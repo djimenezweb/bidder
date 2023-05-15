@@ -1,6 +1,11 @@
+// Router
 import { BrowserRouter } from 'react-router-dom';
-import { GlobalStyles } from './styles/globalStyles';
 import Router from './router/Router';
+
+// Global Styles
+import { GlobalStyles } from './styles/globalStyles';
+
+// Providers
 import { AuthProvider } from './providers/Auth.provider';
 
 const App = () => {

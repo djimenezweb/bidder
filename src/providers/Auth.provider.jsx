@@ -9,12 +9,12 @@ export const AuthProvider = ({ children }) => {
 		const unsubscribe = auth.onAuthStateChanged(user => {
 			if (user) {
 				// El usuario está autenticado
-				console.log('User is logged in', user);
 				setLoggedUser(user);
+				console.log('Logged user: ', user.email);
 			} else {
 				// El usuario no está autenticado
-				console.log('User is not logged in');
 				setLoggedUser(null);
+				console.log('User is not logged in');
 			}
 		});
 

@@ -8,12 +8,12 @@ import { collection, getFirestore } from 'firebase/firestore';
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-	apiKey: 'AIzaSyA8H_vuaOabgHTQ6SGuxKDS8-XOqfT3pYA',
-	authDomain: 'react-app-1aec5.firebaseapp.com',
-	projectId: 'react-app-1aec5',
-	storageBucket: 'react-app-1aec5.appspot.com',
-	messagingSenderId: '272160009422',
-	appId: '1:272160009422:web:c6b37a7d66fda430ea749f'
+	apiKey: 'AIzaSyDtfJkiod3DT53iocE67GydZpvwYDpHUx0',
+	authDomain: 'bidder-89e7b.firebaseapp.com',
+	projectId: 'bidder-89e7b',
+	storageBucket: 'bidder-89e7b.appspot.com',
+	messagingSenderId: '147196669592',
+	appId: '1:147196669592:web:a547525470efecbebfaaed'
 };
 
 // Initialize Firebase
@@ -24,4 +24,4 @@ export const auth = getAuth(app);
 
 // Cloud Firestore
 const db = getFirestore(app);
-export const testDB = collection(db, 'test');
+export const itemsDB = collection(db, 'items');
