@@ -5,7 +5,6 @@ import { AuthContext } from '../contexts/Auth.context';
 
 const Header = () => {
 	const { loggedUser } = useContext(AuthContext);
-	// console.log('Logged user: ' + loggedUser.email);
 
 	return (
 		<StyledHeader>
@@ -22,10 +21,7 @@ const Header = () => {
 					<li>
 						{loggedUser ? (
 							<NavLink to='/profile'>
-								{loggedUser.displayName.substring(
-									0,
-									loggedUser.displayName.indexOf(' ')
-								) || loggedUser.email}
+								{loggedUser.displayName || loggedUser.email}
 							</NavLink>
 						) : (
 							<NavLink to='/signin'>Acceder</NavLink>

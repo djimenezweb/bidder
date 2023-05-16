@@ -1,4 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
+import { useContext } from 'react';
+import { AuthContext } from '../contexts/Auth.context';
 
 // Layouts
 import RootLayout from '../layouts/RootLayout';
@@ -9,9 +11,8 @@ import SignIn from '../pages/sign-in/SignIn';
 import SignUp from '../pages/sign-up/SignUp';
 import NotFound from '../pages/not-found/NotFound';
 import Profile from '../pages/profile/Profile';
-import { useContext } from 'react';
-import { AuthContext } from '../contexts/Auth.context';
 import AddItem from '../pages/add-item/AddItem';
+import Item from '../pages/item/Item';
 
 const Router = () => {
 	const { loggedUser } = useContext(AuthContext);
@@ -20,6 +21,7 @@ const Router = () => {
 		<Routes>
 			<Route path='/' element={<RootLayout />}>
 				<Route index element={<Home />} />
+				<Route path='/itm/:itemId' element={<Item />} />
 				{loggedUser ? (
 					<Route path='/signin' element={<Home />} />
 				) : (
