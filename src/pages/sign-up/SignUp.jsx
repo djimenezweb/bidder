@@ -55,7 +55,6 @@ const SignUp = () => {
 				<button>Crear cuenta</button>
 			</form>
 			<button>Iniciar sesión con Google</button>
-			<button>Iniciar sesión con xxxxx</button>
 
 			<h2>¿Ya tienes una cuenta?</h2>
 			<button onClick={() => navigate('/signin')}>Inicia sesión</button>

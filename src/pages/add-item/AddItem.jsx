@@ -104,13 +104,22 @@ const handleSubmit = async (
 	INITIAL_STATE
 ) => {
 	e.preventDefault();
+	const today = new Date();
+	const endDate = new Date();
+	endDate.setDate(endDate.getDate() + 1);
+
 	try {
 		await addDoc(itemsDB, {
 			...newItem,
 			sellerEmail: loggedUser.email,
 			sellerID: loggedUser.uid,
 			currentPrice: newItem.startingPrice,
-			creationDate: new Date().toLocaleString()
+			highestBid: 0,
+			creationDate: today,
+			creationDateString: today.toLocaleString(),
+			creationDateString2: today.toDateString(),
+			endDate,
+			endDateString: endDate.toLocaleString()
 		});
 		setNewItem(INITIAL_STATE);
 	} catch (err) {

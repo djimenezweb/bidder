@@ -23,9 +23,11 @@ const Item = () => {
 		<>
 			<p>ID (params): {itemId}</p>
 			<h2>{item.title}</h2>
-			<p>{item.description}</p>
 			<p>{item.currentPrice} €</p>
-			<form onSubmit={e => handleSubmit(e, itemId, bid)}>
+			<p style={{ opacity: 0.33 }}>highestBid: {item.highestBid} €</p>
+			<p>{item.description}</p>
+			<p>Vendido por {item.sellerEmail}</p>
+			<form onSubmit={e => handleSubmit(e, itemId, bid, item.highestBid)}>
 				<label htmlFor='bid'>Pujar</label>
 				<input
 					type='text'
@@ -40,12 +42,21 @@ const Item = () => {
 	);
 };
 
-const handleSubmit = async (e, id, bid) => {
+const handleSubmit = async (e, id, bid, highestBid) => {
 	e.preventDefault();
 
 	try {
 		const itemToUpdate = doc(db, 'items', id);
-		await updateDoc(itemToUpdate, { currentPrice: bid });
+		if (Number(highestBid) === 0) {
+			await updateDoc(itemToUpdate, { highestBid: bid });
+		} else if (Number(bid) > Number(highestBid)) {
+			await updateDoc(itemToUpdate, {
+				currentPrice: Number(highestBid) + 1,
+				highestBid: bid
+			});
+		} else if (Number(bid) < Number(highestBid)) {
+			await updateDoc(itemToUpdate, { currentPrice: Number(bid) + 1 });
+		}
 		console.log('Puja confirmada');
 	} catch (err) {
 		console.error('Error al actualizar el documento', err);
