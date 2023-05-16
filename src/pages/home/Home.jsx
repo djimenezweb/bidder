@@ -73,10 +73,7 @@ const Home = () => {
 
 			{searchResults.map(item => {
 				return (
-					<article
-						key={item.id}
-						onClick={() => navigate(`/itm/${item.id}`, { state: item })}
-					>
+					<article key={item.id} onClick={() => navigate(`/itm/${item.id}`)}>
 						<h3>{item.title}</h3>
 						<p>{item.description}</p>
 						<p>{item.currentPrice} €</p>

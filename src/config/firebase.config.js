@@ -23,5 +23,5 @@ const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
 
 // Cloud Firestore
-const db = getFirestore(app);
+export const db = getFirestore(app);
 export const itemsDB = collection(db, 'items');
