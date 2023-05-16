@@ -35,6 +35,13 @@ a {
     text-decoration: none;
     color: inherit;
 }
+
+article {
+    cursor: pointer;
+    border: 1px solid grey;
+    margin: 8px 0;
+    padding: 0 8px;
+}
 `;
 
 export { GlobalStyles };

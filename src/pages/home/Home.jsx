@@ -2,14 +2,30 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 // Icons
-import { Gavel, Heart } from '@phosphor-icons/react';
+import {
+	ClockCountdown,
+	CurrencyEur,
+	Gavel,
+	Heart,
+	Money,
+	PlusCircle,
+	PlusSquare,
+	Power,
+	SignIn,
+	SignOut,
+	User,
+	UserCircle,
+	X
+} from '@phosphor-icons/react';
 
 // Firebase
 import { onSnapshot } from 'firebase/firestore';
 import { itemsDB } from '../../config/firebase.config';
+import SearchBar from '../../components/search-bar/SearchBar';
 
 const Home = () => {
 	const [allItems, setAllItems] = useState([]);
+	const [searchResults, setSearchResults] = useState([]);
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -19,6 +35,7 @@ const Home = () => {
 				id: doc.id
 			}));
 			response.length === 0 ? setAllItems([]) : setAllItems(response);
+			response.length === 0 ? setSearchResults([]) : setSearchResults(response);
 		});
 		return () => subscribeToData();
 	}, []);
@@ -40,7 +57,21 @@ const Home = () => {
 			<Gavel size={32} weight='fill' />
 			<Gavel size={32} weight='duotone' />
 
-			{allItems.map(item => {
+			<User size={32} />
+			<UserCircle size={32} />
+			<SignIn size={32} />
+			<SignOut size={32} />
+			<Power size={32} />
+			<X size={32} />
+			<Money size={32} />
+			<CurrencyEur size={32} />
+			<ClockCountdown size={32} />
+			<PlusCircle size={32} />
+			<PlusSquare size={32} />
+
+			<SearchBar allItems={allItems} setSearchResults={setSearchResults} />
+
+			{searchResults.map(item => {
 				return (
 					<article
 						key={item.id}
@@ -48,6 +79,7 @@ const Home = () => {
 					>
 						<h3>{item.title}</h3>
 						<p>{item.description}</p>
+						<p>{item.currentPrice} €</p>
 					</article>
 				);
 			})}

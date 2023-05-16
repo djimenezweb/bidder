@@ -1,7 +1,7 @@
 import { Link, NavLink } from 'react-router-dom';
 import { StyledHeader, StyledList, StyledLogo, StyledNav } from './styles';
 import { useContext } from 'react';
-import { AuthContext } from '../contexts/Auth.context';
+import { AuthContext } from '../../contexts/Auth.context';
 
 const Header = () => {
 	const { loggedUser } = useContext(AuthContext);

@@ -9,6 +9,7 @@ const AddItem = () => {
 	const INITIAL_STATE = {
 		title: '',
 		startingPrice: '',
+		currentPrice: '',
 		duration: '',
 		description: ''
 	};
@@ -46,7 +47,8 @@ const AddItem = () => {
 						onChange={e =>
 							handleChange(newItem, setNewItem, 'startingPrice', e.target.value)
 						}
-					/>
+					/>{' '}
+					€
 				</div>
 				<div>
 					<label htmlFor='duration'>Duración</label>
@@ -61,8 +63,7 @@ const AddItem = () => {
 						<option value='0'>Duración</option>
 						<option value='3'>3 días</option>
 						<option value='7'>1 semana</option>
-					</select>{' '}
-					€
+					</select>
 				</div>
 				<div>
 					<label htmlFor='description'>Descripción</label>
@@ -108,6 +109,7 @@ const handleSubmit = async (
 			...newItem,
 			sellerEmail: loggedUser.email,
 			sellerID: loggedUser.uid,
+			currentPrice: newItem.startingPrice,
 			creationDate: new Date().toLocaleString()
 		});
 		setNewItem(INITIAL_STATE);
