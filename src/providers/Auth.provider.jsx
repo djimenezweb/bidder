@@ -4,6 +4,7 @@ import { auth } from '../config/firebase.config';
 
 export const AuthProvider = ({ children }) => {
 	const [loggedUser, setLoggedUser] = useState(null);
+	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
 		const unsubscribe = auth.onAuthStateChanged(user => {
@@ -16,13 +17,13 @@ export const AuthProvider = ({ children }) => {
 				setLoggedUser(null);
 				console.log('User is not logged in');
 			}
+			setIsLoading(false);
 		});
-
 		return () => unsubscribe();
 	}, []);
 
 	return (
-		<AuthContext.Provider value={{ loggedUser, setLoggedUser }}>
+		<AuthContext.Provider value={{ isLoading, loggedUser, setLoggedUser }}>
 			{children}
 		</AuthContext.Provider>
 	);

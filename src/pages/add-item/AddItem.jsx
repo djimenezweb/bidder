@@ -8,14 +8,15 @@ import { AuthContext } from '../../contexts/Auth.context';
 const AddItem = () => {
 	const INITIAL_STATE = {
 		title: '',
-		startingPrice: '',
-		currentPrice: '',
-		duration: '',
+		startingPrice: 1,
+		duration: 1,
 		description: ''
 	};
 
 	const { loggedUser } = useContext(AuthContext);
 	const [newItem, setNewItem] = useState(INITIAL_STATE);
+
+	console.log('CARGANDO');
 
 	return (
 		<>
@@ -60,10 +61,15 @@ const AddItem = () => {
 							handleChange(newItem, setNewItem, 'duration', e.target.value)
 						}
 					>
-						<option value='0'>Duración</option>
+						<option value='1'>1 día</option>
 						<option value='3'>3 días</option>
+						<option value='5'>5 días</option>
 						<option value='7'>1 semana</option>
 					</select>
+					<p>
+						La subasta terminará el {printDate(newItem.duration)} a las{' '}
+						{printTime()}
+					</p>
 				</div>
 				<div>
 					<label htmlFor='description'>Descripción</label>
@@ -106,7 +112,9 @@ const handleSubmit = async (
 	e.preventDefault();
 	const today = new Date();
 	const endDate = new Date();
-	endDate.setDate(endDate.getDate() + 1);
+	endDate.setDate(endDate.getDate() + Number(newItem.duration));
+	console.log(today.toISOString());
+	console.log(endDate.toISOString());
 
 	try {
 		await addDoc(itemsDB, {
@@ -115,16 +123,26 @@ const handleSubmit = async (
 			sellerID: loggedUser.uid,
 			currentPrice: newItem.startingPrice,
 			highestBid: 0,
-			creationDate: today,
-			creationDateString: today.toLocaleString(),
-			creationDateString2: today.toDateString(),
-			endDate,
-			endDateString: endDate.toLocaleString()
+			creationDate: today.toISOString(),
+			endDate: endDate.toISOString()
 		});
 		setNewItem(INITIAL_STATE);
 	} catch (err) {
 		console.error(err);
 	}
+};
+
+const printDate = duration => {
+	const dateToPrint = new Date();
+	dateToPrint.setDate(dateToPrint.getDate() + Number(duration));
+	return dateToPrint.toLocaleDateString('es-ES', { dateStyle: 'full' });
+};
+
+const printTime = duration => {
+	const timeToPrint = new Date();
+	return timeToPrint.toLocaleTimeString('es-ES', {
+		timeStyle: 'short'
+	});
 };
 
 /* 

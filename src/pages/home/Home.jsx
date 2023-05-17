@@ -40,6 +40,8 @@ const Home = () => {
 		return () => subscribeToData();
 	}, []);
 
+	if (searchResults.length === 0) return <p>Loading...</p>;
+
 	return (
 		<>
 			<h2>Home</h2>
