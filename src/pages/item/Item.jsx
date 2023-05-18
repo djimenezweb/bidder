@@ -7,7 +7,7 @@ import Countdown from '../../components/countdown/Countdown';
 const Item = () => {
 	const { itemId } = useParams();
 	const [bid, setBid] = useState('');
-	const [item, setItem] = useState();
+	const [item, setItem] = useState(null);
 
 	useEffect(() => {
 		const unsub = onSnapshot(doc(db, 'items', itemId), doc => {
@@ -33,7 +33,17 @@ const Item = () => {
 				{printTime(item.endDate)}
 			</p>
 			<Countdown endDate={item.endDate} />
-			<form onSubmit={e => handleSubmit(e, itemId, bid, item.highestBid)}>
+			<form
+				onSubmit={e =>
+					handleSubmit(
+						e,
+						itemId,
+						Number(bid),
+						Number(item.highestBid),
+						Number(item.currentPrice)
+					)
+				}
+			>
 				<label htmlFor='bid'>Pujar</label>
 				<input
 					type='text'
@@ -60,25 +70,71 @@ const printTime = date => {
 	});
 };
 
-const handleSubmit = async (e, id, bid, highestBid) => {
-	e.preventDefault();
-
+const updateAuction = async (id, newPrice, newHighestBid) => {
 	try {
 		const itemToUpdate = doc(db, 'items', id);
-		if (Number(highestBid) === 0) {
-			await updateDoc(itemToUpdate, { highestBid: bid });
-		} else if (Number(bid) > Number(highestBid)) {
-			await updateDoc(itemToUpdate, {
-				currentPrice: Number(highestBid) + 1,
-				highestBid: bid
-			});
-		} else if (Number(bid) < Number(highestBid)) {
-			await updateDoc(itemToUpdate, { currentPrice: Number(bid) + 1 });
-		}
+		await updateDoc(itemToUpdate, {
+			currentPrice: newPrice,
+			highestBid: newHighestBid
+		});
 		console.log('Puja confirmada');
 	} catch (err) {
 		console.error('Error al actualizar el documento', err);
 	}
+};
+
+const handleSubmit = async (e, id, bid, highestBid, currentPrice) => {
+	e.preventDefault();
+	let newPrice = currentPrice;
+	let newHighestBid = highestBid;
+
+	// Invalid
+	if (bid < currentPrice) {
+		console.log('Bid must be higher than current price');
+		return;
+	}
+
+	// First bidder
+	if (highestBid === 0) {
+		console.log('First bidder');
+		newHighestBid = bid;
+		newPrice = currentPrice;
+		updateAuction(id, newPrice, newHighestBid);
+		return;
+	}
+
+	// Bidder wins
+	if (bid > highestBid) {
+		console.log('You are the highest bidder');
+		newHighestBid = bid;
+		if (highestBid + 1 > bid) {
+			console.log('cannot add 1');
+			newPrice = bid;
+		} else {
+			console.log('add 1');
+			newPrice = highestBid + 1;
+		}
+		updateAuction(id, newPrice, newHighestBid);
+		return;
+	}
+
+	// Bidder is overbid by previous user
+	if (bid <= highestBid) {
+		console.log('You have been outbid');
+		newHighestBid = highestBid;
+		if (bid + 1 > highestBid) {
+			console.log('cannot add 1');
+			newPrice = highestBid;
+		} else {
+			console.log('add 1');
+			newPrice = bid + 1;
+		}
+		updateAuction(id, newPrice, newHighestBid);
+		return;
+	}
+
+	// Invalid bid
+	console.log('Invalid bid');
 };
 
 export default Item;

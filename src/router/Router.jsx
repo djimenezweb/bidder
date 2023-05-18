@@ -1,4 +1,4 @@
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import RequireAuth from './RequireAuth';
 
 // Layouts
@@ -20,6 +20,7 @@ const Router = () => {
 				<Route index element={<Home />} />
 				<Route path='/itm/:itemId' element={<Item />} />
 				<Route path='/signin' element={<SignIn />} />
+				<Route path='/login' element={<Navigate to='/signin' />} />
 				<Route path='/signup' element={<SignUp />} />
 				<Route
 					path='/profile'
