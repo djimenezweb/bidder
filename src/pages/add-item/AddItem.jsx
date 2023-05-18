@@ -16,8 +16,6 @@ const AddItem = () => {
 	const { loggedUser } = useContext(AuthContext);
 	const [newItem, setNewItem] = useState(INITIAL_STATE);
 
-	console.log('CARGANDO');
-
 	return (
 		<>
 			<h2>Crear anuncio</h2>
@@ -113,8 +111,6 @@ const handleSubmit = async (
 	const today = new Date();
 	const endDate = new Date();
 	endDate.setDate(endDate.getDate() + Number(newItem.duration));
-	console.log(today.toISOString());
-	console.log(endDate.toISOString());
 
 	try {
 		await addDoc(itemsDB, {
@@ -123,6 +119,7 @@ const handleSubmit = async (
 			sellerID: loggedUser.uid,
 			currentPrice: newItem.startingPrice,
 			highestBid: 0,
+			highestBidder: '',
 			creationDate: today.toISOString(),
 			endDate: endDate.toISOString()
 		});
