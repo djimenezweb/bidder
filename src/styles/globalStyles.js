@@ -8,6 +8,11 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
 }
 
+/* html {
+  margin-right: 0;
+  margin-left: calc(100vw - 100%)
+} */
+
 html {
   width: 100vw;
   overflow-x: hidden;

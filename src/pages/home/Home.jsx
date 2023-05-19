@@ -25,8 +25,8 @@ import SmallItem from '../../components/small-item/SmallItem';
 
 const Home = () => {
 	const today = new Date();
-	const [allItems, setAllItems] = useState([]);
-	const [searchResults, setSearchResults] = useState([]);
+	const [allItems, setAllItems] = useState(null);
+	const [searchResults, setSearchResults] = useState(null);
 
 	useEffect(() => {
 		const subscribeToData = onSnapshot(itemsDB, snapshot => {
@@ -40,11 +40,15 @@ const Home = () => {
 		return () => subscribeToData();
 	}, []);
 
-	if (searchResults.length === 0) return <p>Loading...</p>;
+	console.log(searchResults);
+
+	if (!allItems) return <p>Loading...</p>;
 
 	return (
 		<>
 			<SearchBar allItems={allItems} setSearchResults={setSearchResults} />
+
+			{searchResults.length === 0 && <h1>No hay resultados</h1>}
 
 			{searchResults.map(item => (
 				<SmallItem key={item.id} item={item} today={today} />

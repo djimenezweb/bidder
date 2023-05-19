@@ -1,19 +1,24 @@
 // Firebase
-// import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-// import { auth } from '../../config/firebase.config';
+import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import { auth, itemsDB } from '../../config/firebase.config';
 
 // Router
 import { useNavigate } from 'react-router-dom';
 
 // Hook Form
 import { useForm } from 'react-hook-form';
-import { FORM_VALIDATION } from '../../constants/form-validation';
+import {
+	FORM_VALIDATION,
+	validatePasswords
+} from '../../constants/form-validation';
+import { addDoc } from 'firebase/firestore';
 
 const SignUp = () => {
 	const navigate = useNavigate();
 	const {
 		handleSubmit,
 		register,
+		getValues,
 		formState: { errors }
 	} = useForm();
 
@@ -64,10 +69,11 @@ const SignUp = () => {
 						autoComplete='new-password'
 						placeholder='repite tu contraseña'
 						{...register('repeatPassword', {
-							required: 'Es obligatorio comprobar la contraseña'
+							required: 'Es obligatorio comprobar la contraseña',
+							validate: value => validatePasswords(value, getValues)
 						})}
 					/>
-					<span>Span para error</span>
+					<span>{errors?.repeatPassword?.message}</span>
 				</div>
 				<button>Crear cuenta</button>
 			</form>
@@ -80,22 +86,23 @@ const SignUp = () => {
 };
 
 // Para hacer pruebas sin enviar información a Firebase:
-const onSubmit = (data, e) => {
+/* const onSubmit = (data, e) => {
 	console.log('Formulario válido');
 	console.log(data);
 	console.log(e);
-};
+}; */
 
-/* const onSubmit = async (data, e) => {
+const onSubmit = async (data, e) => {
 	try {
 		await createUserWithEmailAndPassword(auth, data.newEmail, data.newPassword);
 		await updateProfile(auth.currentUser, {
 			displayName: data.newDisplayName,
 			photoURL: 'http://prueba.jpg'
 		});
+		await addDoc(itemsDB, { myBids: '', myItems: '', myFavs: '' });
 	} catch (err) {
 		console.log(err);
 	}
-}; */
+};
 
 export default SignUp;

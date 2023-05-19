@@ -25,3 +25,4 @@ export const auth = getAuth(app);
 // Cloud Firestore
 export const db = getFirestore(app);
 export const itemsDB = collection(db, 'items');
+export const usersDB = collection(db, 'users');

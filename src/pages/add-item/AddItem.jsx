@@ -1,9 +1,10 @@
 import { useContext, useState } from 'react';
 
 // Firebase
-import { addDoc } from 'firebase/firestore';
-import { itemsDB } from '../../config/firebase.config';
+import { arrayUnion, doc, setDoc, updateDoc } from 'firebase/firestore';
+import { db } from '../../config/firebase.config';
 import { AuthContext } from '../../contexts/Auth.context';
+import { v4 } from 'uuid';
 
 const AddItem = () => {
 	const INITIAL_STATE = {
@@ -111,9 +112,10 @@ const handleSubmit = async (
 	const today = new Date();
 	const endDate = new Date();
 	endDate.setDate(endDate.getDate() + Number(newItem.duration));
-
+	const id = v4();
+	const userToUpdate = doc(db, 'users', loggedUser.email);
 	try {
-		await addDoc(itemsDB, {
+		await setDoc(doc(db, 'items', id), {
 			...newItem,
 			sellerEmail: loggedUser.email,
 			sellerID: loggedUser.uid,
@@ -123,6 +125,7 @@ const handleSubmit = async (
 			creationDate: today.toISOString(),
 			endDate: endDate.toISOString()
 		});
+		await updateDoc(userToUpdate, { myItems: arrayUnion(id) });
 		setNewItem(INITIAL_STATE);
 	} catch (err) {
 		console.error(err);

@@ -1,20 +1,21 @@
+// Firebase
 import { doc, onSnapshot } from 'firebase/firestore';
-import { useContext, useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { db } from '../../config/firebase.config';
+
+// Router
+import { useParams } from 'react-router-dom';
+
+import { useContext, useEffect, useState } from 'react';
 import Countdown from '../../components/countdown/Countdown';
 import { AuthContext } from '../../contexts/Auth.context';
 import PlaceBid from '../../components/place-bid/PlaceBid';
 import AuctionStatus from '../../components/auction-status/AuctionStatus';
-
-// Cómo hacer para que componente PlaceBid no se muestre si loggedUser es null
 
 const Item = () => {
 	const { itemId } = useParams();
 
 	const [item, setItem] = useState(null);
 	const { loggedUser } = useContext(AuthContext);
-	console.log(loggedUser);
 
 	useEffect(() => {
 		const unsub = onSnapshot(doc(db, 'items', itemId), doc => {
@@ -29,14 +30,9 @@ const Item = () => {
 
 	return (
 		<>
-			<p>
-				Logged user: {loggedUser?.email} {loggedUser?.uid}
-			</p>
-			<p>ID (params): {itemId}</p>
 			<h2>{item.title}</h2>
+			<p>ID: {itemId}</p>
 			<p>{item.currentPrice} €</p>
-			<p style={{ opacity: 0.33 }}>highestBid: {item.highestBid} €</p>
-			<p style={{ opacity: 0.33 }}>highestBidder: {item.highestBidder}</p>
 			<p>{item.description}</p>
 			<p>Vendido por {item.sellerEmail}</p>
 			<p>
@@ -45,28 +41,37 @@ const Item = () => {
 			</p>
 			<Countdown endDate={item.endDate} />
 
-			{/* 			{loggedUser?.email !== item.sellerEmail ? (
-				<PlaceBid />
-			) : (
-				<button>Inicia sesión para pujar</button>
-			)} */}
+			{/* Si NO HAY loggedUser se le pide que inicie sesión */}
+			{!loggedUser?.email && <p>Inicia sesión para pujar</p>}
 
-			{loggedUser?.email === item.sellerEmail ? (
-				<button>Editar</button>
-			) : (
-				<PlaceBid
-					itemId={itemId}
-					highestBid={item.highestBid}
-					currentPrice={item.currentPrice}
-					highestBidder={item.highestBidder}
-				/>
+			{/* Si HAY loggedUser y NO ES el vendedor, puede PUJAR */}
+			{loggedUser?.email && loggedUser?.email !== item.sellerEmail && (
+				<>
+					<PlaceBid
+						itemId={itemId}
+						highestBid={item.highestBid}
+						currentPrice={item.currentPrice}
+						highestBidder={item.highestBidder}
+					/>
+					<AuctionStatus
+						highestBid={item.highestBid}
+						highestBidder={item.highestBidder}
+						endDate={item.endDate}
+					/>
+				</>
 			)}
 
-			<AuctionStatus
-				highestBid={item.highestBid}
-				highestBidder={item.highestBidder}
-				endDate={item.endDate}
-			/>
+			{/* Si HAY loggedUser y ES el vendedor, puede EDITAR */}
+			{loggedUser?.email && loggedUser?.email === item.sellerEmail && (
+				<button>Editar</button>
+			)}
+
+			<p style={{ opacity: 0.33 }}>
+				<small>highestBid: {item.highestBid} €</small>
+			</p>
+			<p style={{ opacity: 0.33 }}>
+				<small>highestBidder: {item.highestBidder}</small>
+			</p>
 		</>
 	);
 };

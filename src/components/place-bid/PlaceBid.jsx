@@ -1,4 +1,4 @@
-import { doc, updateDoc } from 'firebase/firestore';
+import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../config/firebase.config';
 import { AuthContext } from '../../contexts/Auth.context';
 import { useContext, useState } from 'react';
@@ -42,13 +42,15 @@ const updateAuction = async (
 	newHighestBidder,
 	setBid
 ) => {
+	const itemToUpdate = doc(db, 'items', id);
+	const userToUpdate = doc(db, 'users', newHighestBidder);
 	try {
-		const itemToUpdate = doc(db, 'items', id);
 		await updateDoc(itemToUpdate, {
 			currentPrice: newPrice,
 			highestBid: newHighestBid,
 			highestBidder: newHighestBidder
 		});
+		await await updateDoc(userToUpdate, { myAuctions: arrayUnion(id) });
 		console.log('Puja confirmada');
 		setBid('');
 	} catch (err) {

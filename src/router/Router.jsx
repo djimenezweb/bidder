@@ -12,6 +12,7 @@ import NotFound from '../pages/not-found/NotFound';
 import Profile from '../pages/profile/Profile';
 import AddItem from '../pages/add-item/AddItem';
 import Item from '../pages/item/Item';
+import UploadPhoto from '../components/upload-photo/UploadPhoto';
 
 const Router = () => {
 	return (
@@ -38,6 +39,7 @@ const Router = () => {
 						</RequireAuth>
 					}
 				/>
+				<Route path='/test' element={<UploadPhoto />} />
 				<Route path='*' element={<NotFound />} />
 			</Route>
 		</Routes>

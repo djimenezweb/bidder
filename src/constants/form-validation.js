@@ -14,6 +14,15 @@ const patterns = {
 	email: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 };
 
+export const validatePasswords = (value, getValues) => {
+	const password = getValues('newPassword');
+	if (password !== value) {
+		return 'Las contraseñas no coinciden';
+	}
+
+	return true;
+};
+
 export const FORM_VALIDATION = {
 	name: {
 		required: messages.requiredName,
