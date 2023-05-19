@@ -6,11 +6,14 @@ import Countdown from '../../components/countdown/Countdown';
 import { AuthContext } from '../../contexts/Auth.context';
 import PlaceBid from '../../components/place-bid/PlaceBid';
 
+// Cómo hacer para que componente PlaceBid no se muestre si loggedUser es null
+
 const Item = () => {
 	const { itemId } = useParams();
 
 	const [item, setItem] = useState(null);
 	const { loggedUser } = useContext(AuthContext);
+	console.log(loggedUser);
 
 	useEffect(() => {
 		const unsub = onSnapshot(doc(db, 'items', itemId), doc => {
@@ -26,7 +29,7 @@ const Item = () => {
 	return (
 		<>
 			<p>
-				Logged user: {loggedUser.email} {loggedUser.uid}
+				Logged user: {loggedUser?.email} {loggedUser?.uid}
 			</p>
 			<p>ID (params): {itemId}</p>
 			<h2>{item.title}</h2>
@@ -40,7 +43,14 @@ const Item = () => {
 				{printTime(item.endDate)}
 			</p>
 			<Countdown endDate={item.endDate} />
-			{loggedUser.email === item.sellerEmail ? (
+
+			{loggedUser?.email !== item.sellerEmail ? (
+				<PlaceBid />
+			) : (
+				<button>Inicia sesión para pujar</button>
+			)}
+
+			{loggedUser?.email === item.sellerEmail ? (
 				<button>Editar</button>
 			) : (
 				<PlaceBid

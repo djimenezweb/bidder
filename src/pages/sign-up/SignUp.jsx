@@ -1,86 +1,101 @@
-// DUDAS: ¿Cómo hacer para que no se muestre "Las contraseñas no coinciden"?
-// ¿Cómo impedir que se guarde usuario y contraseña en el formulario de sign up?
+// Firebase
+// import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+// import { auth } from '../../config/firebase.config';
 
-import { useState } from 'react';
-import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../config/firebase.config';
+// Router
 import { useNavigate } from 'react-router-dom';
+
+// Hook Form
+import { useForm } from 'react-hook-form';
+import { SIGN_UP_VALIDATION } from '../../constants/form-validation';
 
 const SignUp = () => {
 	const navigate = useNavigate();
-	const [registerForm, setRegisterForm] = useState({
-		email: '',
-		password: '',
-		confirmPassword: ''
-	});
-	const [passwordError, setPasswordError] = useState(false);
+	const {
+		handleSubmit,
+		register,
+		formState: { errors }
+	} = useForm();
+
+	console.log(errors);
 
 	return (
 		<>
 			<h2>Crear cuenta</h2>
-			<form
-				onSubmit={e =>
-					handleSubmit(e, registerForm, setRegisterForm, setPasswordError)
-				}
-				autoComplete='off'
-			>
-				<input
-					type='email'
-					placeholder='email'
-					value={registerForm.email}
-					onChange={e =>
-						setRegisterForm({ ...registerForm, email: e.target.value })
-					}
-				/>
-				<input
-					type='password'
-					placeholder='contraseña'
-					value={registerForm.password}
-					onChange={e =>
-						setRegisterForm({ ...registerForm, password: e.target.value })
-					}
-				/>
-				<input
-					type='password'
-					placeholder='repite tu contraseña'
-					value={registerForm.confirmPassword}
-					onChange={e =>
-						setRegisterForm({
-							...registerForm,
-							confirmPassword: e.target.value
-						})
-					}
-				/>
-				{passwordError && <span>Las contraseñas no coinciden</span>}
+			<form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
+				<div>
+					<input
+						type='text'
+						name='newDisplayName'
+						id='newDisplayName'
+						autoComplete='off'
+						placeholder='nombre de usuario'
+						{...register('newDisplayName', SIGN_UP_VALIDATION.name)}
+					/>
+					<span>{errors?.newDisplayName?.message}</span>
+				</div>
+				<div>
+					<input
+						type='email'
+						name='newEmail'
+						id='newEmail'
+						autoComplete='off'
+						placeholder='email'
+						{...register('newEmail', SIGN_UP_VALIDATION.email)}
+					/>
+					<span>{errors?.newEmail?.message}</span>
+				</div>
+				<div>
+					<input
+						type='password'
+						name='newPassword'
+						id='newPassword'
+						autoComplete='new-password'
+						placeholder='contraseña'
+						{...register('newPassword', SIGN_UP_VALIDATION.password)}
+					/>
+					<span>{errors?.newPassword?.message}</span>
+				</div>
+				<div>
+					<input
+						type='password'
+						name='repeatPassword'
+						id='repeatPassword'
+						autoComplete='new-password'
+						placeholder='repite tu contraseña'
+						{...register('repeatPassword', {
+							required: 'Es obligatorio comprobar la contraseña'
+						})}
+					/>
+					<span>Span para error</span>
+				</div>
 				<button>Crear cuenta</button>
 			</form>
-			<button>Iniciar sesión con Google</button>
 
 			<h2>¿Ya tienes una cuenta?</h2>
 			<button onClick={() => navigate('/signin')}>Inicia sesión</button>
+			<button>Iniciar sesión con Google</button>
 		</>
 	);
 };
 
-const handleSubmit = async (
-	e,
-	registerForm,
-	setRegisterForm,
-	setPasswordError
-) => {
-	e.preventDefault();
-	const { email, password, confirmPassword } = registerForm;
-	if (password !== confirmPassword) {
-		setPasswordError(true);
-		setRegisterForm({ ...registerForm, password: '', confirmPassword: '' });
-		return;
-	}
+// Para hacer pruebas sin enviar información a Firebase:
+const onSubmit = (data, e) => {
+	console.log('Formulario válido');
+	console.log(data);
+	console.log(e);
+};
+
+/* const onSubmit = async (data, e) => {
 	try {
-		await createUserWithEmailAndPassword(auth, email, password);
-		setRegisterForm({ email: '', password: '', confirmPassword: '' });
+		await createUserWithEmailAndPassword(auth, data.newEmail, data.newPassword);
+		await updateProfile(auth.currentUser, {
+			displayName: data.newDisplayName,
+			photoURL: 'http://prueba.jpg'
+		});
 	} catch (err) {
 		console.log(err);
 	}
-};
+}; */
 
 export default SignUp;
