@@ -5,6 +5,7 @@ import { db } from '../../config/firebase.config';
 import Countdown from '../../components/countdown/Countdown';
 import { AuthContext } from '../../contexts/Auth.context';
 import PlaceBid from '../../components/place-bid/PlaceBid';
+import AuctionStatus from '../../components/auction-status/AuctionStatus';
 
 // Cómo hacer para que componente PlaceBid no se muestre si loggedUser es null
 
@@ -44,11 +45,11 @@ const Item = () => {
 			</p>
 			<Countdown endDate={item.endDate} />
 
-			{loggedUser?.email !== item.sellerEmail ? (
+			{/* 			{loggedUser?.email !== item.sellerEmail ? (
 				<PlaceBid />
 			) : (
 				<button>Inicia sesión para pujar</button>
-			)}
+			)} */}
 
 			{loggedUser?.email === item.sellerEmail ? (
 				<button>Editar</button>
@@ -60,6 +61,12 @@ const Item = () => {
 					highestBidder={item.highestBidder}
 				/>
 			)}
+
+			<AuctionStatus
+				highestBid={item.highestBid}
+				highestBidder={item.highestBidder}
+				endDate={item.endDate}
+			/>
 		</>
 	);
 };

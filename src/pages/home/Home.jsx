@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 // Icons
 import {
@@ -22,11 +21,12 @@ import {
 import { onSnapshot } from 'firebase/firestore';
 import { itemsDB } from '../../config/firebase.config';
 import SearchBar from '../../components/search-bar/SearchBar';
+import SmallItem from '../../components/small-item/SmallItem';
 
 const Home = () => {
+	const today = new Date();
 	const [allItems, setAllItems] = useState([]);
 	const [searchResults, setSearchResults] = useState([]);
-	const navigate = useNavigate();
 
 	useEffect(() => {
 		const subscribeToData = onSnapshot(itemsDB, snapshot => {
@@ -44,7 +44,12 @@ const Home = () => {
 
 	return (
 		<>
-			<h2>Home</h2>
+			<SearchBar allItems={allItems} setSearchResults={setSearchResults} />
+
+			{searchResults.map(item => (
+				<SmallItem key={item.id} item={item} today={today} />
+			))}
+
 			<Heart color='#AE2983' weight='thin' size={32} />
 			<Heart color='#AE2983' weight='light' size={32} />
 			<Heart color='#AE2983' weight='regular' size={32} />
@@ -70,18 +75,6 @@ const Home = () => {
 			<ClockCountdown size={32} />
 			<PlusCircle size={32} />
 			<PlusSquare size={32} />
-
-			<SearchBar allItems={allItems} setSearchResults={setSearchResults} />
-
-			{searchResults.map(item => {
-				return (
-					<article key={item.id} onClick={() => navigate(`/itm/${item.id}`)}>
-						<h3>{item.title}</h3>
-						<p>{item.description}</p>
-						<p>{item.currentPrice} €</p>
-					</article>
-				);
-			})}
 		</>
 	);
 };

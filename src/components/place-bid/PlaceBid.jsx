@@ -80,11 +80,12 @@ const handleSubmit = async (
 
 	// First bidder
 	if (highestBid === 0) {
-		console.log('First bidder');
-		newHighestBid = bid;
-		newPrice = currentPrice;
-		newHighestBidder = email;
-		updateAuction(id, newPrice, newHighestBid, newHighestBidder, setBid);
+		// console.log('First bidder');
+		// newHighestBid = bid;
+		// newPrice = currentPrice;
+		// newHighestBidder = email;
+		updateAuction(id, currentPrice, bid, email, setBid);
+		// updateAuction(id, newPrice, newHighestBid, newHighestBidder, setBid);
 		return;
 	}
 

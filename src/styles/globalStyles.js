@@ -8,6 +8,11 @@ const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
 }
 
+html {
+  width: 100vw;
+  overflow-x: hidden;
+}
+
 body {
     margin: 0;
     font-family: 'Manrope', sans-serif;

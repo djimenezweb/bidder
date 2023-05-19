@@ -41,7 +41,9 @@ const SignIn = () => {
 				</div>
 				<button>Iniciar sesión</button>
 			</form>
-			<button onClick={handleGoogleLogin}>Iniciar sesión con Google</button>
+			<button onClick={() => handleGoogleLogin(navigate)}>
+				Iniciar sesión con Google
+			</button>
 			<button>Iniciar sesión con xxxxx</button>
 
 			<h2>¿Todavía no tienes cuenta?</h2>
@@ -60,12 +62,13 @@ const onSubmit = async (data, e, navigate) => {
 	}
 };
 
-const handleGoogleLogin = async () => {
+const handleGoogleLogin = async navigate => {
 	const provider = new GoogleAuthProvider();
 	try {
 		const result = await signInWithPopup(auth, provider);
 		const credential = GoogleAuthProvider.credentialFromResult(result);
 		console.log(credential);
+		navigate('/');
 	} catch (err) {
 		console.log(err);
 	}
