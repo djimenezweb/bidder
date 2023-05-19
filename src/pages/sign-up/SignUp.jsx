@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 
 // Hook Form
 import { useForm } from 'react-hook-form';
-import { SIGN_UP_VALIDATION } from '../../constants/form-validation';
+import { FORM_VALIDATION } from '../../constants/form-validation';
 
 const SignUp = () => {
 	const navigate = useNavigate();
@@ -30,7 +30,7 @@ const SignUp = () => {
 						id='newDisplayName'
 						autoComplete='off'
 						placeholder='nombre de usuario'
-						{...register('newDisplayName', SIGN_UP_VALIDATION.name)}
+						{...register('newDisplayName', FORM_VALIDATION.name)}
 					/>
 					<span>{errors?.newDisplayName?.message}</span>
 				</div>
@@ -41,7 +41,7 @@ const SignUp = () => {
 						id='newEmail'
 						autoComplete='off'
 						placeholder='email'
-						{...register('newEmail', SIGN_UP_VALIDATION.email)}
+						{...register('newEmail', FORM_VALIDATION.email)}
 					/>
 					<span>{errors?.newEmail?.message}</span>
 				</div>
@@ -52,7 +52,7 @@ const SignUp = () => {
 						id='newPassword'
 						autoComplete='new-password'
 						placeholder='contraseña'
-						{...register('newPassword', SIGN_UP_VALIDATION.password)}
+						{...register('newPassword', FORM_VALIDATION.password)}
 					/>
 					<span>{errors?.newPassword?.message}</span>
 				</div>

@@ -14,7 +14,7 @@ const patterns = {
 	email: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 };
 
-export const SIGN_UP_VALIDATION = {
+export const FORM_VALIDATION = {
 	name: {
 		required: messages.requiredName,
 		pattern: { value: patterns.name, message: messages.invalidName }
