@@ -63,6 +63,7 @@ const onSubmit = async (data, e, navigate) => {
 };
 
 const handleGoogleLogin = async navigate => {
+	// Comprobar si el usuario se registra por primera vez: UserCredential.additionalUserInfo.isNewUser
 	const provider = new GoogleAuthProvider();
 	try {
 		const result = await signInWithPopup(auth, provider);

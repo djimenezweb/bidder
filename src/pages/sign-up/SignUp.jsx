@@ -1,6 +1,7 @@
 // Firebase
 import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
-import { auth, itemsDB } from '../../config/firebase.config';
+import { auth, db } from '../../config/firebase.config';
+import { doc, setDoc } from 'firebase/firestore';
 
 // Router
 import { useNavigate } from 'react-router-dom';
@@ -11,7 +12,6 @@ import {
 	FORM_VALIDATION,
 	validatePasswords
 } from '../../constants/form-validation';
-import { addDoc } from 'firebase/firestore';
 
 const SignUp = () => {
 	const navigate = useNavigate();
@@ -27,7 +27,10 @@ const SignUp = () => {
 	return (
 		<>
 			<h2>Crear cuenta</h2>
-			<form onSubmit={handleSubmit(onSubmit)} autoComplete='off'>
+			<form
+				onSubmit={handleSubmit((data, e) => onSubmit(data, e, navigate))}
+				autoComplete='off'
+			>
 				<div>
 					<input
 						type='text'
@@ -80,26 +83,23 @@ const SignUp = () => {
 
 			<h2>¿Ya tienes una cuenta?</h2>
 			<button onClick={() => navigate('/signin')}>Inicia sesión</button>
-			<button>Iniciar sesión con Google</button>
 		</>
 	);
 };
 
-// Para hacer pruebas sin enviar información a Firebase:
-/* const onSubmit = (data, e) => {
-	console.log('Formulario válido');
-	console.log(data);
-	console.log(e);
-}; */
-
-const onSubmit = async (data, e) => {
+const onSubmit = async (data, e, navigate) => {
 	try {
 		await createUserWithEmailAndPassword(auth, data.newEmail, data.newPassword);
 		await updateProfile(auth.currentUser, {
 			displayName: data.newDisplayName,
 			photoURL: 'http://prueba.jpg'
 		});
-		await addDoc(itemsDB, { myBids: '', myItems: '', myFavs: '' });
+		await setDoc(doc(db, 'users', data.newEmail), {
+			myBids: '',
+			myItems: '',
+			myFavs: ''
+		});
+		navigate('/');
 	} catch (err) {
 		console.log(err);
 	}

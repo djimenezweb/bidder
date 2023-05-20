@@ -50,7 +50,7 @@ const updateAuction = async (
 			highestBid: newHighestBid,
 			highestBidder: newHighestBidder
 		});
-		await await updateDoc(userToUpdate, { myAuctions: arrayUnion(id) });
+		await updateDoc(userToUpdate, { myAuctions: arrayUnion(id) });
 		console.log('Puja confirmada');
 		setBid('');
 	} catch (err) {
