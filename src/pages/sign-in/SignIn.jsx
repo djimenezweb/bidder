@@ -3,10 +3,12 @@ import { useNavigate } from 'react-router-dom';
 // Firebase & Google Login
 import {
 	GoogleAuthProvider,
+	getAdditionalUserInfo,
 	signInWithEmailAndPassword,
 	signInWithPopup
 } from 'firebase/auth';
-import { auth } from '../../config/firebase.config';
+import { auth, db } from '../../config/firebase.config';
+import { doc, setDoc } from 'firebase/firestore';
 
 // Hook Form
 import { useForm } from 'react-hook-form';
@@ -44,7 +46,6 @@ const SignIn = () => {
 			<button onClick={() => handleGoogleLogin(navigate)}>
 				Iniciar sesión con Google
 			</button>
-			<button>Iniciar sesión con xxxxx</button>
 
 			<h2>¿Todavía no tienes cuenta?</h2>
 			<button onClick={() => navigate('/signup')}>Regístrate</button>
@@ -63,12 +64,21 @@ const onSubmit = async (data, e, navigate) => {
 };
 
 const handleGoogleLogin = async navigate => {
-	// Comprobar si el usuario se registra por primera vez: UserCredential.additionalUserInfo.isNewUser
 	const provider = new GoogleAuthProvider();
 	try {
 		const result = await signInWithPopup(auth, provider);
-		const credential = GoogleAuthProvider.credentialFromResult(result);
-		console.log(credential);
+		const details = getAdditionalUserInfo(result);
+		// const credential = GoogleAuthProvider.credentialFromResult(result);
+		// console.log(credential);
+		// console.log(details);
+		// Si es la primera vez que inicia sesión con Google se crea su perfil en colección de usuarios
+		if (details.isNewUser) {
+			await setDoc(doc(db, 'users', details.profile.email), {
+				myBids: '',
+				myItems: '',
+				myFavs: ''
+			});
+		}
 		navigate('/');
 	} catch (err) {
 		console.log(err);
