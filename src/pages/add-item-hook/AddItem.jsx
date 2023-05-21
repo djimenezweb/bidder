@@ -63,6 +63,26 @@ const AddItem = () => {
 					></textarea>
 				</div>
 				<div>
+					<input
+						type='file'
+						name='picture0'
+						id='picture0'
+						{...register('picture0')}
+					/>
+					<input
+						type='file'
+						name='picture1'
+						id='picture1'
+						{...register('picture1')}
+					/>
+					<input
+						type='file'
+						name='picture2'
+						id='picture2'
+						{...register('picture2')}
+					/>
+				</div>
+				<div>
 					<button type='reset'>Borrar</button>
 					<button>Publicar anuncio</button>
 				</div>
@@ -73,7 +93,14 @@ const AddItem = () => {
 
 export default AddItem;
 
-const onSubmit = async (data, e, loggedUser) => {
+const onSubmit = (data, e, loggedUser) => {
+	console.log(data);
+	console.log(data.picture0[0]);
+	console.log(data.picture1[0]);
+	console.log(data.picture2[0]);
+};
+
+const onSubmit2 = async (data, e, loggedUser) => {
 	const today = new Date();
 	const endDate = new Date();
 	endDate.setDate(endDate.getDate() + Number(data.duration));
