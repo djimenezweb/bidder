@@ -1,15 +1,11 @@
-import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const SmallItem = ({ item, today }) => {
-	const [timeLeft, setTimeLeft] = useState('...');
 	const navigate = useNavigate();
 	const end = new Date(item.endDate);
 	const timeSpan = end - today;
 
-	useEffect(() => {
-		printTimeLeft(timeSpan, setTimeLeft);
-	}, []);
+	const timeLeft = printTimeLeft(timeSpan);
 
 	return (
 		<article key={item.id} onClick={() => navigate(`/itm/${item.id}`)}>
@@ -27,25 +23,24 @@ const printTimeLeft = (timeSpan, setTimeLeft) => {
 	// const minutesLeft = Math.floor((timeSpan % 3600000) / 60000);
 
 	if (timeSpan <= 0) {
-		setTimeLeft('Finalizado');
-		return;
+		return 'Finalizado';
 	}
 	// 5 minutos
 	if (timeSpan <= 300000) {
-		setTimeLeft('¡Termina en unos minutos!');
-		return;
+		return '¡Termina en unos minutos!';
 	}
 	// 1 hora
 	if (timeSpan <= 3600000) {
-		setTimeLeft('Termina pronto');
-		return;
+		return 'Termina pronto';
 	}
 	// 1 día
 	if (timeSpan <= 86400000) {
-		setTimeLeft('Termina hoy');
-		return;
+		return 'Termina hoy';
 	}
-	setTimeLeft(`Termina en ${daysLeft} días`);
+	if (daysLeft === 1) {
+		return `Termina mañana (en ${daysLeft} día)`;
+	}
+	return `Termina en ${daysLeft} días`;
 };
 
 export default SmallItem;
