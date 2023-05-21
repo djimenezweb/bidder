@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 
 // Firebase
 import { arrayUnion, doc, setDoc, updateDoc } from 'firebase/firestore';
@@ -13,7 +13,7 @@ const AddItem = () => {
 		duration: 1,
 		description: ''
 	};
-
+	const inputFileRef = useRef(null);
 	const { loggedUser } = useContext(AuthContext);
 	const [newItem, setNewItem] = useState(INITIAL_STATE);
 
@@ -82,6 +82,12 @@ const AddItem = () => {
 					></textarea>
 				</div>
 				<div>
+					<input type='file' ref={inputFileRef} name='picture0' id='picture0' />
+					<div onClick={() => handleInputFileClick(inputFileRef)}>
+						AÑADIR ARCHIVO
+					</div>
+				</div>
+				<div>
 					<button type='reset' onClick={() => setNewItem(INITIAL_STATE)}>
 						Borrar
 					</button>
@@ -93,6 +99,10 @@ const AddItem = () => {
 };
 
 export default AddItem;
+
+const handleInputFileClick = inputFileRef => {
+	inputFileRef.current.click();
+};
 
 const handleChange = (newItem, setNewItem, key, value) => {
 	setNewItem({
@@ -144,19 +154,3 @@ const printTime = duration => {
 		timeStyle: 'short'
 	});
 };
-
-/* 
-
-				<div>
-					<label htmlFor='condition'>Estado</label>
-					<select name='condition' id='condition'>
-						<option value='0'>Estado</option>
-						<option value='5'>Nuevo</option>
-						<option value='4'>Como nuevo</option>
-						<option value='3'>En buen estado</option>
-						<option value='2'>Aceptable</option>
-						<option value='1'>Desconocido / No funciona</option>
-					</select>
-				</div>
-
-*/
