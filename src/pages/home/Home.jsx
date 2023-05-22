@@ -18,8 +18,17 @@ const Home = () => {
 				...doc.data(),
 				id: doc.id
 			}));
-			response.length === 0 ? setAllItems([]) : setAllItems(response);
-			response.length === 0 ? setSearchResults([]) : setSearchResults(response);
+			const orderedByEndDate = response.sort((a, b) => {
+				if (a.endDate > b.endDate) return 1;
+				if (a.endDate < b.endDate) return -1;
+				return 0;
+			});
+			orderedByEndDate.length === 0
+				? setAllItems([])
+				: setAllItems(orderedByEndDate);
+			orderedByEndDate.length === 0
+				? setSearchResults([])
+				: setSearchResults(orderedByEndDate);
 		});
 		return () => subscribeToData();
 	}, []);

@@ -5,13 +5,6 @@ const StyledForm = styled.form`
 	padding: 1rem 0;
 `;
 
-const StyledSearchContainer = styled.div`
-	display: flex;
-	border-radius: 2rem;
-	border: 1px solid grey;
-	overflow: hidden;
-`;
-
 const StyledInput = styled.input`
 	width: 100%;
 	height: 3rem;
@@ -19,6 +12,21 @@ const StyledInput = styled.input`
 	font-family: 'Comfortaa', cursive;
 	font-size: 2rem;
 	font-weight: 200;
+
+	&:focus {
+		outline: transparent;
+	}
+`;
+
+const StyledSearchContainer = styled.div`
+	display: flex;
+	border-radius: 2rem;
+	border: 1px solid lightgray;
+	overflow: hidden;
+
+	${StyledInput}:hover & {
+		border: 1px solid black;
+	}
 `;
 
 const StyledSearchButton = styled.button`
