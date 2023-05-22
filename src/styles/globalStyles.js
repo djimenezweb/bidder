@@ -25,6 +25,7 @@ body {
 }
 
 main {
+    // background-color: pink;
     width: min(75rem, 100% - 2rem);
     margin: 0 auto;
 }
@@ -44,13 +45,6 @@ ul {
 a {
     text-decoration: none;
     color: inherit;
-}
-
-article {
-    cursor: pointer;
-    border: 1px solid grey;
-    margin: 8px 0;
-    padding: 0 8px;
 }
 `;
 

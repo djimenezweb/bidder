@@ -1,4 +1,12 @@
 import { useNavigate } from 'react-router-dom';
+import {
+	StyledArticle,
+	StyledImageContainer,
+	StyledInfo,
+	StyledPrice,
+	StyledTimeLeft,
+	StyledTitle
+} from './styles';
 
 const SmallItem = ({ item, today }) => {
 	const navigate = useNavigate();
@@ -10,13 +18,19 @@ const SmallItem = ({ item, today }) => {
 
 	console.log(item);
 	return (
-		<article key={item.id} onClick={() => navigate(`/itm/${item.id}`)}>
-			{item.pictures && <img src={item.pictures[0]} />}
-			<h3>{item.title}</h3>
-			<p>{item.description}</p>
-			<p>{item.currentPrice} €</p>
-			<p>{timeLeft}</p>
-		</article>
+		<StyledArticle key={item.id} onClick={() => navigate(`/itm/${item.id}`)}>
+			<StyledImageContainer>
+				{item.pictures && <img src={item.pictures[0]} />}
+			</StyledImageContainer>
+			<StyledInfo>
+				<div>
+					<StyledTitle>{item.title}</StyledTitle>
+					<StyledTimeLeft>{timeLeft}</StyledTimeLeft>
+				</div>
+
+				<StyledPrice>{item.currentPrice} €</StyledPrice>
+			</StyledInfo>
+		</StyledArticle>
 	);
 };
 
