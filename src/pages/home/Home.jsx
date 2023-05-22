@@ -40,7 +40,7 @@ const Home = () => {
 		return () => subscribeToData();
 	}, []);
 
-	console.log(searchResults);
+	// console.log(searchResults);
 
 	if (!allItems) return <p>Loading...</p>;
 

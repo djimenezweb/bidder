@@ -10,10 +10,9 @@ import SignIn from '../pages/sign-in/SignIn';
 import SignUp from '../pages/sign-up/SignUp';
 import NotFound from '../pages/not-found/NotFound';
 import Profile from '../pages/profile/Profile';
-// import AddItem from '../pages/add-item/AddItem';
-import AddItem from '../pages/add-item-hook/AddItem';
+import AddItem from '../pages/add-item/AddItem';
+// import AddItem from '../pages/add-item-hook/AddItem';
 import Item from '../pages/item/Item';
-import UploadPhoto from '../components/upload-photo/UploadPhoto';
 
 const Router = () => {
 	return (
@@ -40,7 +39,6 @@ const Router = () => {
 						</RequireAuth>
 					}
 				/>
-				<Route path='/test' element={<UploadPhoto />} />
 				<Route path='*' element={<NotFound />} />
 			</Route>
 		</Routes>

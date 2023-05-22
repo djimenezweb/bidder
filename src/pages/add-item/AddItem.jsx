@@ -1,10 +1,14 @@
-import { useContext, useRef, useState } from 'react';
+import { useContext, useState } from 'react';
 
 // Firebase
 import { arrayUnion, doc, setDoc, updateDoc } from 'firebase/firestore';
-import { db } from '../../config/firebase.config';
+import { db, storage } from '../../config/firebase.config';
 import { AuthContext } from '../../contexts/Auth.context';
 import { v4 } from 'uuid';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+
+// Components
+import UploadPictures from '../../components/upload-pictures/UploadPictures';
 
 const AddItem = () => {
 	const INITIAL_STATE = {
@@ -13,16 +17,31 @@ const AddItem = () => {
 		duration: 1,
 		description: ''
 	};
-	const inputFileRef = useRef(null);
+
+	const INITIAL_PREVIEW = {
+		picture0: '',
+		picture1: '',
+		picture2: ''
+	};
+
 	const { loggedUser } = useContext(AuthContext);
 	const [newItem, setNewItem] = useState(INITIAL_STATE);
+	const [preview, setPreview] = useState(INITIAL_PREVIEW);
 
 	return (
 		<>
 			<h2>Crear anuncio</h2>
 			<form
 				onSubmit={e =>
-					handleSubmit(e, newItem, loggedUser, setNewItem, INITIAL_STATE)
+					handleSubmit(
+						e,
+						newItem,
+						loggedUser,
+						setNewItem,
+						INITIAL_STATE,
+						setPreview,
+						INITIAL_PREVIEW
+					)
 				}
 			>
 				<div>
@@ -81,12 +100,9 @@ const AddItem = () => {
 						}
 					></textarea>
 				</div>
-				<div>
-					<input type='file' ref={inputFileRef} name='picture0' id='picture0' />
-					<div onClick={() => handleInputFileClick(inputFileRef)}>
-						AÑADIR ARCHIVO
-					</div>
-				</div>
+
+				<UploadPictures preview={preview} setPreview={setPreview} />
+
 				<div>
 					<button type='reset' onClick={() => setNewItem(INITIAL_STATE)}>
 						Borrar
@@ -100,10 +116,6 @@ const AddItem = () => {
 
 export default AddItem;
 
-const handleInputFileClick = inputFileRef => {
-	inputFileRef.current.click();
-};
-
 const handleChange = (newItem, setNewItem, key, value) => {
 	setNewItem({
 		...newItem,
@@ -116,15 +128,31 @@ const handleSubmit = async (
 	newItem,
 	loggedUser,
 	setNewItem,
-	INITIAL_STATE
+	INITIAL_STATE,
+	setPreview,
+	INITIAL_PREVIEW
 ) => {
 	e.preventDefault();
+	const id = v4();
+
+	const storageRef0 = ref(storage, `${loggedUser.email}/${id}/picture0`);
+	const storageRef1 = ref(storage, `${loggedUser.email}/${id}/picture1`);
+	const storageRef2 = ref(storage, `${loggedUser.email}/${id}/picture2`);
+
 	const today = new Date();
 	const endDate = new Date();
 	endDate.setDate(endDate.getDate() + Number(newItem.duration));
-	const id = v4();
 	const userToUpdate = doc(db, 'users', loggedUser.email);
 	try {
+		await uploadBytes(storageRef0, e.target.picture0.files[0]);
+		const picture0URL = await getDownloadURL(storageRef0);
+
+		await uploadBytes(storageRef1, e.target.picture1.files[0]);
+		const picture1URL = await getDownloadURL(storageRef1);
+
+		await uploadBytes(storageRef2, e.target.picture2.files[0]);
+		const picture2URL = await getDownloadURL(storageRef2);
+
 		await setDoc(doc(db, 'items', id), {
 			...newItem,
 			sellerEmail: loggedUser.email,
@@ -133,10 +161,12 @@ const handleSubmit = async (
 			highestBid: 0,
 			highestBidder: '',
 			creationDate: today.toISOString(),
-			endDate: endDate.toISOString()
+			endDate: endDate.toISOString(),
+			pictures: [picture0URL, picture1URL, picture2URL]
 		});
 		await updateDoc(userToUpdate, { myItems: arrayUnion(id) });
 		setNewItem(INITIAL_STATE);
+		setPreview(INITIAL_PREVIEW);
 	} catch (err) {
 		console.error(err);
 	}

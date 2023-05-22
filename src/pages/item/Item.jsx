@@ -10,6 +10,7 @@ import Countdown from '../../components/countdown/Countdown';
 import { AuthContext } from '../../contexts/Auth.context';
 import PlaceBid from '../../components/place-bid/PlaceBid';
 import AuctionStatus from '../../components/auction-status/AuctionStatus';
+import DeleteItem from '../../components/delete-item/DeleteItem';
 
 const Item = () => {
 	const { itemId } = useParams();
@@ -30,6 +31,9 @@ const Item = () => {
 
 	return (
 		<>
+			<img src={item.pictures[0]} alt='' />
+			<img src={item.pictures[1]} alt='' />
+			<img src={item.pictures[2]} alt='' />
 			<h2>{item.title}</h2>
 			<p>ID: {itemId}</p>
 			<p>{item.currentPrice} €</p>
@@ -40,10 +44,8 @@ const Item = () => {
 				{printTime(item.endDate)}
 			</p>
 			<Countdown endDate={item.endDate} />
-
 			{/* Si NO HAY loggedUser se le pide que inicie sesión */}
 			{!loggedUser?.email && <p>Inicia sesión para pujar</p>}
-
 			{/* Si HAY loggedUser y NO ES el vendedor, puede PUJAR */}
 			{loggedUser?.email && loggedUser?.email !== item.sellerEmail && (
 				<>
@@ -60,12 +62,13 @@ const Item = () => {
 					/>
 				</>
 			)}
-
-			{/* Si HAY loggedUser y ES el vendedor, puede EDITAR */}
+			{/* Si HAY loggedUser y ES el vendedor, puede EDITAR y BORRAR */}
 			{loggedUser?.email && loggedUser?.email === item.sellerEmail && (
-				<button>Editar</button>
+				<>
+					<button>Editar</button>
+					<DeleteItem itemId={itemId} />
+				</>
 			)}
-
 			<p style={{ opacity: 0.33 }}>
 				<small>highestBid: {item.highestBid} €</small>
 			</p>
