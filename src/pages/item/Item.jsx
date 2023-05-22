@@ -31,9 +31,11 @@ const Item = () => {
 
 	return (
 		<>
-			<img src={item.pictures[0]} alt='' />
-			<img src={item.pictures[1]} alt='' />
-			<img src={item.pictures[2]} alt='' />
+			{item.pictures &&
+				item.pictures.map((picture, index) => {
+					return <img key={`${itemId}-${index}`} src={picture} />;
+				})}
+
 			<h2>{item.title}</h2>
 			<p>ID: {itemId}</p>
 			<p>{item.currentPrice} €</p>

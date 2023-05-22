@@ -1,16 +1,28 @@
+import { MagnifyingGlass } from '@phosphor-icons/react';
+import {
+	StyledForm,
+	StyledInput,
+	StyledSearchButton,
+	StyledSearchContainer
+} from './styles';
+
 const SearchBar = ({ allItems, setSearchResults }) => {
 	return (
-		<form onSubmit={e => handleSubmit(e)}>
-			<input
-				type='search'
-				id='search'
-				name='search'
-				onChange={e =>
-					handleSearchChange(e.target.value, allItems, setSearchResults)
-				}
-			/>
-			<button>Search</button>
-		</form>
+		<StyledForm onSubmit={e => handleSubmit(e)}>
+			<StyledSearchContainer>
+				<StyledSearchButton>
+					<MagnifyingGlass size={32} />
+				</StyledSearchButton>
+				<StyledInput
+					type='search'
+					id='search'
+					name='search'
+					onChange={e =>
+						handleSearchChange(e.target.value, allItems, setSearchResults)
+					}
+				/>
+			</StyledSearchContainer>
+		</StyledForm>
 	);
 };
 

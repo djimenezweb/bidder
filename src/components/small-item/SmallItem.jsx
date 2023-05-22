@@ -1,7 +1,9 @@
 import { useNavigate } from 'react-router-dom';
 import {
 	StyledArticle,
+	StyledFlexContainer,
 	StyledImageContainer,
+	StyledImg,
 	StyledInfo,
 	StyledPrice,
 	StyledTimeLeft,
@@ -20,16 +22,17 @@ const SmallItem = ({ item, today }) => {
 	return (
 		<StyledArticle key={item.id} onClick={() => navigate(`/itm/${item.id}`)}>
 			<StyledImageContainer>
-				{item.pictures && <img src={item.pictures[0]} />}
+				{item.pictures && <StyledImg src={item.pictures[0]} />}
 			</StyledImageContainer>
-			<StyledInfo>
-				<div>
+
+			<StyledFlexContainer>
+				<StyledInfo>
 					<StyledTitle>{item.title}</StyledTitle>
 					<StyledTimeLeft>{timeLeft}</StyledTimeLeft>
-				</div>
+				</StyledInfo>
 
 				<StyledPrice>{item.currentPrice} €</StyledPrice>
-			</StyledInfo>
+			</StyledFlexContainer>
 		</StyledArticle>
 	);
 };
