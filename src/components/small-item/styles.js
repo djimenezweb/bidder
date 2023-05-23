@@ -9,6 +9,8 @@ const StyledImageContainer = styled.div`
 	max-width: 100%;
 	aspect-ratio: 1;
 	background-color: rgb(240 240 240);
+	border-radius: 1rem;
+	overflow: hidden;
 `;
 
 const StyledFlexContainer = styled.div`

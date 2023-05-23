@@ -5,11 +5,13 @@ import {
 	StyledSearchButton,
 	StyledSearchContainer
 } from './styles';
+import { useState } from 'react';
 
 const SearchBar = ({ allItems, setSearchResults }) => {
+	const [focus, setFocus] = useState(false);
 	return (
 		<StyledForm onSubmit={e => handleSubmit(e)}>
-			<StyledSearchContainer>
+			<StyledSearchContainer focus={focus}>
 				<StyledSearchButton>
 					<MagnifyingGlass size={32} />
 				</StyledSearchButton>
@@ -17,6 +19,8 @@ const SearchBar = ({ allItems, setSearchResults }) => {
 					type='search'
 					id='search'
 					name='search'
+					onFocus={() => setFocus(true)}
+					onBlur={() => setFocus(false)}
 					onChange={e =>
 						handleSearchChange(e.target.value, allItems, setSearchResults)
 					}

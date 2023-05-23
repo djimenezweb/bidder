@@ -13,6 +13,13 @@ const StyledNav = styled.nav`
 	align-items: center;
 `;
 
+const StyledProfilePhoto = styled.img`
+	width: 2rem;
+	height: 2rem;
+	background-color: pink;
+	border-radius: 50%;
+`;
+
 const StyledLogo = styled.h1`
 	margin: 0;
 	font-family: 'Comfortaa', cursive;
@@ -26,4 +33,4 @@ const StyledList = styled.ul`
 	gap: 1rem;
 `;
 
-export { StyledHeader, StyledNav, StyledLogo, StyledList };
+export { StyledHeader, StyledNav, StyledLogo, StyledProfilePhoto, StyledList };

@@ -12,19 +12,9 @@ const Profile = () => {
 
 	return (
 		<>
-			<h2>Perfil de usuario</h2>
-			<p>displayName: {loggedUser.displayName}</p>
-			<p>email: {loggedUser.email}</p>
-			<p>
-				email (sin dominio):{' '}
-				{loggedUser.email.substring(0, loggedUser.email.indexOf('@'))}
-			</p>
-			<p>photoURL: {loggedUser.photoURL}</p>
+			<h2>{loggedUser.displayName}</h2>
+			<p>{loggedUser.email}</p>
 			<img src={loggedUser.photoURL} alt='Profile picture' />
-			<p>phoneNumber: {loggedUser.phoneNumber}</p>
-			<p>lastSignInTime: {loggedUser.metadata.lastSignInTime}</p>
-			<p>lastLoginAt: {loggedUser.metadata.lastLoginAt}</p>
-			<p>createdAt: {loggedUser.metadata.createdAt}</p>
 			<p>ID: {loggedUser.uid}</p>
 			<button onClick={() => logout(navigate)}>Cerrar sesión</button>
 		</>

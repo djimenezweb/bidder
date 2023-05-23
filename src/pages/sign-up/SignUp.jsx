@@ -13,6 +13,10 @@ import {
 	validatePasswords
 } from '../../constants/form-validation';
 
+// Functions
+import { handleGoogleLogin } from '../../functions/google-login';
+import Button from '../../components/button/Button';
+
 const SignUp = () => {
 	const navigate = useNavigate();
 	const {
@@ -20,7 +24,7 @@ const SignUp = () => {
 		register,
 		getValues,
 		formState: { errors }
-	} = useForm();
+	} = useForm({ mode: 'onBlur' });
 
 	console.log(errors);
 
@@ -81,6 +85,10 @@ const SignUp = () => {
 				<button>Crear cuenta</button>
 			</form>
 
+			<button onClick={() => handleGoogleLogin(navigate)}>
+				Regístrate con Google
+			</button>
+
 			<h2>¿Ya tienes una cuenta?</h2>
 			<button onClick={() => navigate('/signin')}>Inicia sesión</button>
 		</>
@@ -92,7 +100,8 @@ const onSubmit = async (data, e, navigate) => {
 		await createUserWithEmailAndPassword(auth, data.newEmail, data.newPassword);
 		await updateProfile(auth.currentUser, {
 			displayName: data.newDisplayName,
-			photoURL: 'http://prueba.jpg'
+			photoURL:
+				'https://firebasestorage.googleapis.com/v0/b/bidder-89e7b.appspot.com/o/defaults%2Fuser-light-96px.png?alt=media&token=ceee64bb-30f2-40d8-9ec1-8385644043a1'
 		});
 		await setDoc(doc(db, 'users', data.newEmail), {
 			myBids: '',
