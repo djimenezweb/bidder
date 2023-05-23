@@ -11,8 +11,8 @@ import SignUp from '../pages/sign-up/SignUp';
 import NotFound from '../pages/not-found/NotFound';
 import Profile from '../pages/profile/Profile';
 import AddItem from '../pages/add-item/AddItem';
-// import AddItem from '../pages/add-item-hook/AddItem';
 import Item from '../pages/item/Item';
+import MyItems from '../pages/my-items/MyItems';
 
 const Router = () => {
 	return (
@@ -39,6 +39,7 @@ const Router = () => {
 						</RequireAuth>
 					}
 				/>
+				<Route path='/myitems' element={<MyItems />} />
 				<Route path='*' element={<NotFound />} />
 			</Route>
 		</Routes>

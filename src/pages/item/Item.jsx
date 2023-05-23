@@ -68,7 +68,7 @@ const Item = () => {
 			{loggedUser?.email && loggedUser?.email === item.sellerEmail && (
 				<>
 					<button>Editar</button>
-					<DeleteItem itemId={itemId} />
+					<DeleteItem itemId={itemId} picturesArray={item.pictures} />
 				</>
 			)}
 			<p style={{ opacity: 0.33 }}>

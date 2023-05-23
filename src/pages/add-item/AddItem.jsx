@@ -9,6 +9,7 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 
 // Components
 import UploadPictures from '../../components/upload-pictures/UploadPictures';
+import { DURATION } from '../../constants/add-item';
 
 const AddItem = () => {
 	const INITIAL_STATE = {
@@ -79,10 +80,13 @@ const AddItem = () => {
 							handleChange(newItem, setNewItem, 'duration', e.target.value)
 						}
 					>
-						<option value='1'>1 día</option>
-						<option value='3'>3 días</option>
-						<option value='5'>5 días</option>
-						<option value='7'>1 semana</option>
+						{DURATION.map(option => {
+							return (
+								<option key={option.id} value={option.value}>
+									{option.option}
+								</option>
+							);
+						})}
 					</select>
 					<p>
 						La subasta terminará el {printDate(newItem.duration)} a las{' '}

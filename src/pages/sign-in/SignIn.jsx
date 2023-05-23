@@ -51,19 +51,14 @@ const SignIn = () => {
 					/>
 					<StyledError>{errors?.password?.message}</StyledError>
 				</StyledFormField>
-				<button>Iniciar sesión</button>
+				<Button>Iniciar sesión</Button>
 			</form>
-			<button onClick={() => handleGoogleLogin(navigate)}>
+			<Button action={() => handleGoogleLogin(navigate)}>
 				Iniciar sesión con Google
-			</button>
+			</Button>
 
 			<h2>¿Todavía no tienes cuenta?</h2>
-			<Button onClick={() => navigate('/signup')}>
-				Regístrate (componente)
-			</Button>
-			<button onClick={() => navigate('/signup')}>
-				Regístrate (botón HTML)
-			</button>
+			<Button action={() => navigate('/signup')}>Regístrate</Button>
 		</StyledContainer>
 	);
 };

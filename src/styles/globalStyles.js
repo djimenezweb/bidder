@@ -15,6 +15,10 @@ html {
   overflow-x: hidden;
 }
 
+/* #root {
+  min-height: 100vh;
+} */
+
 body {
     margin: 0;
     font-family: ${FONTS.sans};

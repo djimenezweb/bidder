@@ -92,15 +92,15 @@ const SignUp = () => {
 					/>
 					<StyledError>{errors?.repeatPassword?.message}</StyledError>
 				</StyledFormField>
-				<button>Crear cuenta</button>
+				<Button>Crear cuenta</Button>
 			</form>
 
-			<button onClick={() => handleGoogleLogin(navigate)}>
+			<Button action={() => handleGoogleLogin(navigate)}>
 				Regístrate con Google
-			</button>
+			</Button>
 
 			<h2>¿Ya tienes una cuenta?</h2>
-			<button onClick={() => navigate('/signin')}>Inicia sesión</button>
+			<Button action={() => navigate('/signin')}>Inicia sesión</Button>
 		</StyledContainer>
 	);
 };
