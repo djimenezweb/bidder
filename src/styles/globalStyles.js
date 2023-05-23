@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { FONTS } from '../constants/fonts';
 
 const GlobalStyles = createGlobalStyle`
 
@@ -9,11 +10,6 @@ const GlobalStyles = createGlobalStyle`
     // outline: 1px dashed rgba(255 0 0 / 0.3);
 }
 
-/* html {
-  margin-right: 0;
-  margin-left: calc(100vw - 100%)
-} */
-
 html {
   width: 100vw;
   overflow-x: hidden;
@@ -21,12 +17,11 @@ html {
 
 body {
     margin: 0;
-    font-family: 'Manrope', sans-serif;
+    font-family: ${FONTS.sans};
     font-weight: 400;
 }
 
-main {
-    // background-color: pink;
+main {    
     width: min(75rem, 100% - 2rem);
     margin: 0 auto;
 }

@@ -16,6 +16,12 @@ import {
 // Functions
 import { handleGoogleLogin } from '../../functions/google-login';
 import Button from '../../components/button/Button';
+import {
+	StyledContainer,
+	StyledError,
+	StyledFormField,
+	StyledInput
+} from './styles';
 
 const SignUp = () => {
 	const navigate = useNavigate();
@@ -29,47 +35,50 @@ const SignUp = () => {
 	console.log(errors);
 
 	return (
-		<>
+		<StyledContainer>
 			<h2>Crear cuenta</h2>
 			<form
 				onSubmit={handleSubmit((data, e) => onSubmit(data, e, navigate))}
 				autoComplete='off'
 			>
-				<div>
-					<input
+				<StyledFormField>
+					<StyledInput
 						type='text'
 						name='newDisplayName'
 						id='newDisplayName'
 						autoComplete='off'
 						placeholder='nombre de usuario'
 						{...register('newDisplayName', FORM_VALIDATION.name)}
+						invalid={errors?.newDisplayName?.message}
 					/>
-					<span>{errors?.newDisplayName?.message}</span>
-				</div>
-				<div>
-					<input
+					<StyledError>{errors?.newDisplayName?.message}</StyledError>
+				</StyledFormField>
+				<StyledFormField>
+					<StyledInput
 						type='email'
 						name='newEmail'
 						id='newEmail'
 						autoComplete='off'
 						placeholder='email'
 						{...register('newEmail', FORM_VALIDATION.email)}
+						invalid={errors?.newEmail?.message}
 					/>
-					<span>{errors?.newEmail?.message}</span>
-				</div>
-				<div>
-					<input
+					<StyledError>{errors?.newEmail?.message}</StyledError>
+				</StyledFormField>
+				<StyledFormField>
+					<StyledInput
 						type='password'
 						name='newPassword'
 						id='newPassword'
 						autoComplete='new-password'
 						placeholder='contraseña'
 						{...register('newPassword', FORM_VALIDATION.password)}
+						invalid={errors?.newPassword?.message}
 					/>
-					<span>{errors?.newPassword?.message}</span>
-				</div>
-				<div>
-					<input
+					<StyledError>{errors?.newPassword?.message}</StyledError>
+				</StyledFormField>
+				<StyledFormField>
+					<StyledInput
 						type='password'
 						name='repeatPassword'
 						id='repeatPassword'
@@ -79,9 +88,10 @@ const SignUp = () => {
 							required: 'Es obligatorio comprobar la contraseña',
 							validate: value => validatePasswords(value, getValues)
 						})}
+						invalid={errors?.repeatPassword?.message}
 					/>
-					<span>{errors?.repeatPassword?.message}</span>
-				</div>
+					<StyledError>{errors?.repeatPassword?.message}</StyledError>
+				</StyledFormField>
 				<button>Crear cuenta</button>
 			</form>
 
@@ -91,7 +101,7 @@ const SignUp = () => {
 
 			<h2>¿Ya tienes una cuenta?</h2>
 			<button onClick={() => navigate('/signin')}>Inicia sesión</button>
-		</>
+		</StyledContainer>
 	);
 };
 

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { FONTS } from '../../constants/fonts';
 
 const StyledHeader = styled.header`
 	background-color: rgb(245 245 245);
@@ -22,7 +23,7 @@ const StyledProfilePhoto = styled.img`
 
 const StyledLogo = styled.h1`
 	margin: 0;
-	font-family: 'Comfortaa', cursive;
+	font-family: ${FONTS.cursive};
 	font-size: 2rem;
 	font-weight: 700;
 	letter-spacing: auto;

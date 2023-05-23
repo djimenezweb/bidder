@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { FONTS } from '../../constants/fonts';
 
 const StyledForm = styled.form`
 	margin: 1rem 0;
@@ -22,7 +23,7 @@ const StyledInput = styled.input`
 	width: 100%;
 	height: 3rem;
 	border: transparent;
-	font-family: 'Comfortaa', cursive;
+	font-family: ${FONTS.cursive};
 	font-size: 2rem;
 	font-weight: 200;
 

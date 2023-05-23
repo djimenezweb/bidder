@@ -10,7 +10,17 @@ import { FORM_VALIDATION } from '../../constants/form-validation';
 
 // Functions
 import { handleGoogleLogin } from '../../functions/google-login';
+
+// Components
 import Button from '../../components/button/Button';
+
+// Styles
+import {
+	StyledContainer,
+	StyledError,
+	StyledFormField,
+	StyledInput
+} from './styles';
 
 const SignIn = () => {
 	const navigate = useNavigate();
@@ -20,25 +30,27 @@ const SignIn = () => {
 		formState: { errors }
 	} = useForm({ mode: 'onBlur' });
 	return (
-		<>
+		<StyledContainer>
 			<h2>¡Bienvenido!</h2>
 			<form onSubmit={handleSubmit((data, e) => onSubmit(data, e, navigate))}>
-				<div>
-					<input
+				<StyledFormField>
+					<StyledInput
 						type='email'
 						placeholder='email'
 						{...register('email', FORM_VALIDATION.email)}
+						invalid={errors?.email?.message}
 					/>
-					<span>{errors?.email?.message}</span>
-				</div>
-				<div>
-					<input
+					<StyledError>{errors?.email?.message}</StyledError>
+				</StyledFormField>
+				<StyledFormField>
+					<StyledInput
 						type='password'
 						placeholder='contraseña'
 						{...register('password', FORM_VALIDATION.password)}
+						invalid={errors?.password?.message}
 					/>
-					<span>{errors?.password?.message}</span>
-				</div>
+					<StyledError>{errors?.password?.message}</StyledError>
+				</StyledFormField>
 				<button>Iniciar sesión</button>
 			</form>
 			<button onClick={() => handleGoogleLogin(navigate)}>
@@ -52,7 +64,7 @@ const SignIn = () => {
 			<button onClick={() => navigate('/signup')}>
 				Regístrate (botón HTML)
 			</button>
-		</>
+		</StyledContainer>
 	);
 };
 
