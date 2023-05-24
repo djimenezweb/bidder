@@ -111,7 +111,7 @@ const onSubmit = async (data, e, navigate) => {
 		await updateProfile(auth.currentUser, {
 			displayName: data.newDisplayName,
 			photoURL:
-				'https://firebasestorage.googleapis.com/v0/b/bidder-89e7b.appspot.com/o/defaults%2Fuser-light-96px.png?alt=media&token=ceee64bb-30f2-40d8-9ec1-8385644043a1'
+				'https://firebasestorage.googleapis.com/v0/b/bidder-89e7b.appspot.com/o/defaults%2Fuser-circle-light-96px.png?alt=media&token=15eab190-4efb-4e9d-b20c-bf9f330882ad'
 		});
 		await setDoc(doc(db, 'users', data.newEmail), {
 			myBids: '',

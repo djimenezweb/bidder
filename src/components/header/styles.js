@@ -14,10 +14,16 @@ const StyledNav = styled.nav`
 	align-items: center;
 `;
 
+const StyledList = styled.ul`
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+`;
+
 const StyledProfilePhoto = styled.img`
 	width: 2rem;
 	height: 2rem;
-	background-color: pink;
+	background-color: white;
 	border-radius: 50%;
 `;
 
@@ -27,11 +33,6 @@ const StyledLogo = styled.h1`
 	font-size: 2rem;
 	font-weight: 700;
 	letter-spacing: auto;
-`;
-
-const StyledList = styled.ul`
-	display: flex;
-	gap: 1rem;
 `;
 
 export { StyledHeader, StyledNav, StyledLogo, StyledProfilePhoto, StyledList };

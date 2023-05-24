@@ -38,14 +38,6 @@ const Header = () => {
 									/>
 								</NavLink>
 							</li>
-							<li>
-								<NavLink to='/profile'>
-									<StyledProfilePhoto
-										src='https://firebasestorage.googleapis.com/v0/b/bidder-89e7b.appspot.com/o/defaults%2Fuser-circle-light-96px.png?alt=media&token=15eab190-4efb-4e9d-b20c-bf9f330882ad'
-										alt={loggedUser.displayName}
-									/>
-								</NavLink>
-							</li>
 						</>
 					) : (
 						<li>
