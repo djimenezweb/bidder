@@ -32,7 +32,7 @@ const SignUp = () => {
 		formState: { errors }
 	} = useForm({ mode: 'onBlur' });
 
-	console.log(errors);
+	// console.log(errors);
 
 	return (
 		<StyledContainer>

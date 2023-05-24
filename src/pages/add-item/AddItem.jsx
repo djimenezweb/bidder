@@ -19,15 +19,9 @@ const AddItem = () => {
 		description: ''
 	};
 
-	const INITIAL_PREVIEW = {
-		picture0: '',
-		picture1: '',
-		picture2: ''
-	};
-
 	const { loggedUser } = useContext(AuthContext);
 	const [newItem, setNewItem] = useState(INITIAL_STATE);
-	const [preview, setPreview] = useState(INITIAL_PREVIEW);
+	const [pictures, setPictures] = useState([]);
 
 	return (
 		<>
@@ -40,8 +34,8 @@ const AddItem = () => {
 						loggedUser,
 						setNewItem,
 						INITIAL_STATE,
-						setPreview,
-						INITIAL_PREVIEW
+						pictures,
+						setPictures
 					)
 				}
 			>
@@ -105,7 +99,7 @@ const AddItem = () => {
 					></textarea>
 				</div>
 
-				<UploadPictures preview={preview} setPreview={setPreview} />
+				<UploadPictures pictures={pictures} setPictures={setPictures} />
 
 				<div>
 					<button type='reset' onClick={() => setNewItem(INITIAL_STATE)}>
@@ -133,29 +127,31 @@ const handleSubmit = async (
 	loggedUser,
 	setNewItem,
 	INITIAL_STATE,
-	setPreview,
-	INITIAL_PREVIEW
+	pictures,
+	setPictures
 ) => {
 	e.preventDefault();
 	const id = v4();
-
-	const storageRef0 = ref(storage, `${loggedUser.email}/${id}/picture0`);
-	const storageRef1 = ref(storage, `${loggedUser.email}/${id}/picture1`);
-	const storageRef2 = ref(storage, `${loggedUser.email}/${id}/picture2`);
-
 	const today = new Date();
 	const endDate = new Date();
 	endDate.setDate(endDate.getDate() + Number(newItem.duration));
 	const userToUpdate = doc(db, 'users', loggedUser.email);
+	const picturesURLS = [];
+
 	try {
-		await uploadBytes(storageRef0, e.target.picture0.files[0]);
-		const picture0URL = await getDownloadURL(storageRef0);
+		pictures.forEach(async (picture, index) => {
+			const storageRef = ref(
+				storage,
+				`${loggedUser.email}/${id}/picture${index}`
+			);
+			await uploadBytes(storageRef, picture);
+			// await uploadString(storageRef, picture);
+			const pictureURL = await getDownloadURL(storageRef);
+			console.log('URL: ' + pictureURL);
+			picturesURLS.push(pictureURL);
+		});
 
-		await uploadBytes(storageRef1, e.target.picture1.files[0]);
-		const picture1URL = await getDownloadURL(storageRef1);
-
-		await uploadBytes(storageRef2, e.target.picture2.files[0]);
-		const picture2URL = await getDownloadURL(storageRef2);
+		console.log('Array de urls: ' + picturesURLS);
 
 		await setDoc(doc(db, 'items', id), {
 			...newItem,
@@ -166,11 +162,11 @@ const handleSubmit = async (
 			highestBidder: '',
 			creationDate: today.toISOString(),
 			endDate: endDate.toISOString(),
-			pictures: [picture0URL, picture1URL, picture2URL]
+			pictures: picturesURLS
 		});
 		await updateDoc(userToUpdate, { myItems: arrayUnion(id) });
 		setNewItem(INITIAL_STATE);
-		setPreview(INITIAL_PREVIEW);
+		setPictures([]);
 	} catch (err) {
 		console.error(err);
 	}

@@ -15,7 +15,7 @@ const StyledInput = styled.input`
 	width: 100%;
 	margin: 0 0 2rem 0;
 	padding: 0.5rem 1rem;
-	background-color: white;
+	background-color: none;
 	// border: 1px solid gray;
 	border: ${({ invalid }) => (invalid ? '1px solid red' : '1px solid gray')};
 	border-radius: 2rem;

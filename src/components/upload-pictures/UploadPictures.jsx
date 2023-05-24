@@ -1,103 +1,63 @@
 import { useRef } from 'react';
+import { v4 } from 'uuid';
+import {
+	StyledAddPictureButton,
+	StyledContainer,
+	StyledPreview
+} from './styles';
 
-const UploadPictures = ({ preview, setPreview }) => {
-	const inputPicture0Ref = useRef(null);
-	const inputPicture1Ref = useRef(null);
-	const inputPicture2Ref = useRef(null);
+const UploadPictures = ({ pictures, setPictures }) => {
+	const inputPictureRef = useRef(null);
 
 	return (
-		<>
-			<div>
-				<input
-					style={{ display: 'none' }}
-					type='file'
-					name='picture0'
-					id='picture0'
-					ref={inputPicture0Ref}
-					onChange={e =>
-						loadPreview(e.target.files[0], setPreview, preview, 'picture0')
-					}
-				/>
-				{preview.picture0 ? (
-					<div
-						onClick={() =>
-							handleCancel(inputPicture0Ref, setPreview, preview, 'picture0')
-						}
-					>
-						<img src={preview?.picture0} alt='' />
-					</div>
-				) : (
-					<div onClick={() => handleClick(inputPicture0Ref)}>AÑADIR</div>
-				)}
-			</div>
+		<StyledContainer>
+			{pictures.length !== 0 &&
+				pictures.map((picture, index) => (
+					<StyledPreview
+						key={v4()}
+						src={picture.preview}
+						onClick={() => handleCancel(index, pictures, setPictures)}
+					/>
+				))}
 
 			<div>
 				<input
 					style={{ display: 'none' }}
 					type='file'
-					name='picture1'
-					id='picture1'
-					ref={inputPicture1Ref}
-					onChange={e =>
-						loadPreview(e.target.files[0], setPreview, preview, 'picture1')
-					}
+					name='picture'
+					id='picture'
+					ref={inputPictureRef}
+					onChange={e => loadPreview(e.target.files[0], pictures, setPictures)}
 				/>
-				{preview.picture1 ? (
-					<div
-						onClick={() =>
-							handleCancel(inputPicture1Ref, setPreview, preview, 'picture1')
-						}
-					>
-						<img src={preview?.picture1} alt='' />
-					</div>
-				) : (
-					<div onClick={() => handleClick(inputPicture1Ref)}>AÑADIR</div>
-				)}
-			</div>
 
-			<div>
-				<input
-					style={{ display: 'none' }}
-					type='file'
-					name='picture2'
-					id='picture2'
-					ref={inputPicture2Ref}
-					onChange={e =>
-						loadPreview(e.target.files[0], setPreview, preview, 'picture2')
-					}
-				/>
-				{preview.picture2 ? (
-					<div
-						onClick={() =>
-							handleCancel(inputPicture2Ref, setPreview, preview, 'picture2')
-						}
-					>
-						<img src={preview?.picture2} alt='' />
-					</div>
-				) : (
-					<div onClick={() => handleClick(inputPicture2Ref)}>AÑADIR</div>
+				{pictures.length < 10 && (
+					<StyledAddPictureButton onClick={() => handleClick(inputPictureRef)}>
+						+
+					</StyledAddPictureButton>
 				)}
 			</div>
-		</>
+		</StyledContainer>
 	);
 };
 
-const loadPreview = (file, setPreview, preview, pictureNumber) => {
+const loadPreview = (file, pictures, setPictures) => {
 	const reader = new FileReader();
 
 	reader.addEventListener('loadend', e => {
-		console.log(e.target.result);
-		setPreview({ ...preview, [pictureNumber]: e.target.result });
+		file.preview = e.target.result;
+		// setPictures({previews: [...pictures.previews, e.target.result], files:[...pictures.files, file]})
+		setPictures([...pictures, file]);
 	});
-
 	reader.readAsDataURL(file);
 };
 
 const handleClick = inputRef => inputRef.current.click();
 
-const handleCancel = (inputRef, setPreview, preview, pictureNumber) => {
-	inputRef.current.value = null;
-	setPreview({ ...preview, [pictureNumber]: '' });
+const handleCancel = (index, pictures, setPictures) => {
+	const filteredArray = pictures.filter(
+		(item, stateIndex) => stateIndex !== index
+	);
+	setPictures(filteredArray);
 };
 
 export default UploadPictures;
