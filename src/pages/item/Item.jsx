@@ -11,6 +11,7 @@ import { AuthContext } from '../../contexts/Auth.context';
 import PlaceBid from '../../components/place-bid/PlaceBid';
 import AuctionStatus from '../../components/auction-status/AuctionStatus';
 import DeleteItem from '../../components/delete-item/DeleteItem';
+import { StyledId, StyledPrice, StyledTitle } from './styles';
 
 const Item = () => {
 	const { itemId } = useParams();
@@ -31,14 +32,9 @@ const Item = () => {
 
 	return (
 		<>
-			{item.pictures &&
-				item.pictures.map((picture, index) => {
-					return <img key={`${itemId}-${index}`} src={picture} />;
-				})}
-
-			<h2>{item.title}</h2>
-			<p>ID: {itemId}</p>
-			<p>{item.currentPrice} €</p>
+			<StyledTitle>{item.title}</StyledTitle>
+			<StyledId>Item No.: {itemId}</StyledId>
+			<StyledPrice>{item.currentPrice} €</StyledPrice>
 			<p>{item.description}</p>
 			<p>Vendido por {item.sellerEmail}</p>
 			<p>
@@ -71,6 +67,10 @@ const Item = () => {
 					<DeleteItem itemId={itemId} picturesArray={item.pictures} />
 				</>
 			)}
+			{item.pictures &&
+				item.pictures.map((picture, index) => {
+					return <img key={`${itemId}-${index}`} src={picture} />;
+				})}
 			<p style={{ opacity: 0.33 }}>
 				<small>highestBid: {item.highestBid} €</small>
 			</p>

@@ -57,9 +57,10 @@ const UploadPictures = ({ pictures, setPictures }) => {
 const loadPreview = (file, pictures, setPictures) => {
 	const reader = new FileReader();
 
+	// reader.onload = e => {console.log(e.target.result);}
+
 	reader.addEventListener('loadend', e => {
 		file.preview = e.target.result;
-		// setPictures({previews: [...pictures.previews, e.target.result], files:[...pictures.files, file]})
 		setPictures([...pictures, file]);
 	});
 	reader.readAsDataURL(file);

@@ -1,4 +1,7 @@
 import { useContext, useState } from 'react';
+import UploadPictures from '../../components/upload-pictures/UploadPictures';
+import { DURATION } from '../../constants/add-item';
+import Button from '../../components/button/Button';
 
 // Firebase
 import { arrayUnion, doc, setDoc, updateDoc } from 'firebase/firestore';
@@ -6,11 +9,6 @@ import { db, storage } from '../../config/firebase.config';
 import { AuthContext } from '../../contexts/Auth.context';
 import { v4 } from 'uuid';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
-
-// Components
-import UploadPictures from '../../components/upload-pictures/UploadPictures';
-import { DURATION } from '../../constants/add-item';
-import Button from '../../components/button/Button';
 
 const AddItem = () => {
 	const INITIAL_STATE = {
@@ -139,8 +137,8 @@ const handleSubmit = async (
 	const userToUpdate = doc(db, 'users', loggedUser.email);
 
 	try {
-		// Bucle map - Queremos recorrer un array con archivos y obtener un array con urls
-		const URLarray = await Promise.allSettled(
+		const allUrls = [];
+		await Promise.all(
 			pictures.map(async (picture, index) => {
 				const storageRef = ref(
 					storage,
@@ -149,47 +147,13 @@ const handleSubmit = async (
 				await uploadBytes(storageRef, picture);
 				const pictureURL = await getDownloadURL(storageRef);
 				console.log(`URL picture${index}: ${pictureURL}`);
-				return pictureURL;
+				allUrls.push(pictureURL);
 			})
 		);
 
-		console.log('Primer item del array de URLs: ' + URLarray[0]);
-		console.log('Primer item.value del array de URLs: ' + URLarray[0].value);
+		console.log('ARRAY', allUrls);
 
-		console.log('Array de urls: ' + URLarray);
-
-		// Bucle for...of que recorre array de previews y files
-
-		/* for await (const picture of pictures) {
-			const index = pictures.indexOf(picture);
-
-			const storageRef = ref(
-				storage,
-				`${loggedUser.email}/${id}/picture${index}`
-			);
-			await uploadBytes(storageRef, picture);
-			const pictureURL = await getDownloadURL(storageRef);
-			// URLarray = [...URLarray, pictureURL];
-			URLarray.push(pictureURL);
-			console.log('URL picture' + index + ': ' + pictureURL);
-			console.log('Array lleno: ' + URLarray);
-		} */
-
-		/* // Bucle forEach
-		pictures.forEach(async (picture, index) => {
-			const storageRef = ref(
-				storage,
-				`${loggedUser.email}/${id}/picture${index}`
-			);
-			await uploadBytes(storageRef, picture);
-			const pictureURL = await getDownloadURL(storageRef);
-			URLarray = [...URLarray, pictureURL];
-			// URLarray.push(pictureURL);
-			console.log('URL picture' + index + ': ' + pictureURL);
-			console.log('Array lleno: ' + URLarray);
-		}); */
-
-		/* 		await setDoc(doc(db, 'items', id), {
+		await setDoc(doc(db, 'items', id), {
 			...newItem,
 			sellerEmail: loggedUser.email,
 			sellerID: loggedUser.uid,
@@ -198,9 +162,9 @@ const handleSubmit = async (
 			highestBidder: '',
 			creationDate: today.toISOString(),
 			endDate: endDate.toISOString(),
-			pictures: URLarray
+			pictures: allUrls
 		});
-		await updateDoc(userToUpdate, { myItems: arrayUnion(id) }); */
+		await updateDoc(userToUpdate, { myItems: arrayUnion(id) });
 		await setNewItem(INITIAL_STATE);
 		await setPictures([]);
 	} catch (err) {
