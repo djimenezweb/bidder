@@ -136,24 +136,55 @@ const handleSubmit = async (
 	const endDate = new Date();
 	endDate.setDate(endDate.getDate() + Number(newItem.duration));
 	const userToUpdate = doc(db, 'users', loggedUser.email);
-	const picturesURLS = [];
 
 	try {
+		// Bucle map
+		const URLarray = await Promise.allSettled(
+			pictures.map(async (picture, index) => {
+				const storageRef = ref(
+					storage,
+					`${loggedUser.email}/${id}/picture${index}`
+				);
+				await uploadBytes(storageRef, picture);
+				const pictureURL = await getDownloadURL(storageRef);
+				console.log(`URL picture${index}: ${pictureURL}`);
+				return pictureURL;
+			})
+		);
+
+		// Bucle for...of que recorre array de previews y files
+		/* for await (const picture of pictures) {
+			const index = pictures.indexOf(picture);
+
+			const storageRef = ref(
+				storage,
+				`${loggedUser.email}/${id}/picture${index}`
+			);
+			await uploadBytes(storageRef, picture);
+			const pictureURL = await getDownloadURL(storageRef);
+			// URLarray = [...URLarray, pictureURL];
+			URLarray.push(pictureURL);
+			console.log('URL picture' + index + ': ' + pictureURL);
+			console.log('Array lleno: ' + URLarray);
+		} */
+
+		/* // Bucle forEach
 		pictures.forEach(async (picture, index) => {
 			const storageRef = ref(
 				storage,
 				`${loggedUser.email}/${id}/picture${index}`
 			);
 			await uploadBytes(storageRef, picture);
-			// await uploadString(storageRef, picture);
 			const pictureURL = await getDownloadURL(storageRef);
-			console.log('URL: ' + pictureURL);
-			picturesURLS.push(pictureURL);
-		});
+			URLarray = [...URLarray, pictureURL];
+			// URLarray.push(pictureURL);
+			console.log('URL picture' + index + ': ' + pictureURL);
+			console.log('Array lleno: ' + URLarray);
+		}); */
 
-		console.log('Array de urls: ' + picturesURLS);
+		console.log('Array de urls: ' + URLarray);
 
-		await setDoc(doc(db, 'items', id), {
+		/* 		await setDoc(doc(db, 'items', id), {
 			...newItem,
 			sellerEmail: loggedUser.email,
 			sellerID: loggedUser.uid,
@@ -164,9 +195,9 @@ const handleSubmit = async (
 			endDate: endDate.toISOString(),
 			pictures: picturesURLS
 		});
-		await updateDoc(userToUpdate, { myItems: arrayUnion(id) });
-		setNewItem(INITIAL_STATE);
-		setPictures([]);
+		await updateDoc(userToUpdate, { myItems: arrayUnion(id) }); */
+		await setNewItem(INITIAL_STATE);
+		await setPictures([]);
 	} catch (err) {
 		console.error(err);
 	}
