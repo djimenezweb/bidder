@@ -9,8 +9,13 @@ import { db, storage } from '../../config/firebase.config';
 import { AuthContext } from '../../contexts/Auth.context';
 import { v4 } from 'uuid';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { useNavigate } from 'react-router-dom';
 
 const AddItem = () => {
+	console.log('AddItem renderizado');
+
+	const navigate = useNavigate();
+
 	const INITIAL_STATE = {
 		title: '',
 		startingPrice: 1,
@@ -19,8 +24,16 @@ const AddItem = () => {
 	};
 
 	const { loggedUser } = useContext(AuthContext);
-	const [newItem, setNewItem] = useState(INITIAL_STATE);
+	const [formData, setFormData] = useState(INITIAL_STATE);
 	const [pictures, setPictures] = useState([]);
+	const [errors, setErrors] = useState({
+		title: false,
+		startingPrice: false,
+		description: false,
+		pictures: false
+	});
+
+	console.log(errors);
 
 	return (
 		<>
@@ -29,12 +42,15 @@ const AddItem = () => {
 				onSubmit={e =>
 					handleSubmit(
 						e,
-						newItem,
+						formData,
 						loggedUser,
-						setNewItem,
+						setFormData,
 						INITIAL_STATE,
 						pictures,
-						setPictures
+						setPictures,
+						errors,
+						setErrors,
+						navigate
 					)
 				}
 			>
@@ -44,11 +60,12 @@ const AddItem = () => {
 						type='text'
 						name='title'
 						id='title'
-						value={newItem.title}
+						value={formData.title}
 						onChange={e =>
-							handleChange(newItem, setNewItem, 'title', e.target.value)
+							handleChange(formData, setFormData, 'title', e.target.value)
 						}
 					/>
+					{errors.title && <p>Campo requerido</p>}
 				</div>
 				<div>
 					<label htmlFor='startingPrice'>Precio de salida</label>
@@ -56,21 +73,31 @@ const AddItem = () => {
 						type='number'
 						name='startingPrice'
 						id='startingPrice'
-						value={newItem.startingPrice}
+						value={formData.startingPrice}
 						onChange={e =>
-							handleChange(newItem, setNewItem, 'startingPrice', e.target.value)
+							handleChange(
+								formData,
+								setFormData,
+								'startingPrice',
+								e.target.value
+							)
 						}
 					/>{' '}
 					€
+					{errors.startingPrice && (
+						<p>
+							Introduce un número válido. El precio debe ser mayor o igual a 1€.
+						</p>
+					)}
 				</div>
 				<div>
 					<label htmlFor='duration'>Duración</label>
 					<select
 						name='duration'
 						id='duration'
-						value={newItem.duration}
+						value={formData.duration}
 						onChange={e =>
-							handleChange(newItem, setNewItem, 'duration', e.target.value)
+							handleChange(formData, setFormData, 'duration', e.target.value)
 						}
 					>
 						{DURATION.map(option => {
@@ -82,7 +109,7 @@ const AddItem = () => {
 						})}
 					</select>
 					<p>
-						La subasta terminará el {printDate(newItem.duration)} a las{' '}
+						La subasta terminará el {printDate(formData.duration)} a las{' '}
 						{printTime()}
 					</p>
 				</div>
@@ -91,19 +118,22 @@ const AddItem = () => {
 					<textarea
 						name='description'
 						id='description'
-						value={newItem.description}
+						value={formData.description}
 						onChange={e =>
-							handleChange(newItem, setNewItem, 'description', e.target.value)
+							handleChange(formData, setFormData, 'description', e.target.value)
 						}
 					></textarea>
+					{errors.description && <p>Campo requerido</p>}
 				</div>
 
-				<UploadPictures pictures={pictures} setPictures={setPictures} />
+				<UploadPictures
+					pictures={pictures}
+					setPictures={setPictures}
+					errors={errors}
+				/>
 
 				<div>
-					<button type='reset' onClick={() => setNewItem(INITIAL_STATE)}>
-						Borrar
-					</button>
+					<Button action={() => setFormData(INITIAL_STATE)}>Borrar</Button>
 					<Button>Publicar anuncio</Button>
 				</div>
 			</form>
@@ -113,27 +143,56 @@ const AddItem = () => {
 
 export default AddItem;
 
-const handleChange = (newItem, setNewItem, key, value) => {
-	setNewItem({
-		...newItem,
+const handleChange = (formData, setFormData, key, value) => {
+	setFormData({
+		...formData,
 		[key]: value
 	});
 };
 
+const validateForm = (formData, pictures, errors, setErrors) => {
+	console.log('title', formData.title);
+	if (formData.length === 0) {
+		setErrors({ ...errors, title: true });
+	}
+
+	console.log('price', formData.startingPrice);
+
+	if (formData.startingPrice < 1) {
+		setErrors({ ...errors, startingPrice: true });
+	}
+
+	console.log('description', formData.description);
+	if (formData.description === '') {
+		setErrors({ ...errors, description: true });
+	}
+
+	if (pictures.length === 0) {
+		setErrors({ ...errors, pictures: true });
+	}
+};
+
 const handleSubmit = async (
 	e,
-	newItem,
+	formData,
 	loggedUser,
-	setNewItem,
+	setFormData,
 	INITIAL_STATE,
 	pictures,
-	setPictures
+	setPictures,
+	errors,
+	setErrors,
+	navigate
 ) => {
 	e.preventDefault();
-	const id = v4();
+
+	// Validar formulario
+	validateForm(formData, pictures, errors, setErrors);
+
+	/* const id = v4();
 	const today = new Date();
 	const endDate = new Date();
-	endDate.setDate(endDate.getDate() + Number(newItem.duration));
+	endDate.setDate(endDate.getDate() + Number(formData.duration));
 	const userToUpdate = doc(db, 'users', loggedUser.email);
 
 	try {
@@ -151,13 +210,13 @@ const handleSubmit = async (
 			})
 		);
 
-		console.log('ARRAY', allUrls);
+		console.log('allUrls: ', allUrls);
 
 		await setDoc(doc(db, 'items', id), {
-			...newItem,
+			...formData,
 			sellerEmail: loggedUser.email,
 			sellerID: loggedUser.uid,
-			currentPrice: newItem.startingPrice,
+			currentPrice: formData.startingPrice,
 			highestBid: 0,
 			highestBidder: '',
 			creationDate: today.toISOString(),
@@ -165,11 +224,12 @@ const handleSubmit = async (
 			pictures: allUrls
 		});
 		await updateDoc(userToUpdate, { myItems: arrayUnion(id) });
-		await setNewItem(INITIAL_STATE);
-		await setPictures([]);
+		setFormData(INITIAL_STATE);
+		setPictures([]);
+		// navigate(`/itm/${id}`);
 	} catch (err) {
 		console.error(err);
-	}
+	} */
 };
 
 const printDate = duration => {

@@ -9,7 +9,7 @@ import {
 } from './styles';
 import { PICTURE_LIMIT } from '../../constants/add-item';
 
-const UploadPictures = ({ pictures, setPictures }) => {
+const UploadPictures = ({ pictures, setPictures, errors }) => {
 	const inputPictureRef = useRef(null);
 
 	return (
@@ -17,6 +17,7 @@ const UploadPictures = ({ pictures, setPictures }) => {
 			<StyledContainer>
 				<h3>Fotos</h3>
 				<p>Puedes subir hasta {PICTURE_LIMIT} fotos</p>
+				{errors.pictures && <p>Es necesario subir al menos 1 foto</p>}
 				<StyledGrid>
 					{pictures.length !== 0 &&
 						pictures.map((picture, index) => (
