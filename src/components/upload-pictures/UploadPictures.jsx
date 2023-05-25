@@ -3,40 +3,54 @@ import { v4 } from 'uuid';
 import {
 	StyledAddPictureButton,
 	StyledContainer,
-	StyledPreview
+	StyledGrid,
+	StyledPreview,
+	StyledPreviewContainer
 } from './styles';
+import { PICTURE_LIMIT } from '../../constants/add-item';
 
 const UploadPictures = ({ pictures, setPictures }) => {
 	const inputPictureRef = useRef(null);
 
 	return (
-		<StyledContainer>
-			{pictures.length !== 0 &&
-				pictures.map((picture, index) => (
-					<StyledPreview
-						key={v4()}
-						src={picture.preview}
-						onClick={() => handleCancel(index, pictures, setPictures)}
-					/>
-				))}
+		<>
+			<StyledContainer>
+				<h3>Fotos</h3>
+				<p>Puedes subir hasta {PICTURE_LIMIT} fotos</p>
+				<StyledGrid>
+					{pictures.length !== 0 &&
+						pictures.map((picture, index) => (
+							<StyledPreviewContainer
+								key={v4()}
+								onClick={() => handleCancel(index, pictures, setPictures)}
+							>
+								<StyledPreview src={picture.preview} />
+							</StyledPreviewContainer>
+						))}
 
-			<div>
-				<input
-					style={{ display: 'none' }}
-					type='file'
-					name='picture'
-					id='picture'
-					ref={inputPictureRef}
-					onChange={e => loadPreview(e.target.files[0], pictures, setPictures)}
-				/>
+					<div>
+						<input
+							style={{ display: 'none' }}
+							type='file'
+							name='picture'
+							id='picture'
+							ref={inputPictureRef}
+							onChange={e =>
+								loadPreview(e.target.files[0], pictures, setPictures)
+							}
+						/>
 
-				{pictures.length < 10 && (
-					<StyledAddPictureButton onClick={() => handleClick(inputPictureRef)}>
-						+
-					</StyledAddPictureButton>
-				)}
-			</div>
-		</StyledContainer>
+						{pictures.length < PICTURE_LIMIT && (
+							<StyledAddPictureButton
+								onClick={() => handleClick(inputPictureRef)}
+							>
+								+
+							</StyledAddPictureButton>
+						)}
+					</div>
+				</StyledGrid>
+			</StyledContainer>
+		</>
 	);
 };
 

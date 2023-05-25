@@ -10,6 +10,7 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 // Components
 import UploadPictures from '../../components/upload-pictures/UploadPictures';
 import { DURATION } from '../../constants/add-item';
+import Button from '../../components/button/Button';
 
 const AddItem = () => {
 	const INITIAL_STATE = {
@@ -105,7 +106,7 @@ const AddItem = () => {
 					<button type='reset' onClick={() => setNewItem(INITIAL_STATE)}>
 						Borrar
 					</button>
-					<button>Publicar anuncio</button>
+					<Button>Publicar anuncio</Button>
 				</div>
 			</form>
 		</>
@@ -138,7 +139,7 @@ const handleSubmit = async (
 	const userToUpdate = doc(db, 'users', loggedUser.email);
 
 	try {
-		// Bucle map
+		// Bucle map - Queremos recorrer un array con archivos y obtener un array con urls
 		const URLarray = await Promise.allSettled(
 			pictures.map(async (picture, index) => {
 				const storageRef = ref(
@@ -152,7 +153,13 @@ const handleSubmit = async (
 			})
 		);
 
+		console.log('Primer item del array de URLs: ' + URLarray[0]);
+		console.log('Primer item.value del array de URLs: ' + URLarray[0].value);
+
+		console.log('Array de urls: ' + URLarray);
+
 		// Bucle for...of que recorre array de previews y files
+
 		/* for await (const picture of pictures) {
 			const index = pictures.indexOf(picture);
 
@@ -182,8 +189,6 @@ const handleSubmit = async (
 			console.log('Array lleno: ' + URLarray);
 		}); */
 
-		console.log('Array de urls: ' + URLarray);
-
 		/* 		await setDoc(doc(db, 'items', id), {
 			...newItem,
 			sellerEmail: loggedUser.email,
@@ -193,7 +198,7 @@ const handleSubmit = async (
 			highestBidder: '',
 			creationDate: today.toISOString(),
 			endDate: endDate.toISOString(),
-			pictures: picturesURLS
+			pictures: URLarray
 		});
 		await updateDoc(userToUpdate, { myItems: arrayUnion(id) }); */
 		await setNewItem(INITIAL_STATE);
