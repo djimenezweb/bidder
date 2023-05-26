@@ -16,7 +16,7 @@ const AuctionStatus = ({ highestBid, highestBidder, endDate }) => {
 	}
 
 	if (highestBidder === loggedUser?.email) {
-		return <p>Eres el mayor postor</p>;
+		return <p>Eres el mayor postor. Tu precio máximo es {highestBid} €.</p>;
 	}
 
 	if (timeSpan <= 0) {

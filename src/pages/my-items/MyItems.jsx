@@ -2,29 +2,27 @@ import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../contexts/Auth.context';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../config/firebase.config';
-import SmallItem from '../../components/small-item/SmallItem';
+import MiniItem from '../../components/mini-item/MiniItem';
 
 const MyItems = () => {
-	const today = new Date();
 	const { loggedUser } = useContext(AuthContext);
 	const [items, setItems] = useState([]);
+	const today = new Date();
 
 	useEffect(() => {
 		if (!loggedUser) return;
-		getItemsById(loggedUser.email, setItems);
+		getItemsByEmail(loggedUser.email, setItems);
 	}, [loggedUser]);
-
-	console.log(items);
 
 	return (
 		<>
 			<h2>Mis anuncios</h2>
 
 			<div>
-				{items.length === 0 && <p>No hay resultados</p>}
+				{items.length === 0 && <p>Todavía no has publicado ningún anuncio.</p>}
 
 				{items.map(item => (
-					<SmallItem key={item.id} item={item} today={today} />
+					<MiniItem key={item.id} item={item} today={today} />
 				))}
 			</div>
 		</>
@@ -33,16 +31,12 @@ const MyItems = () => {
 
 export default MyItems;
 
-const getItemsById = async (email, setItems) => {
+const getItemsByEmail = async (email, setItems) => {
 	try {
 		const q = query(collection(db, 'items'), where('sellerEmail', '==', email));
-
 		const querySnapshot = await getDocs(q);
-
 		const data = [];
-
-		querySnapshot.forEach(doc => data.push(doc.data()));
-
+		querySnapshot.forEach(doc => data.push({ ...doc.data(), id: doc.id }));
 		setItems(data);
 	} catch (err) {
 		console.error(err);

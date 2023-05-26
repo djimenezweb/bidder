@@ -14,6 +14,7 @@ import AddItem from '../pages/add-item/AddItem';
 import Item from '../pages/item/Item';
 import MyItems from '../pages/my-items/MyItems';
 import EditItem from '../pages/edit-item/EditItem';
+import MyAuctions from '../pages/my-auctions/MyAuctions';
 
 const Router = () => {
 	return (
@@ -42,6 +43,7 @@ const Router = () => {
 					}
 				/>
 				<Route path='/myitems' element={<MyItems />} />
+				<Route path='/myauctions' element={<MyAuctions />} />
 				<Route path='*' element={<NotFound />} />
 			</Route>
 		</Routes>

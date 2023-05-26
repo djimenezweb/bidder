@@ -43,6 +43,9 @@ const Item = () => {
 			<StyledTitle>{item.title}</StyledTitle>
 			<StyledId>Item No.: {itemId}</StyledId>
 			<StyledPrice>{item.currentPrice} €</StyledPrice>
+			<p>
+				{item.bids} {Number(item.bids) === 1 ? 'puja' : 'pujas'}
+			</p>
 			<p>{item.description}</p>
 			<p>Vendido por {item.sellerEmail}</p>
 			<p>
@@ -60,6 +63,7 @@ const Item = () => {
 						highestBid={item.highestBid}
 						currentPrice={item.currentPrice}
 						highestBidder={item.highestBidder}
+						bids={item.bids}
 					/>
 					<AuctionStatus
 						highestBid={item.highestBid}

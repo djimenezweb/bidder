@@ -3,7 +3,13 @@ import { db } from '../../config/firebase.config';
 import { AuthContext } from '../../contexts/Auth.context';
 import { useContext, useState } from 'react';
 
-const PlaceBid = ({ itemId, highestBid, currentPrice, highestBidder }) => {
+const PlaceBid = ({
+	itemId,
+	highestBid,
+	currentPrice,
+	highestBidder,
+	bids
+}) => {
 	const { loggedUser } = useContext(AuthContext);
 	const [bid, setBid] = useState('');
 
@@ -17,6 +23,7 @@ const PlaceBid = ({ itemId, highestBid, currentPrice, highestBidder }) => {
 					Number(highestBid),
 					Number(currentPrice),
 					highestBidder,
+					bids,
 					loggedUser.email,
 					setBid
 				)
@@ -40,7 +47,8 @@ const updateAuction = async (
 	newPrice,
 	newHighestBid,
 	newHighestBidder,
-	setBid
+	setBid,
+	newBids
 ) => {
 	const itemToUpdate = doc(db, 'items', id);
 	const userToUpdate = doc(db, 'users', newHighestBidder);
@@ -48,7 +56,8 @@ const updateAuction = async (
 		await updateDoc(itemToUpdate, {
 			currentPrice: newPrice,
 			highestBid: newHighestBid,
-			highestBidder: newHighestBidder
+			highestBidder: newHighestBidder,
+			bids: newBids
 		});
 		await updateDoc(userToUpdate, { myAuctions: arrayUnion(id) });
 		console.log('Puja confirmada');
@@ -65,6 +74,7 @@ const handleSubmit = async (
 	highestBid,
 	currentPrice,
 	highestBidder,
+	bids,
 	email,
 	setBid
 ) => {
@@ -73,6 +83,7 @@ const handleSubmit = async (
 	let newPrice = currentPrice;
 	let newHighestBid = highestBid;
 	let newHighestBidder = highestBidder;
+	const newBids = Number(bids) + 1;
 
 	// Invalid
 	if (bid < currentPrice) {
@@ -86,7 +97,7 @@ const handleSubmit = async (
 		// newHighestBid = bid;
 		// newPrice = currentPrice;
 		// newHighestBidder = email;
-		updateAuction(id, currentPrice, bid, email, setBid);
+		updateAuction(id, currentPrice, bid, email, setBid, newBids);
 		// updateAuction(id, newPrice, newHighestBid, newHighestBidder, setBid);
 		return;
 	}
@@ -103,7 +114,14 @@ const handleSubmit = async (
 			console.log('add 1');
 			newPrice = highestBid + 1;
 		}
-		updateAuction(id, newPrice, newHighestBid, newHighestBidder, setBid);
+		updateAuction(
+			id,
+			newPrice,
+			newHighestBid,
+			newHighestBidder,
+			setBid,
+			newBids
+		);
 		return;
 	}
 
@@ -119,7 +137,14 @@ const handleSubmit = async (
 			console.log('add 1');
 			newPrice = bid + 1;
 		}
-		updateAuction(id, newPrice, newHighestBid, newHighestBidder, setBid);
+		updateAuction(
+			id,
+			newPrice,
+			newHighestBid,
+			newHighestBidder,
+			setBid,
+			newBids
+		);
 		return;
 	}
 

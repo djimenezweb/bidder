@@ -192,11 +192,13 @@ const handleSubmit = async (
 		// Enviar datos formulario
 		await setDoc(doc(db, 'items', id), {
 			...formData,
+			id,
 			sellerEmail: loggedUser.email,
 			sellerID: loggedUser.uid,
 			currentPrice: formData.startingPrice,
 			highestBid: 0,
 			highestBidder: '',
+			bids: 0,
 			creationDate: today.toISOString(),
 			endDate: endDate.toISOString(),
 			pictures: allUrls

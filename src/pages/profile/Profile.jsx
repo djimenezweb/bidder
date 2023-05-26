@@ -17,6 +17,7 @@ const Profile = () => {
 			<img src={loggedUser.photoURL} alt='Profile picture' />
 			<p>ID: {loggedUser.uid}</p>
 			<Link to='/myitems'>Mis anuncios</Link>
+			<Link to='/myauctions'>Mis subastas</Link>
 			<button onClick={() => logout(navigate)}>Cerrar sesión</button>
 		</>
 	);
