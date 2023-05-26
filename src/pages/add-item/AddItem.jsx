@@ -12,8 +12,6 @@ import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom';
 
 const AddItem = () => {
-	console.log('AddItem renderizado');
-
 	const navigate = useNavigate();
 
 	const INITIAL_STATE = {
@@ -26,14 +24,7 @@ const AddItem = () => {
 	const { loggedUser } = useContext(AuthContext);
 	const [formData, setFormData] = useState(INITIAL_STATE);
 	const [pictures, setPictures] = useState([]);
-	const [errors, setErrors] = useState({
-		title: false,
-		startingPrice: false,
-		description: false,
-		pictures: false
-	});
-
-	console.log(errors);
+	const [errors, setErrors] = useState({});
 
 	return (
 		<>
@@ -48,7 +39,6 @@ const AddItem = () => {
 						INITIAL_STATE,
 						pictures,
 						setPictures,
-						errors,
 						setErrors,
 						navigate
 					)
@@ -65,7 +55,7 @@ const AddItem = () => {
 							handleChange(formData, setFormData, 'title', e.target.value)
 						}
 					/>
-					{errors.title && <p>Campo requerido</p>}
+					{<p>{errors?.title}</p>}
 				</div>
 				<div>
 					<label htmlFor='startingPrice'>Precio de salida</label>
@@ -83,12 +73,7 @@ const AddItem = () => {
 							)
 						}
 					/>{' '}
-					€
-					{errors.startingPrice && (
-						<p>
-							Introduce un número válido. El precio debe ser mayor o igual a 1€.
-						</p>
-					)}
+					€{<p>{errors?.startingPrice}</p>}
 				</div>
 				<div>
 					<label htmlFor='duration'>Duración</label>
@@ -123,7 +108,7 @@ const AddItem = () => {
 							handleChange(formData, setFormData, 'description', e.target.value)
 						}
 					></textarea>
-					{errors.description && <p>Campo requerido</p>}
+					{<p>{errors?.description}</p>}
 				</div>
 
 				<UploadPictures
@@ -150,26 +135,17 @@ const handleChange = (formData, setFormData, key, value) => {
 	});
 };
 
-const validateForm = (formData, pictures, errors, setErrors) => {
-	console.log('title', formData.title);
-	if (formData.length === 0) {
-		setErrors({ ...errors, title: true });
-	}
-
-	console.log('price', formData.startingPrice);
-
-	if (formData.startingPrice < 1) {
-		setErrors({ ...errors, startingPrice: true });
-	}
-
-	console.log('description', formData.description);
-	if (formData.description === '') {
-		setErrors({ ...errors, description: true });
-	}
-
-	if (pictures.length === 0) {
-		setErrors({ ...errors, pictures: true });
-	}
+const validateForm = (formData, pictures) => {
+	const errorMessages = {};
+	if (formData.title === '') errorMessages.title = 'Campo requerido';
+	if (formData.startingPrice < 1)
+		errorMessages.startingPrice =
+			'Introduce un número válido. El precio debe ser igual o mayor que 1€.';
+	if (formData.description === '')
+		errorMessages.description = 'Campo requerido';
+	if (pictures.length === 0)
+		errorMessages.pictures = 'Es necesario subir al menos 1 foto';
+	return Object.keys(errorMessages).length === 0 ? null : errorMessages;
 };
 
 const handleSubmit = async (
@@ -180,22 +156,25 @@ const handleSubmit = async (
 	INITIAL_STATE,
 	pictures,
 	setPictures,
-	errors,
 	setErrors,
 	navigate
 ) => {
 	e.preventDefault();
 
 	// Validar formulario
-	validateForm(formData, pictures, errors, setErrors);
+	const invalidFields = validateForm(formData, pictures);
+	setErrors({ ...invalidFields });
+	if (invalidFields) return;
 
-	/* const id = v4();
+	// Formulario sin errores. Declaración de constantes:
+	const id = v4();
 	const today = new Date();
 	const endDate = new Date();
 	endDate.setDate(endDate.getDate() + Number(formData.duration));
 	const userToUpdate = doc(db, 'users', loggedUser.email);
 
 	try {
+		// Enviar fotos
 		const allUrls = [];
 		await Promise.all(
 			pictures.map(async (picture, index) => {
@@ -210,8 +189,7 @@ const handleSubmit = async (
 			})
 		);
 
-		console.log('allUrls: ', allUrls);
-
+		// Enviar datos formulario
 		await setDoc(doc(db, 'items', id), {
 			...formData,
 			sellerEmail: loggedUser.email,
@@ -224,12 +202,14 @@ const handleSubmit = async (
 			pictures: allUrls
 		});
 		await updateDoc(userToUpdate, { myItems: arrayUnion(id) });
+
+		// Resetear formulario y redireccionar
 		setFormData(INITIAL_STATE);
 		setPictures([]);
-		// navigate(`/itm/${id}`);
+		navigate(`/itm/${id}`);
 	} catch (err) {
 		console.error(err);
-	} */
+	}
 };
 
 const printDate = duration => {
