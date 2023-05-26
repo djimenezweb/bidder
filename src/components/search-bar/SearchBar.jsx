@@ -34,7 +34,6 @@ const handleSubmit = e => e.preventDefault();
 
 const handleSearchChange = (value, allItems, setSearchResults) => {
 	if (!value) return setSearchResults(allItems);
-	console.log(allItems);
 	const filteredItems = allItems.filter(
 		item =>
 			item.title.toLowerCase().includes(value.toLowerCase()) ||

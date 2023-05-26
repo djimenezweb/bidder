@@ -16,7 +16,6 @@ const SmallItem = ({ item, today }) => {
 	const timeSpan = end - today;
 	const timeLeft = printTimeLeft(timeSpan);
 
-	console.log(item);
 	return (
 		<StyledArticle key={item.id} onClick={() => navigate(`/itm/${item.id}`)}>
 			<StyledImageContainer>

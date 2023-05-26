@@ -18,7 +18,10 @@ const Home = () => {
 				...doc.data(),
 				id: doc.id
 			}));
-			const orderedByEndDate = response.sort((a, b) => {
+			const activeOnly = response.filter(
+				item => item.endDate > today.toISOString()
+			);
+			const orderedByEndDate = activeOnly.sort((a, b) => {
 				if (a.endDate > b.endDate) return 1;
 				if (a.endDate < b.endDate) return -1;
 				return 0;
@@ -32,8 +35,6 @@ const Home = () => {
 		});
 		return () => subscribeToData();
 	}, []);
-
-	// console.log(searchResults);
 
 	if (!allItems) return <p>Loading...</p>;
 

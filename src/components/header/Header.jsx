@@ -28,12 +28,17 @@ const Header = () => {
 					{loggedUser ? (
 						<>
 							<li>
-								<NavLink to='/profile'>{loggedUser.displayName}</NavLink>
+								<NavLink to='/profile'>
+									{loggedUser.displayName || 'Nuevo usuario'}
+								</NavLink>
 							</li>
 							<li>
 								<NavLink to='/profile'>
 									<StyledProfilePhoto
-										src={loggedUser.photoURL}
+										src={
+											loggedUser.photoURL ||
+											'/assets/images/user-circle-light-96px.png'
+										}
 										alt={loggedUser.displayName}
 									/>
 								</NavLink>
