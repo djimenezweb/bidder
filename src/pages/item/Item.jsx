@@ -3,7 +3,7 @@ import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../../config/firebase.config';
 
 // Router
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { useContext, useEffect, useState } from 'react';
 import Countdown from '../../components/countdown/Countdown';
@@ -25,6 +25,7 @@ const Item = () => {
 	const [item, setItem] = useState(null);
 	const [activePicture, setActivePicture] = useState(0);
 	const { loggedUser } = useContext(AuthContext);
+	const navigate = useNavigate();
 
 	useEffect(() => {
 		const unsub = onSnapshot(doc(db, 'items', itemId), doc => {
@@ -70,7 +71,9 @@ const Item = () => {
 			{/* Si HAY loggedUser y ES el vendedor, puede EDITAR y BORRAR */}
 			{loggedUser?.email && loggedUser?.email === item.sellerEmail && (
 				<>
-					<button>Editar</button>
+					<button onClick={() => navigate('edit', { state: item })}>
+						Editar
+					</button>
 					<DeleteItem itemId={itemId} picturesArray={item.pictures} />
 				</>
 			)}

@@ -13,6 +13,7 @@ import Profile from '../pages/profile/Profile';
 import AddItem from '../pages/add-item/AddItem';
 import Item from '../pages/item/Item';
 import MyItems from '../pages/my-items/MyItems';
+import EditItem from '../pages/edit-item/EditItem';
 
 const Router = () => {
 	return (
@@ -20,6 +21,7 @@ const Router = () => {
 			<Route path='/' element={<RootLayout />}>
 				<Route index element={<Home />} />
 				<Route path='/itm/:itemId' element={<Item />} />
+				<Route path='/itm/:itemId/edit' element={<EditItem />} />
 				<Route path='/signin' element={<SignIn />} />
 				<Route path='/login' element={<Navigate to='/signin' />} />
 				<Route path='/signup' element={<SignUp />} />
