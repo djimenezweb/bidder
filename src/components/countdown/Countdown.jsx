@@ -6,6 +6,8 @@ const Countdown = ({ endDate }) => {
 	const [message, setMessage] = useState('0d 0h 0m 0s');
 
 	useEffect(() => {
+		printDate(setMessage, end);
+
 		const timeoutID = setTimeout(() => printDate(setMessage, end), 1000);
 		return () => clearTimeout(timeoutID);
 	}, [message]);

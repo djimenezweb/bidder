@@ -11,12 +11,19 @@ import { AuthContext } from '../../contexts/Auth.context';
 import PlaceBid from '../../components/place-bid/PlaceBid';
 import AuctionStatus from '../../components/auction-status/AuctionStatus';
 import DeleteItem from '../../components/delete-item/DeleteItem';
-import { StyledId, StyledPrice, StyledTitle } from './styles';
+import {
+	StyledActivePicture,
+	StyledId,
+	StyledPrice,
+	StyledThumbnail,
+	StyledThumbnailContainer,
+	StyledTitle
+} from './styles';
 
 const Item = () => {
 	const { itemId } = useParams();
-
 	const [item, setItem] = useState(null);
+	const [activePicture, setActivePicture] = useState(0);
 	const { loggedUser } = useContext(AuthContext);
 
 	useEffect(() => {
@@ -67,10 +74,27 @@ const Item = () => {
 					<DeleteItem itemId={itemId} picturesArray={item.pictures} />
 				</>
 			)}
-			{item.pictures &&
-				item.pictures.map((picture, index) => {
-					return <img key={`${itemId}-${index}`} src={picture} />;
-				})}
+
+			{item.pictures && (
+				<div>
+					<div>
+						<StyledActivePicture src={item.pictures[activePicture]} />
+					</div>
+					<StyledThumbnailContainer>
+						{item.pictures.map((picture, index) => {
+							return (
+								<StyledThumbnail
+									key={`${itemId}-${index}`}
+									onClick={() => setActivePicture(index)}
+									src={picture}
+									active={index === activePicture}
+								/>
+							);
+						})}
+					</StyledThumbnailContainer>
+				</div>
+			)}
+
 			<p style={{ opacity: 0.33 }}>
 				<small>highestBid: {item.highestBid} €</small>
 			</p>

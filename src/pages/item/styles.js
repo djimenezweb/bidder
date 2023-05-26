@@ -21,4 +21,31 @@ const StyledPrice = styled.p`
 	font-weight: 500;
 `;
 
-export { StyledTitle, StyledId, StyledPrice };
+// Contenedor de fotos
+
+const StyledActivePicture = styled.img`
+	width: 500px;
+`;
+
+const StyledThumbnailContainer = styled.div`
+	display: flex;
+	gap: 0.5rem;
+`;
+
+const StyledThumbnail = styled.img`
+	border: ${({ active }) =>
+		active ? '2px solid blue' : '2px solid transparent'};
+	width: 100px;
+	height: 100px;
+	object-fit: cover;
+	object-position: center;
+`;
+
+export {
+	StyledTitle,
+	StyledId,
+	StyledPrice,
+	StyledActivePicture,
+	StyledThumbnailContainer,
+	StyledThumbnail
+};

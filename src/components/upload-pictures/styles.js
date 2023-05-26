@@ -34,7 +34,7 @@ const StyledPreviewContainer = styled.div`
 
 	&:hover::after {
 		content: '';
-		background-image: url('public/assets/images/x-circle-fill.svg');
+		background-image: url('/assets/images/x-circle-fill.svg');
 		background-position: center center;
 		background-repeat: no-repeat;
 		position: absolute;
