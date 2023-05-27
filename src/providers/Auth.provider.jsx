@@ -8,7 +8,7 @@ export const AuthProvider = ({ children }) => {
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		const unsubscribe = auth.onAuthStateChanged(user => {
+		const unsubscribe = auth.onIdTokenChanged(user => {
 			if (user) {
 				// El usuario está autenticado
 				getUserInfo(user, setLoggedUser);

@@ -1,5 +1,9 @@
 // Firebase
-import { createUserWithEmailAndPassword, updateProfile } from 'firebase/auth';
+import {
+	createUserWithEmailAndPassword,
+	getIdToken,
+	updateProfile
+} from 'firebase/auth';
 import { auth, db } from '../../config/firebase.config';
 import { doc, setDoc } from 'firebase/firestore';
 
@@ -118,6 +122,8 @@ const onSubmit = async (data, e, navigate) => {
 			myItems: '',
 			myFavs: ''
 		});
+		// Fuerza actualización del token para que se muestre displayName y foto perfil
+		await getIdToken(auth.currentUser, true);
 		navigate('/');
 	} catch (err) {
 		console.log(err);
