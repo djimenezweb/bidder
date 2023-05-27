@@ -192,7 +192,7 @@ const handleSubmit = async (
 		// Enviar datos formulario
 		await setDoc(doc(db, 'items', id), {
 			...formData,
-			id,
+			// id,
 			sellerEmail: loggedUser.email,
 			sellerID: loggedUser.uid,
 			currentPrice: formData.startingPrice,

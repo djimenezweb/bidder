@@ -1,14 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 
-const NotFound = () => {
+const Error = ({ children }) => {
 	const navigate = useNavigate();
 
 	return (
 		<>
-			<h2>Página no encontrada</h2>
+			<h2>{children}</h2>
 			<button onClick={() => navigate(-1)}>Volver</button>
 		</>
 	);
 };
 
-export default NotFound;
+export default Error;

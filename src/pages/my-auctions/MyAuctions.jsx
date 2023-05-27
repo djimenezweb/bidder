@@ -1,14 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import { AuthContext } from '../../contexts/Auth.context';
-import {
-	collection,
-	doc,
-	getDoc,
-	getDocs,
-	query,
-	where
-} from 'firebase/firestore';
-import { db, usersDB } from '../../config/firebase.config';
+import { doc, getDoc } from 'firebase/firestore';
+import { itemsDB } from '../../config/firebase.config';
 import MiniItem from '../../components/mini-item/MiniItem';
 
 const MyAuctions = () => {
@@ -19,7 +12,7 @@ const MyAuctions = () => {
 
 	useEffect(() => {
 		if (!loggedUser) return;
-		getItemsById(loggedUser.email, setItems, setLoading);
+		getItemsById(loggedUser.myAuctions, setItems, setLoading);
 	}, [loggedUser]);
 
 	if (loading) return <p>Cargando...</p>;
@@ -39,23 +32,18 @@ const MyAuctions = () => {
 	);
 };
 
-const getItemsById = async (email, setItems, setLoading) => {
-	const userRef = doc(usersDB, email);
+const getItemsById = async (myAuctions, setItems, setLoading) => {
+	if (!myAuctions) {
+		setLoading(false);
+		return;
+	}
 	try {
-		const userToRead = await getDoc(userRef);
-		const response = userToRead.data();
-		console.log(response);
-		const idArray = response.myAuctions;
-		if (!idArray) return;
-
-		const data = [];
-		await Promise.all(
-			idArray.map(async id => {
-				const q = query(collection(db, 'items'), where('id', '==', id));
-				const querySnapshot = await getDocs(q);
-				querySnapshot.forEach(doc => data.push({ ...doc.data(), id: doc.id }));
-			})
-		);
+		const docRefs = myAuctions.map(id => doc(itemsDB, id));
+		const docSnapshots = await Promise.all(docRefs.map(ref => getDoc(ref)));
+		const data = docSnapshots.map(snapshot => ({
+			id: snapshot.id,
+			...snapshot.data()
+		}));
 		setItems(data);
 		setLoading(false);
 	} catch (err) {

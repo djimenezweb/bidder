@@ -23,11 +23,11 @@ const MiniItem = ({ item, today }) => {
 			<StyledPrice>{item.currentPrice} EUR</StyledPrice>
 			<StyledBids>{item.bids} pujas</StyledBids>
 			<StyledTimeLeft>{timeLeft}</StyledTimeLeft>
-			<AuctionStatus
+			{/* <AuctionStatus
 				highestBid={item.highestBid}
 				highestBidder={item.highestBidder}
 				endDate={item.endDate}
-			/>
+			/> */}
 		</StyledRow>
 	);
 };

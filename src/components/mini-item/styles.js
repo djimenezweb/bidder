@@ -9,6 +9,7 @@ const StyledImg = styled.img`
 `;
 
 const StyledRow = styled.div`
+	background-color: pink;
 	display: flex;
 	align-items: center;
 	gap: 1rem;
@@ -16,15 +17,16 @@ const StyledRow = styled.div`
 `;
 
 const StyledTitle = styled.p`
-	flex-basis: 10rem;
+	flex-basis: 20rem;
 `;
 const StyledPrice = styled.p`
-	flex-basis: 6rem;
+	flex-basis: 7rem;
 `;
 const StyledBids = styled.p`
-	flex-basis: 6rem;
+	flex-basis: 7rem;
 `;
 const StyledTimeLeft = styled.p`
+	background-color: green;
 	flex-basis: 12rem;
 `;
 export {

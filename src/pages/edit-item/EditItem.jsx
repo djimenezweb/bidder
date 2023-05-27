@@ -2,16 +2,13 @@ import { useState } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { itemsDB } from '../../config/firebase.config';
 import { doc, updateDoc } from 'firebase/firestore';
-import Unauthorized from '../unauthorized/Unauthorized';
+import Error from '../error/Error';
 
 const EditItem = () => {
 	const { itemId } = useParams();
 	const navigate = useNavigate();
 	const { state } = useLocation();
-	if (!state)
-		return (
-			<Unauthorized>No tiene permiso para editar este anuncio</Unauthorized>
-		);
+	if (!state) return <Error>No tiene permiso para editar este anuncio</Error>;
 
 	const INITIAL_ITEM = {
 		title: state.title,

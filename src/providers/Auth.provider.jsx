@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { AuthContext } from '../contexts/Auth.context';
-import { auth } from '../config/firebase.config';
+import { auth, usersDB } from '../config/firebase.config';
+import { doc, getDoc } from 'firebase/firestore';
 
 export const AuthProvider = ({ children }) => {
 	const [loggedUser, setLoggedUser] = useState(null);
@@ -10,7 +11,7 @@ export const AuthProvider = ({ children }) => {
 		const unsubscribe = auth.onAuthStateChanged(user => {
 			if (user) {
 				// El usuario está autenticado
-				setLoggedUser(user);
+				getUserInfo(user, setLoggedUser);
 				console.log('Logged user: ', user.email);
 			} else {
 				// El usuario no está autenticado
@@ -27,4 +28,15 @@ export const AuthProvider = ({ children }) => {
 			{children}
 		</AuthContext.Provider>
 	);
+};
+
+const getUserInfo = async (user, setLoggedUser) => {
+	const userRef = doc(usersDB, user.email);
+	try {
+		const userToRead = await getDoc(userRef);
+		const response = userToRead.data();
+		setLoggedUser({ ...user, ...response });
+	} catch (err) {
+		console.error(err);
+	}
 };
