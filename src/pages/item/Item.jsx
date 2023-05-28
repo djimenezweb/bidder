@@ -13,6 +13,11 @@ import AuctionStatus from '../../components/auction-status/AuctionStatus';
 import DeleteItem from '../../components/delete-item/DeleteItem';
 import {
 	StyledActivePicture,
+	StyledBids,
+	StyledDot,
+	StyledDotContainer,
+	StyledFlexContainer,
+	StyledGrid,
 	StyledId,
 	StyledPrice,
 	StyledThumbnail,
@@ -39,50 +44,8 @@ const Item = () => {
 	if (!item) return <p>Loading...</p>;
 
 	return (
-		<>
-			<StyledTitle>{item.title}</StyledTitle>
-			<StyledId>Item No.: {itemId}</StyledId>
-			<StyledPrice>{item.currentPrice} €</StyledPrice>
-			<p>
-				{item.bids} {Number(item.bids) === 1 ? 'puja' : 'pujas'}
-			</p>
-			<p>{item.description}</p>
-			<p>Vendido por {item.sellerEmail}</p>
-			<p>
-				La subasta finaliza el {printDate(item.endDate)} a las{' '}
-				{printTime(item.endDate)}
-			</p>
-			<Countdown endDate={item.endDate} />
-			{/* Si NO HAY loggedUser se le pide que inicie sesión */}
-			{!loggedUser?.email && <p>Inicia sesión para pujar</p>}
-			{/* Si HAY loggedUser y NO ES el vendedor, puede PUJAR */}
-			{loggedUser?.email && loggedUser?.email !== item.sellerEmail && (
-				<>
-					<PlaceBid
-						itemId={itemId}
-						highestBid={item.highestBid}
-						currentPrice={item.currentPrice}
-						highestBidder={item.highestBidder}
-						bids={item.bids}
-					/>
-					<AuctionStatus
-						highestBid={item.highestBid}
-						highestBidder={item.highestBidder}
-						endDate={item.endDate}
-					/>
-				</>
-			)}
-			{/* Si HAY loggedUser y ES el vendedor, puede EDITAR y BORRAR */}
-			{loggedUser?.email && loggedUser?.email === item.sellerEmail && (
-				<>
-					<button onClick={() => navigate('edit', { state: item })}>
-						Editar
-					</button>
-					<DeleteItem itemId={itemId} picturesArray={item.pictures} />
-				</>
-			)}
-
-			{item.pictures && (
+		<StyledGrid>
+			{/* 			{item.pictures && (
 				<div>
 					<div>
 						<StyledActivePicture src={item.pictures[activePicture]} />
@@ -100,15 +63,87 @@ const Item = () => {
 						})}
 					</StyledThumbnailContainer>
 				</div>
-			)}
+			)} 
+			<StyledId>ITEM {itemId}</StyledId>
+			
+			*/}
 
-			<p style={{ opacity: 0.33 }}>
-				<small>highestBid: {item.highestBid} €</small>
-			</p>
-			<p style={{ opacity: 0.33 }}>
-				<small>highestBidder: {item.highestBidder}</small>
-			</p>
-		</>
+			{item.pictures && (
+				<div>
+					<div>
+						<StyledActivePicture src={item.pictures[activePicture]} />
+					</div>
+					<StyledDotContainer>
+						{item.pictures.map((picture, index) => {
+							return (
+								<StyledDot
+									key={`${itemId}-${index}`}
+									onClick={() => setActivePicture(index)}
+									active={index === activePicture}
+								/>
+							);
+						})}
+					</StyledDotContainer>
+				</div>
+			)}
+			<div>
+				<StyledTitle>{item.title}</StyledTitle>
+				<p>{item.description}</p>
+				<StyledFlexContainer>
+					<StyledPrice>
+						{Number(item.currentPrice).toLocaleString('es-ES', {
+							minimumFractionDigits: 2,
+							maximumFractionDigits: 2
+						})}{' '}
+						€
+					</StyledPrice>
+					<StyledBids>
+						{item.bids} {Number(item.bids) === 1 ? 'puja' : 'pujas'}
+					</StyledBids>
+				</StyledFlexContainer>
+				<p>Vendido por {item.sellerEmail}</p>
+				<p>
+					La subasta finaliza el {printDate(item.endDate)} a las{' '}
+					{printTime(item.endDate)}
+				</p>
+				<Countdown endDate={item.endDate} />
+				{/* Si NO HAY loggedUser se le pide que inicie sesión */}
+				{!loggedUser?.email && <p>Inicia sesión para pujar</p>}
+				{/* Si HAY loggedUser y NO ES el vendedor, puede PUJAR */}
+				{loggedUser?.email && loggedUser?.email !== item.sellerEmail && (
+					<>
+						<PlaceBid
+							itemId={itemId}
+							highestBid={item.highestBid}
+							currentPrice={item.currentPrice}
+							highestBidder={item.highestBidder}
+							bids={item.bids}
+						/>
+						<AuctionStatus
+							highestBid={item.highestBid}
+							highestBidder={item.highestBidder}
+							endDate={item.endDate}
+						/>
+					</>
+				)}
+				{/* Si HAY loggedUser y ES el vendedor, puede EDITAR y BORRAR */}
+				{loggedUser?.email && loggedUser?.email === item.sellerEmail && (
+					<>
+						<button onClick={() => navigate('edit', { state: item })}>
+							Editar
+						</button>
+						<DeleteItem itemId={itemId} picturesArray={item.pictures} />
+					</>
+				)}
+
+				<p style={{ opacity: 0.33 }}>
+					<small>highestBid: {item.highestBid} €</small>
+				</p>
+				<p style={{ opacity: 0.33 }}>
+					<small>highestBidder: {item.highestBidder}</small>
+				</p>
+			</div>
+		</StyledGrid>
 	);
 };
 

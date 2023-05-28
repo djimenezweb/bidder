@@ -5,6 +5,8 @@ import { AuthContext } from '../../contexts/Auth.context';
 import { signOut } from 'firebase/auth';
 import { auth } from '../../config/firebase.config';
 import { Link, useNavigate } from 'react-router-dom';
+import MyItems from '../my-items/MyItems';
+import MyAuctions from '../my-auctions/MyAuctions';
 
 const Profile = () => {
 	const { loggedUser } = useContext(AuthContext);
@@ -19,6 +21,10 @@ const Profile = () => {
 			<Link to='/myitems'>Mis anuncios</Link>
 			<Link to='/myauctions'>Mis subastas</Link>
 			<button onClick={() => logout(navigate)}>Cerrar sesión</button>
+
+			<MyItems />
+
+			<MyAuctions />
 		</>
 	);
 };
