@@ -1,4 +1,5 @@
 import {
+	GithubAuthProvider,
 	GoogleAuthProvider,
 	getAdditionalUserInfo,
 	signInWithPopup
@@ -15,6 +16,28 @@ export const handleGoogleLogin = async navigate => {
 		// console.log(credential);
 		// console.log(details);
 		// Si es la primera vez que inicia sesión con Google se crea su perfil en colección de usuarios
+		if (details.isNewUser) {
+			await setDoc(doc(db, 'users', details.profile.email), {
+				myBids: '',
+				myItems: '',
+				myFavs: ''
+			});
+		}
+		navigate('/');
+	} catch (err) {
+		console.log(err);
+	}
+};
+
+export const handleGithubLogin = async navigate => {
+	const provider = new GithubAuthProvider();
+	try {
+		const result = await signInWithPopup(auth, provider);
+		const details = getAdditionalUserInfo(result);
+		// const credential = GithubAuthProvider.credentialFromResult(result);
+		// console.log(credential);
+		// const token = credential.accessToken;
+		// Si es la primera vez que inicia sesión con Github se crea su perfil en colección de usuarios
 		if (details.isNewUser) {
 			await setDoc(doc(db, 'users', details.profile.email), {
 				myBids: '',

@@ -23,9 +23,6 @@ const Router = () => {
 				<Route index element={<Home />} />
 				<Route path='/itm/:itemId' element={<Item />} />
 				<Route path='/itm/:itemId/edit' element={<EditItem />} />
-				<Route path='/signin' element={<SignIn />} />
-				<Route path='/login' element={<Navigate to='/signin' />} />
-				<Route path='/signup' element={<SignUp />} />
 				<Route
 					path='/profile'
 					element={
@@ -46,6 +43,9 @@ const Router = () => {
 				<Route path='/myauctions' element={<MyAuctions />} />
 				<Route path='*' element={<Error>Página no encontrada</Error>} />
 			</Route>
+			<Route path='/signin' element={<SignIn />} />
+			<Route path='/login' element={<Navigate to='/signin' />} />
+			<Route path='/signup' element={<SignUp />} />
 		</Routes>
 	);
 };

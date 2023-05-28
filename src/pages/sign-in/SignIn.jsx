@@ -8,19 +8,18 @@ import { auth } from '../../config/firebase.config';
 import { useForm } from 'react-hook-form';
 import { FORM_VALIDATION } from '../../constants/form-validation';
 
-// Functions
-import { handleGoogleLogin } from '../../functions/google-login';
-
-// Components
-import Button from '../../components/button/Button';
-
 // Styles
 import {
+	StyledBackground,
 	StyledContainer,
-	StyledError,
+	StyledErrorContainer,
 	StyledFormField,
-	StyledInput
+	StyledInput,
+	StyledSignInButton,
+	StyledSmallContainer,
+	StyledTitle
 } from './styles';
+import SignInOptions from '../../components/sign-in-options/SignInOptions';
 
 const SignIn = () => {
 	const navigate = useNavigate();
@@ -29,37 +28,44 @@ const SignIn = () => {
 		register,
 		formState: { errors }
 	} = useForm({ mode: 'onBlur' });
-	return (
-		<StyledContainer>
-			<h2>¡Bienvenido!</h2>
-			<form onSubmit={handleSubmit((data, e) => onSubmit(data, e, navigate))}>
-				<StyledFormField>
-					<StyledInput
-						type='email'
-						placeholder='email'
-						{...register('email', FORM_VALIDATION.email)}
-						invalid={errors?.email?.message}
-					/>
-					<StyledError>{errors?.email?.message}</StyledError>
-				</StyledFormField>
-				<StyledFormField>
-					<StyledInput
-						type='password'
-						placeholder='contraseña'
-						{...register('password', FORM_VALIDATION.password)}
-						invalid={errors?.password?.message}
-					/>
-					<StyledError>{errors?.password?.message}</StyledError>
-				</StyledFormField>
-				<Button>Iniciar sesión</Button>
-			</form>
-			<Button action={() => handleGoogleLogin(navigate)}>
-				Iniciar sesión con Google
-			</Button>
 
-			<h2>¿Todavía no tienes cuenta?</h2>
-			<Button action={() => navigate('/signup')}>Regístrate</Button>
-		</StyledContainer>
+	return (
+		<StyledBackground>
+			<StyledContainer>
+				<StyledTitle>Inicia sesión</StyledTitle>
+				<form onSubmit={handleSubmit((data, e) => onSubmit(data, e, navigate))}>
+					<StyledFormField>
+						<StyledInput
+							type='email'
+							placeholder='email'
+							{...register('email', FORM_VALIDATION.email)}
+							invalid={errors?.email?.message}
+						/>
+					</StyledFormField>
+					<StyledFormField>
+						<StyledInput
+							type='password'
+							placeholder='contraseña'
+							{...register('password', FORM_VALIDATION.password)}
+							invalid={errors?.password?.message}
+						/>
+					</StyledFormField>
+					{(errors.email || errors.password) && (
+						<StyledErrorContainer>
+							<p>{errors?.email?.message}</p>
+							<p>{errors?.password?.message}</p>
+						</StyledErrorContainer>
+					)}
+
+					<StyledSignInButton>Iniciar sesión</StyledSignInButton>
+				</form>
+
+				<SignInOptions />
+			</StyledContainer>
+			<StyledSmallContainer onClick={() => navigate('/signup')}>
+				¿No tienes cuenta? ¡Regístrate!
+			</StyledSmallContainer>
+		</StyledBackground>
 	);
 };
 
@@ -70,6 +76,8 @@ const onSubmit = async (data, e, navigate) => {
 		navigate('/');
 	} catch (err) {
 		console.log(err);
+		console.log(err.code);
+		console.log(err.message);
 	}
 };
 

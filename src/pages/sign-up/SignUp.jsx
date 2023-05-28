@@ -17,15 +17,17 @@ import {
 	validatePasswords
 } from '../../constants/form-validation';
 
-// Functions
-import { handleGoogleLogin } from '../../functions/google-login';
-import Button from '../../components/button/Button';
 import {
+	StyledBackground,
 	StyledContainer,
-	StyledError,
+	StyledErrorContainer,
 	StyledFormField,
-	StyledInput
+	StyledInput,
+	StyledSignUpButton,
+	StyledSmallContainer,
+	StyledTitle
 } from './styles';
+import SignInOptions from '../../components/sign-in-options/SignInOptions';
 
 const SignUp = () => {
 	const navigate = useNavigate();
@@ -36,76 +38,80 @@ const SignUp = () => {
 		formState: { errors }
 	} = useForm({ mode: 'onBlur' });
 
-	// console.log(errors);
-
 	return (
-		<StyledContainer>
-			<h2>Crear cuenta</h2>
-			<form
-				onSubmit={handleSubmit((data, e) => onSubmit(data, e, navigate))}
-				autoComplete='off'
-			>
-				<StyledFormField>
-					<StyledInput
-						type='text'
-						name='newDisplayName'
-						id='newDisplayName'
-						autoComplete='off'
-						placeholder='nombre de usuario'
-						{...register('newDisplayName', FORM_VALIDATION.name)}
-						invalid={errors?.newDisplayName?.message}
-					/>
-					<StyledError>{errors?.newDisplayName?.message}</StyledError>
-				</StyledFormField>
-				<StyledFormField>
-					<StyledInput
-						type='email'
-						name='newEmail'
-						id='newEmail'
-						autoComplete='off'
-						placeholder='email'
-						{...register('newEmail', FORM_VALIDATION.email)}
-						invalid={errors?.newEmail?.message}
-					/>
-					<StyledError>{errors?.newEmail?.message}</StyledError>
-				</StyledFormField>
-				<StyledFormField>
-					<StyledInput
-						type='password'
-						name='newPassword'
-						id='newPassword'
-						autoComplete='new-password'
-						placeholder='contraseña'
-						{...register('newPassword', FORM_VALIDATION.password)}
-						invalid={errors?.newPassword?.message}
-					/>
-					<StyledError>{errors?.newPassword?.message}</StyledError>
-				</StyledFormField>
-				<StyledFormField>
-					<StyledInput
-						type='password'
-						name='repeatPassword'
-						id='repeatPassword'
-						autoComplete='new-password'
-						placeholder='repite tu contraseña'
-						{...register('repeatPassword', {
-							required: 'Es obligatorio comprobar la contraseña',
-							validate: value => validatePasswords(value, getValues)
-						})}
-						invalid={errors?.repeatPassword?.message}
-					/>
-					<StyledError>{errors?.repeatPassword?.message}</StyledError>
-				</StyledFormField>
-				<Button>Crear cuenta</Button>
-			</form>
+		<StyledBackground>
+			<StyledContainer>
+				<StyledTitle>Crea una cuenta</StyledTitle>
+				<form
+					onSubmit={handleSubmit((data, e) => onSubmit(data, e, navigate))}
+					autoComplete='off'
+				>
+					<StyledFormField>
+						<StyledInput
+							type='text'
+							name='newDisplayName'
+							id='newDisplayName'
+							autoComplete='off'
+							placeholder='nombre de usuario'
+							{...register('newDisplayName', FORM_VALIDATION.name)}
+							invalid={errors?.newDisplayName?.message}
+						/>
+					</StyledFormField>
+					<StyledFormField>
+						<StyledInput
+							type='email'
+							name='newEmail'
+							id='newEmail'
+							autoComplete='off'
+							placeholder='email'
+							{...register('newEmail', FORM_VALIDATION.email)}
+							invalid={errors?.newEmail?.message}
+						/>
+					</StyledFormField>
+					<StyledFormField>
+						<StyledInput
+							type='password'
+							name='newPassword'
+							id='newPassword'
+							autoComplete='new-password'
+							placeholder='contraseña'
+							{...register('newPassword', FORM_VALIDATION.password)}
+							invalid={errors?.newPassword?.message}
+						/>
+					</StyledFormField>
+					<StyledFormField>
+						<StyledInput
+							type='password'
+							name='repeatPassword'
+							id='repeatPassword'
+							autoComplete='new-password'
+							placeholder='repite tu contraseña'
+							{...register('repeatPassword', {
+								required: 'Es obligatorio comprobar la contraseña',
+								validate: value => validatePasswords(value, getValues)
+							})}
+							invalid={errors?.repeatPassword?.message}
+						/>
+					</StyledFormField>
 
-			<Button action={() => handleGoogleLogin(navigate)}>
-				Regístrate con Google
-			</Button>
+					{Object.keys(errors).length !== 0 && (
+						<StyledErrorContainer>
+							<p>{errors?.newDisplayName?.message}</p>
+							<p>{errors?.newEmail?.message}</p>
+							<p>{errors?.newPassword?.message}</p>
+							<p>{errors?.repeatPassword?.message}</p>
+						</StyledErrorContainer>
+					)}
 
-			<h2>¿Ya tienes una cuenta?</h2>
-			<Button action={() => navigate('/signin')}>Inicia sesión</Button>
-		</StyledContainer>
+					<StyledSignUpButton>Crear cuenta</StyledSignUpButton>
+				</form>
+				<SignInOptions />
+			</StyledContainer>
+
+			<StyledSmallContainer onClick={() => navigate('/signin')}>
+				¿Ya tienes una cuenta? Inicia sesión
+			</StyledSmallContainer>
+		</StyledBackground>
 	);
 };
 
