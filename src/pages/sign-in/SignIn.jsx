@@ -10,7 +10,6 @@ import { FORM_VALIDATION } from '../../constants/form-validation';
 
 // Styles
 import {
-	StyledBackground,
 	StyledContainer,
 	StyledErrorContainer,
 	StyledFormField,
@@ -30,7 +29,7 @@ const SignIn = () => {
 	} = useForm({ mode: 'onBlur' });
 
 	return (
-		<StyledBackground>
+		<>
 			<StyledContainer>
 				<StyledTitle>Inicia sesión</StyledTitle>
 				<form onSubmit={handleSubmit((data, e) => onSubmit(data, e, navigate))}>
@@ -65,7 +64,7 @@ const SignIn = () => {
 			<StyledSmallContainer onClick={() => navigate('/signup')}>
 				¿No tienes cuenta? ¡Regístrate!
 			</StyledSmallContainer>
-		</StyledBackground>
+		</>
 	);
 };
 

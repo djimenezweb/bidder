@@ -18,7 +18,6 @@ import {
 } from '../../constants/form-validation';
 
 import {
-	StyledBackground,
 	StyledContainer,
 	StyledErrorContainer,
 	StyledFormField,
@@ -39,7 +38,7 @@ const SignUp = () => {
 	} = useForm({ mode: 'onBlur' });
 
 	return (
-		<StyledBackground>
+		<>
 			<StyledContainer>
 				<StyledTitle>Crea una cuenta</StyledTitle>
 				<form
@@ -111,7 +110,7 @@ const SignUp = () => {
 			<StyledSmallContainer onClick={() => navigate('/signin')}>
 				¿Ya tienes una cuenta? Inicia sesión
 			</StyledSmallContainer>
-		</StyledBackground>
+		</>
 	);
 };
 

@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { v4 } from 'uuid';
 import {
 	StyledAddPictureButton,
-	StyledContainer,
+	StyledErrorContainer,
 	StyledGrid,
 	StyledPreview,
 	StyledPreviewContainer
@@ -14,43 +14,46 @@ const UploadPictures = ({ pictures, setPictures, errors }) => {
 
 	return (
 		<>
-			<StyledContainer>
-				<h3>Fotos</h3>
-				<p>Puedes subir hasta {PICTURE_LIMIT} fotos</p>
-				{<p>{errors?.pictures}</p>}
-				<StyledGrid>
-					{pictures.length !== 0 &&
-						pictures.map((picture, index) => (
-							<StyledPreviewContainer
-								key={v4()}
-								onClick={() => handleCancel(index, pictures, setPictures)}
-							>
-								<StyledPreview src={picture.preview} />
-							</StyledPreviewContainer>
-						))}
+			<h3>Fotos</h3>
+			<p>Puedes subir hasta {PICTURE_LIMIT} fotos</p>
+			<StyledGrid>
+				{pictures.length !== 0 &&
+					pictures.map((picture, index) => (
+						<StyledPreviewContainer
+							key={v4()}
+							onClick={() => handleCancel(index, pictures, setPictures)}
+						>
+							<StyledPreview src={picture.preview} />
+						</StyledPreviewContainer>
+					))}
 
-					<div>
-						<input
-							style={{ display: 'none' }}
-							type='file'
-							name='picture'
-							id='picture'
-							ref={inputPictureRef}
-							onChange={e =>
-								loadPreview(e.target.files[0], pictures, setPictures)
-							}
-						/>
+				<div>
+					<input
+						style={{ display: 'none' }}
+						type='file'
+						name='picture'
+						id='picture'
+						ref={inputPictureRef}
+						onChange={e =>
+							loadPreview(e.target.files[0], pictures, setPictures)
+						}
+					/>
 
-						{pictures.length < PICTURE_LIMIT && (
-							<StyledAddPictureButton
-								onClick={() => handleClick(inputPictureRef)}
-							>
-								+
-							</StyledAddPictureButton>
-						)}
-					</div>
-				</StyledGrid>
-			</StyledContainer>
+					{pictures.length < PICTURE_LIMIT && (
+						<StyledAddPictureButton
+							onClick={() => handleClick(inputPictureRef)}
+						>
+							+
+						</StyledAddPictureButton>
+					)}
+				</div>
+			</StyledGrid>
+
+			{errors?.pictures && (
+				<StyledErrorContainer>
+					<p>{errors?.pictures}</p>
+				</StyledErrorContainer>
+			)}
 		</>
 	);
 };

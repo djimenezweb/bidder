@@ -1,8 +1,9 @@
 import styled from 'styled-components';
 import { FONTS } from '../../constants/fonts';
+import { COLORS } from '../../constants/styles';
 
 const StyledHeader = styled.header`
-	background-color: rgb(245 245 245);
+	background-color: ${COLORS.gray200};
 	padding: 1rem 0;
 `;
 

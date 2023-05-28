@@ -3,15 +3,15 @@ import { FONTS } from '../../constants/fonts';
 import { BOX_SHADOWS, COLORS } from '../../constants/styles';
 import { StyledButton } from '../../components/button/styles';
 
-const StyledBackground = styled.div`
-	background-color: rgb(240 240 240);
+/* const StyledBackground = styled.div`
+	background-color: ${COLORS.gray200};
 	min-height: 100vh;
-	padding: 5rem;
-`;
+	padding: calc(1rem + 10vh) 0 1rem;
+`; */
 
 const StyledContainer = styled.div`
 	width: min(100%, 448px);
-	margin: 0 auto 1rem;
+	margin: 2rem auto 1rem;
 	padding: 2rem;
 	background-color: white;
 	border-radius: 8px;
@@ -38,7 +38,7 @@ const StyledInput = styled.input`
 	padding: 0.5rem 1rem;
 	background-color: none;
 	border: ${({ invalid }) =>
-		invalid ? `1px solid ${COLORS.primary.error}` : '1px solid gray'};
+		invalid ? `1px solid ${COLORS.errorPrimary}` : '1px solid gray'};
 	border-radius: 2rem;
 	font-family: ${FONTS.sans};
 	font-size: 1rem;
@@ -94,13 +94,12 @@ const StyledGoogleSignInButton = styled(StyledButton)`
 const StyledErrorContainer = styled.div`
 	margin: 0 0 1rem;
 	padding: 0 1rem;
-	color: ${COLORS.primary.error};
-	border: 1px solid ${COLORS.primary.error};
-	background-color: ${COLORS.secondary.error};
+	color: ${COLORS.errorPrimary};
+	border: 1px solid ${COLORS.errorPrimary};
+	background-color: ${COLORS.errorSecondary};
 `;
 
 export {
-	StyledBackground,
 	StyledContainer,
 	StyledSmallContainer,
 	StyledTitle,

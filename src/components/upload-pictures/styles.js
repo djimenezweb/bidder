@@ -1,11 +1,8 @@
 import styled from 'styled-components';
-
-const StyledContainer = styled.div`
-	background-color: rgb(240, 240, 240);
-	padding: 1rem;
-`;
+import { COLORS } from '../../constants/styles';
 
 const StyledGrid = styled.div`
+	margin: 0 0 1rem;
 	display: grid;
 	grid-template-columns: repeat(auto-fit, 100px);
 	gap: 1rem;
@@ -51,10 +48,19 @@ const StyledPreview = styled.img`
 	object-position: center;
 `;
 
+const StyledErrorContainer = styled.div`
+	margin: 0;
+	padding: 0 1rem;
+	color: ${COLORS.errorPrimary};
+	background-color: ${COLORS.errorSecondary};
+	border: 1px solid ${COLORS.errorPrimary};
+	border-radius: 8px;
+`;
+
 export {
-	StyledContainer,
 	StyledGrid,
 	StyledAddPictureButton,
 	StyledPreviewContainer,
-	StyledPreview
+	StyledPreview,
+	StyledErrorContainer
 };

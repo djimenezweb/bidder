@@ -29,19 +29,55 @@ const StyledButtonsContainer = styled.div`
 `;
 
 const StyledGoogleSignInButton = styled(StyledButton)`
+	position: relative;
 	display: block;
+	margin: 0;
 	background-color: #4285f4;
 	color: white;
 	width: 100%;
-	margin: 0;
+	overflow: hidden;
+	z-index: 10;
+
+	&::after {
+		content: '';
+		// outline: 1px solid red;
+		position: absolute;
+		width: 6rem;
+		height: 6rem;
+		background-image: url('/assets/images/google-logo.svg');
+		background-size: contain;
+		bottom: -2rem;
+		right: -1.5rem;
+		transform: rotate(20deg);
+		transform-origin: center right;
+		z-index: -1;
+	}
 `;
 
 const StyledGithubSignInButton = styled(StyledButton)`
+	position: relative;
 	display: block;
-	background-color: black;
+	margin: 0;
+	background-color: #111;
 	color: white;
 	width: 100%;
-	margin: 0;
+	overflow: hidden;
+	z-index: 10;
+
+	&::after {
+		content: '';
+		// outline: 1px solid red;
+		position: absolute;
+		width: 5rem;
+		height: 5rem;
+		background-image: url('/assets/images/github-logo-white.svg');
+		background-size: contain;
+		bottom: -1.5rem;
+		right: -1rem;
+		transform: rotate(20deg);
+		transform-origin: center right;
+		z-index: -1;
+	}
 `;
 
 export {

@@ -3,6 +3,7 @@ export const BOX_SHADOWS = {
 };
 
 export const COLORS = {
-	primary: { error: 'rgba(255 0 0 / 1)' },
-	secondary: { error: 'rgba(255 0 0 / 0.2)' }
+	gray200: '#f6f7f9',
+	errorPrimary: 'rgba(255 0 0 / 1)',
+	errorSecondary: 'rgba(255 0 0 / 0.2)'
 };

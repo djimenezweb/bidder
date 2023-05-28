@@ -19,10 +19,13 @@ const SignInOptions = () => {
 			</StyledSeparator>
 			<StyledButtonsContainer>
 				<StyledGoogleSignInButton onClick={() => handleGoogleLogin(navigate)}>
-					Iniciar sesión con Google
+					Iniciar sesión
+					<br />
+					con Google
 				</StyledGoogleSignInButton>
 				<StyledGithubSignInButton onClick={() => handleGithubLogin(navigate)}>
-					Iniciar sesión con GitHub
+					Iniciar sesión <br />
+					con GitHub
 				</StyledGithubSignInButton>
 			</StyledButtonsContainer>
 		</>

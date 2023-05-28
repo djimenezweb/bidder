@@ -1,7 +1,6 @@
 import { useContext, useState } from 'react';
 import UploadPictures from '../../components/upload-pictures/UploadPictures';
 import { DURATION } from '../../constants/add-item';
-import Button from '../../components/button/Button';
 
 // Firebase
 import { arrayUnion, doc, setDoc, updateDoc } from 'firebase/firestore';
@@ -10,6 +9,20 @@ import { AuthContext } from '../../contexts/Auth.context';
 import { v4 } from 'uuid';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom';
+import {
+	StyledContainer,
+	StyledDate,
+	StyledErrorContainer,
+	StyledFlexContainer,
+	StyledFormField,
+	StyledInput,
+	StyledInputNumber,
+	StyledLabel,
+	StyledResetButton,
+	StyledSelect,
+	StyledSubmitButton,
+	StyledTextarea
+} from './styles';
 
 const AddItem = () => {
 	const navigate = useNavigate();
@@ -27,26 +40,26 @@ const AddItem = () => {
 	const [errors, setErrors] = useState({});
 
 	return (
-		<>
-			<h2>Crear anuncio</h2>
-			<form
-				onSubmit={e =>
-					handleSubmit(
-						e,
-						formData,
-						loggedUser,
-						setFormData,
-						INITIAL_STATE,
-						pictures,
-						setPictures,
-						setErrors,
-						navigate
-					)
-				}
-			>
-				<div>
-					<label htmlFor='title'>Título</label>
-					<input
+		<form
+			onSubmit={e =>
+				handleSubmit(
+					e,
+					formData,
+					loggedUser,
+					setFormData,
+					INITIAL_STATE,
+					pictures,
+					setPictures,
+					setErrors,
+					navigate
+				)
+			}
+		>
+			<StyledContainer>
+				<h2>Crear anuncio</h2>
+				<StyledFormField>
+					<StyledLabel htmlFor='title'>Título</StyledLabel>
+					<StyledInput
 						type='text'
 						name='title'
 						id='title'
@@ -54,79 +67,105 @@ const AddItem = () => {
 						onChange={e =>
 							handleChange(formData, setFormData, 'title', e.target.value)
 						}
+						invalid={errors?.title}
 					/>
-					{<p>{errors?.title}</p>}
-				</div>
-				<div>
-					<label htmlFor='startingPrice'>Precio de salida</label>
-					<input
-						type='number'
-						name='startingPrice'
-						id='startingPrice'
-						value={formData.startingPrice}
-						onChange={e =>
-							handleChange(
-								formData,
-								setFormData,
-								'startingPrice',
-								e.target.value
-							)
-						}
-					/>{' '}
-					€{<p>{errors?.startingPrice}</p>}
-				</div>
-				<div>
-					<label htmlFor='duration'>Duración</label>
-					<select
-						name='duration'
-						id='duration'
-						value={formData.duration}
-						onChange={e =>
-							handleChange(formData, setFormData, 'duration', e.target.value)
-						}
-					>
-						{DURATION.map(option => {
-							return (
-								<option key={option.id} value={option.value}>
-									{option.option}
-								</option>
-							);
-						})}
-					</select>
-					<p>
+				</StyledFormField>
+				<StyledFlexContainer>
+					<div>
+						<StyledLabel htmlFor='startingPrice'>Precio de salida</StyledLabel>
+						<StyledInputNumber
+							type='number'
+							name='startingPrice'
+							id='startingPrice'
+							value={formData.startingPrice}
+							onChange={e =>
+								handleChange(
+									formData,
+									setFormData,
+									'startingPrice',
+									e.target.value
+								)
+							}
+							invalid={errors?.startingPrice}
+						/>
+						<span>EUR</span>
+					</div>
+					<div>
+						<StyledLabel htmlFor='duration'>Duración</StyledLabel>
+						<StyledSelect
+							name='duration'
+							id='duration'
+							value={formData.duration}
+							onChange={e =>
+								handleChange(formData, setFormData, 'duration', e.target.value)
+							}
+						>
+							{DURATION.map(option => {
+								return (
+									<option key={option.id} value={option.value}>
+										{option.option}
+									</option>
+								);
+							})}
+						</StyledSelect>
+					</div>
+					<StyledDate>
 						La subasta terminará el {printDate(formData.duration)} a las{' '}
 						{printTime()}
-					</p>
-				</div>
-				<div>
-					<label htmlFor='description'>Descripción</label>
-					<textarea
+					</StyledDate>
+				</StyledFlexContainer>
+
+				<StyledFormField>
+					<StyledLabel htmlFor='description'>Descripción</StyledLabel>
+					<StyledTextarea
 						name='description'
 						id='description'
 						value={formData.description}
 						onChange={e =>
 							handleChange(formData, setFormData, 'description', e.target.value)
 						}
-					></textarea>
-					{<p>{errors?.description}</p>}
-				</div>
+						invalid={errors?.description}
+					></StyledTextarea>
+				</StyledFormField>
 
+				{Object.keys(errors).length !== 0 && (
+					<StyledErrorContainer>
+						<p>{errors?.title}</p>
+						<p>{errors?.startingPrice}</p>
+						<p>{errors?.description}</p>
+					</StyledErrorContainer>
+				)}
+			</StyledContainer>
+
+			<StyledContainer>
 				<UploadPictures
 					pictures={pictures}
 					setPictures={setPictures}
 					errors={errors}
 				/>
-
-				<div>
-					<Button action={() => setFormData(INITIAL_STATE)}>Borrar</Button>
-					<Button>Publicar anuncio</Button>
-				</div>
-			</form>
-		</>
+			</StyledContainer>
+			<StyledContainer>
+				<StyledResetButton
+					type='button'
+					onClick={() =>
+						resetForm(setFormData, INITIAL_STATE, setPictures, setErrors)
+					}
+				>
+					Borrar
+				</StyledResetButton>
+				<StyledSubmitButton>Publicar anuncio</StyledSubmitButton>
+			</StyledContainer>
+		</form>
 	);
 };
 
 export default AddItem;
+
+const resetForm = (setFormData, INITIAL_STATE, setPictures, setErrors) => {
+	setFormData(INITIAL_STATE);
+	setPictures([]);
+	setErrors({});
+};
 
 const handleChange = (formData, setFormData, key, value) => {
 	setFormData({
@@ -137,12 +176,12 @@ const handleChange = (formData, setFormData, key, value) => {
 
 const validateForm = (formData, pictures) => {
 	const errorMessages = {};
-	if (formData.title === '') errorMessages.title = 'Campo requerido';
+	if (formData.title === '') errorMessages.title = 'Título necesario';
 	if (formData.startingPrice < 1)
 		errorMessages.startingPrice =
 			'Introduce un número válido. El precio debe ser igual o mayor que 1€.';
 	if (formData.description === '')
-		errorMessages.description = 'Campo requerido';
+		errorMessages.description = 'Descripción necesaria';
 	if (pictures.length === 0)
 		errorMessages.pictures = 'Es necesario subir al menos 1 foto';
 	return Object.keys(errorMessages).length === 0 ? null : errorMessages;
