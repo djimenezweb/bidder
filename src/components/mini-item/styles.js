@@ -1,18 +1,13 @@
 import styled from 'styled-components';
 
-const StyledImg = styled.img`
-	width: 2rem;
-	height: 2rem;
-	border-radius: 50%;
-	object-fit: cover;
-	object-position: center;
-`;
-
 const StyledRow = styled.div`
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
+	display: grid;
+	grid-template-columns: 3rem 1fr 1fr 1fr;
+	grid-template-areas:
+		'img tit tit tit'
+		'img pri bid tim';
 	background-color: white;
+	grid-gap: 0.5rem 0;
 	padding: 1rem;
 	cursor: pointer;
 
@@ -26,66 +21,65 @@ const StyledRow = styled.div`
 
 	@media screen and (min-width: 960px) {
 		padding: 0.5rem 1rem;
-		flex-direction: row;
+		grid-template-columns: 2rem 20rem 1fr 1fr 1fr;
+		grid-template-areas: 'img tit pri bid tim';
+		grid-gap: 0 1rem;
 		align-items: center;
-		gap: 1.5rem;
+		justify-items: end;
 	}
 `;
 
-const StyledTitle = styled.div`
-	display: flex;
-	align-items: center;
-	gap: 1.5rem;
+const StyledImg = styled.img`
+	grid-area: img;
+	width: 2rem;
+	height: 2rem;
+	border-radius: 50%;
+	object-fit: cover;
+	object-position: center;
+
 	@media screen and (min-width: 960px) {
-		flex: 1 0 12rem;
-	}
-
-	span {
-		font-weight: 600;
-		white-space: nowrap;
-		overflow: hidden;
-		text-overflow: ellipsis;
+		justify-self: start;
 	}
 `;
 
-const StyledFlexContainer = styled.div`
-	display: flex;
-	flex: 1 0 auto;
-	margin: 0 0 0 4.5rem;
-	gap: 2rem;
-	@media screen and (min-width: 960px) {
-		margin: 0;
-		flex-direction: row;
-		align-items: center;
-		gap: 1.5rem;
-	}
-`;
-
-const StyledCell = styled.p`
+const StyledTitle = styled.p`
+	grid-area: tit;
 	margin: 0;
-	text-align: right;
+	font-weight: 600;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+
 	@media screen and (min-width: 960px) {
-		flex-basis: 7rem;
+		justify-self: start;
 	}
+`;
+
+const StyledPrice = styled.p`
+	grid-area: pri;
+	margin: 0;
 `;
 
 const StyledCurrency = styled.span`
 	opacity: 0.5;
 `;
 
-const StyledTimeLeft = styled.p`
-	margin: 0 0 0 4.5rem;
-	@media screen and (min-width: 960px) {
-		margin: 0;
-		flex: 1 0 auto;
-	}
+const StyledBids = styled.p`
+	grid-area: bid;
+	margin: 0;
 `;
+
+const StyledTimeLeft = styled.p`
+	grid-area: tim;
+	margin: 0;
+`;
+
 export {
 	StyledImg,
 	StyledRow,
 	StyledTitle,
-	StyledFlexContainer,
-	StyledCell,
+	StyledPrice,
+	StyledBids,
 	StyledCurrency,
 	StyledTimeLeft
 };

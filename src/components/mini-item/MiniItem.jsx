@@ -1,10 +1,10 @@
 import { useNavigate } from 'react-router-dom';
 import { printTimeLeft } from '../../functions/print-time-left';
 import {
-	StyledCell,
+	StyledBids,
 	StyledCurrency,
-	StyledFlexContainer,
 	StyledImg,
+	StyledPrice,
 	StyledRow,
 	StyledTimeLeft,
 	StyledTitle
@@ -18,22 +18,20 @@ const MiniItem = ({ item, today }) => {
 
 	return (
 		<StyledRow onClick={() => navigate(`/itm/${item.id}`)}>
-			<StyledTitle>
-				<StyledImg src={item.pictures[0]} />
-				<span>{item.title}</span>
-			</StyledTitle>
-			<StyledFlexContainer>
-				<StyledCell>
-					{Number(item.currentPrice).toLocaleString('es-ES', {
-						minimumFractionDigits: 2,
-						maximumFractionDigits: 2
-					})}{' '}
-					<StyledCurrency>EUR</StyledCurrency>
-				</StyledCell>
-				<StyledCell>
-					{item.bids} {Number(item.bids) === 1 ? 'puja' : 'pujas'}
-				</StyledCell>
-			</StyledFlexContainer>
+			<StyledImg src={item.pictures[0]} />
+			<StyledTitle>{item.title}</StyledTitle>
+
+			<StyledPrice>
+				{Number(item.currentPrice).toLocaleString('es-ES', {
+					minimumFractionDigits: 2,
+					maximumFractionDigits: 2
+				})}{' '}
+				<StyledCurrency>EUR</StyledCurrency>
+			</StyledPrice>
+			<StyledBids>
+				{item.bids} {Number(item.bids) === 1 ? 'puja' : 'pujas'}
+			</StyledBids>
+
 			<StyledTimeLeft>{timeLeft}</StyledTimeLeft>
 		</StyledRow>
 	);

@@ -8,7 +8,7 @@ const GlobalStyles = createGlobalStyle`
 *::after,
 *::before {
   box-sizing: border-box;
-  outline: 1px dashed rgba(255 0 0 / 0.3);
+  // outline: 1px dashed rgba(255 0 0 / 0.3);
 }
 
 html {
