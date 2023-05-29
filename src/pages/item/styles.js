@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { FONTS } from '../../constants/fonts';
 
 const StyledGrid = styled.div`
 	@media screen and (min-width: 768px) {
@@ -16,33 +15,18 @@ const StyledTitle = styled.h2`
 	font-weight: 500;
 `;
 
-const StyledId = styled.p`
-	margin: 0;
-	font-size: 0.8rem;
-	font-style: 0.5rem;
-	font-weight: 200;
-	opacity: 0.8;
-`;
-
-const StyledFlexContainer = styled.div`
+const StyledList = styled.ul`
+	height: 6rem;
 	display: flex;
-	gap: 1rem;
 	justify-content: start;
-	align-items: center;
+	align-items: stretch;
+	gap: 1rem;
+	border: 1px solid black;
 `;
 
-const StyledPrice = styled.p`
-	font-family: ${FONTS.sans};
-	margin: 0;
-	font-size: 3rem;
-	font-weight: 500;
-`;
-
-const StyledBids = styled.p`
-	margin: 0;
-	font-size: 1.5rem;
-	font-weight: 400;
-	opacity: 0.8;
+const StyledListItem = styled.li`
+	width: 10rem;
+	border: 1px solid black;
 `;
 
 // Contenedor de fotos
@@ -90,10 +74,8 @@ const StyledDot = styled.div`
 export {
 	StyledGrid,
 	StyledTitle,
-	StyledId,
-	StyledFlexContainer,
-	StyledPrice,
-	StyledBids,
+	StyledList,
+	StyledListItem,
 	StyledActivePicture,
 	StyledThumbnailContainer,
 	StyledThumbnail,

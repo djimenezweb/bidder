@@ -8,12 +8,16 @@ const StyledGrid = styled.div`
 	grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
 	gap: var(--gap);
 
-	@media screen and (min-width: 576px) {
+	@media screen and (min-width: 36rem) {
 		--cols: 3;
 		--gap: 2rem;
 	}
 
-	@media screen and (min-width: 960px) {
+	@media screen and (min-width: 58rem) {
+		--cols: 4;
+	}
+
+	@media screen and (min-width: 76rem) {
 		--cols: 5;
 	}
 `;

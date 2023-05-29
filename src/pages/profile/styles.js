@@ -3,7 +3,9 @@ import styled from 'styled-components';
 const StyledGrid = styled.div`
 	@media screen and (min-width: 640px) {
 		display: grid;
+		height: 100%;
 		grid-template-columns: 18rem 1fr;
+		grid-auto-rows: 1fr;
 		gap: 2rem;
 	}
 `;

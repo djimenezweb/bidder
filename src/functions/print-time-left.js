@@ -8,18 +8,18 @@ export const printTimeLeft = timeSpan => {
 	}
 	// 5 minutos
 	if (timeSpan <= 300000) {
-		return '¡Termina en unos minutos!';
+		return 'unos minutos!';
 	}
 	// Menos de 1 hora
 	if (timeSpan <= 3600000) {
-		return `Termina en ${minutesLeft} min`;
+		return `${minutesLeft} min`;
 	}
 	// 1 día
 	if (timeSpan <= 86400000) {
-		return `Termina en ${hoursLeft}h`;
+		return `${hoursLeft}h`;
 	}
 	if (daysLeft === 1) {
-		return `Termina en ${daysLeft} día`;
+		return `${daysLeft} día`;
 	}
-	return `Termina en ${daysLeft} días y ${hoursLeft} horas`;
+	return `${daysLeft} días y ${hoursLeft} horas`;
 };

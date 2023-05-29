@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import { printTimeLeft } from '../../functions/print-time-left';
 import {
 	StyledCell,
+	StyledCurrency,
 	StyledFlexContainer,
 	StyledImg,
 	StyledRow,
@@ -27,9 +28,11 @@ const MiniItem = ({ item, today }) => {
 						minimumFractionDigits: 2,
 						maximumFractionDigits: 2
 					})}{' '}
-					EUR
+					<StyledCurrency>EUR</StyledCurrency>
 				</StyledCell>
-				<StyledCell>{item.bids} pujas</StyledCell>
+				<StyledCell>
+					{item.bids} {Number(item.bids) === 1 ? 'puja' : 'pujas'}
+				</StyledCell>
 			</StyledFlexContainer>
 			<StyledTimeLeft>{timeLeft}</StyledTimeLeft>
 		</StyledRow>

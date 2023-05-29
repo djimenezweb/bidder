@@ -37,11 +37,12 @@ const StyledTitle = styled.div`
 	align-items: center;
 	gap: 1.5rem;
 	@media screen and (min-width: 960px) {
-		flex-basis: 12rem;
+		flex: 1 0 12rem;
 	}
 
 	span {
 		font-weight: 600;
+		white-space: nowrap;
 		overflow: hidden;
 		text-overflow: ellipsis;
 	}
@@ -62,9 +63,14 @@ const StyledFlexContainer = styled.div`
 
 const StyledCell = styled.p`
 	margin: 0;
+	text-align: right;
 	@media screen and (min-width: 960px) {
 		flex-basis: 7rem;
 	}
+`;
+
+const StyledCurrency = styled.span`
+	opacity: 0.5;
 `;
 
 const StyledTimeLeft = styled.p`
@@ -80,5 +86,6 @@ export {
 	StyledTitle,
 	StyledFlexContainer,
 	StyledCell,
+	StyledCurrency,
 	StyledTimeLeft
 };

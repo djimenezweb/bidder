@@ -7,8 +7,8 @@ const GlobalStyles = createGlobalStyle`
 *,
 *::after,
 *::before {
-    box-sizing: border-box;
-    outline: 1px dashed rgba(255 0 0 / 0.3);
+  box-sizing: border-box;
+  outline: 1px dashed rgba(255 0 0 / 0.3);
 }
 
 html {
@@ -16,25 +16,28 @@ html {
   overflow-x: hidden;
 }
 
+body {
+  margin: 0;
+  background-color: ${COLORS.gray200};
+  font-family: ${FONTS.sans};
+  font-weight: 400;
+}
+
 #root {
   min-height: 100vh;
+  // background-color: lightgreen;
 }
 
-body {
-    margin: 0;
-    background-color: ${COLORS.gray200};
-    font-family: ${FONTS.sans};
-    font-weight: 400;
-}
-
-main {    
-    width: min(75rem, 100% - 2rem);
-    margin: 0 auto;
+main {
+  // background-color: pink;    
+  // min-height: 100%;
+  width: min(75rem, 100% - 2rem);
+  margin: 0 auto;
 }
 
 img, video {
-    max-width: 100%;
-    display: block;
+  max-width: 100%;
+  display: block;
 }
 
 ul {

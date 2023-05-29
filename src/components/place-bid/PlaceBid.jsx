@@ -2,6 +2,7 @@ import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import { db } from '../../config/firebase.config';
 import { AuthContext } from '../../contexts/Auth.context';
 import { useContext, useState } from 'react';
+import { StyledInput, StyledSubmitButton } from './styles';
 
 const PlaceBid = ({
 	itemId,
@@ -29,15 +30,14 @@ const PlaceBid = ({
 				)
 			}
 		>
-			<label htmlFor='bid'>Pujar</label>
-			<input
+			<StyledInput
 				type='text'
 				name='bid'
 				id='bid'
 				value={bid}
 				onChange={e => setBid(e.target.value)}
 			/>
-			<button>Pujar</button>
+			<StyledSubmitButton>Pujar</StyledSubmitButton>
 		</form>
 	);
 };
