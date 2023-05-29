@@ -1,15 +1,14 @@
 import { useNavigate } from 'react-router-dom';
 import {
 	StyledArticle,
-	StyledFlexContainer,
+	StyledBids,
 	StyledImageContainer,
 	StyledImg,
-	StyledInfo,
 	StyledPrice,
 	StyledTimeLeft,
 	StyledTitle
 } from './styles';
-import { printTimeLeft } from '../../functions/print-time-left';
+import { printTimeLeft } from '../../utils/print-time-left';
 
 const SmallItem = ({ item, today }) => {
 	const navigate = useNavigate();
@@ -23,21 +22,20 @@ const SmallItem = ({ item, today }) => {
 				{item.pictures && <StyledImg src={item.pictures[0]} />}
 			</StyledImageContainer>
 
-			<StyledFlexContainer>
-				<StyledInfo>
-					<StyledTitle>{item.title}</StyledTitle>
-					<StyledTimeLeft>{timeLeft}</StyledTimeLeft>
-				</StyledInfo>
+			<StyledTitle>{item.title}</StyledTitle>
 
-				<StyledPrice>
-					{Number(item.currentPrice).toLocaleString('es-ES', {
-						minimumFractionDigits: 2,
-						maximumFractionDigits: 2
-					})}{' '}
-					€
-				</StyledPrice>
-			</StyledFlexContainer>
-			<span>{item.bids} pujas</span>
+			<StyledPrice>
+				{Number(item.currentPrice).toLocaleString('es-ES', {
+					minimumFractionDigits: 2,
+					maximumFractionDigits: 2
+				})}{' '}
+				€
+			</StyledPrice>
+
+			<StyledBids>
+				{item.bids} {item.bids === 1 ? 'puja' : 'pujas'}
+			</StyledBids>
+			<StyledTimeLeft>{timeLeft}</StyledTimeLeft>
 		</StyledArticle>
 	);
 };

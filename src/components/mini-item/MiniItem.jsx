@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { printTimeLeft } from '../../functions/print-time-left';
+import { printTimeLeft } from '../../utils/print-time-left';
 import {
 	StyledBids,
 	StyledCurrency,

@@ -24,13 +24,12 @@ body {
 }
 
 #root {
-  min-height: 100vh;
-  // background-color: lightgreen;
+  // height: 100vh;
+  min-height: 100vh;  
 }
 
 main {
-  // background-color: pink;    
-  // min-height: 100%;
+  // min-height: calc(100% - 68px);
   width: min(75rem, 100% - 2rem);
   margin: 0 auto;
 }
@@ -50,6 +49,10 @@ ul {
 a {
     text-decoration: none;
     color: inherit;
+}
+
+button, input {
+  font-family: inherit;
 }
 
 h1, h2, h3, h4 {

@@ -15,10 +15,12 @@ const StyledGrid = styled.div`
 
 	@media screen and (min-width: 58rem) {
 		--cols: 4;
+		--gap: 2.5rem;
 	}
 
 	@media screen and (min-width: 76rem) {
-		--cols: 5;
+		--cols: 4;
+		// --cols: 5;
 	}
 `;
 

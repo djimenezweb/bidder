@@ -1,19 +1,24 @@
 import styled from 'styled-components';
-import { COLORS } from '../../constants/styles';
-import { FONTS } from '../../constants/fonts';
+import { COLORS, PLACE_BID } from '../../constants/styles';
+
+const StyledForm = styled.form`
+	display: flex;
+	gap: ${PLACE_BID.gap};
+`;
 
 const StyledInput = styled.input`
-	width: 10rem;
-	height: 100%;
+	width: ${PLACE_BID.width};
+	height: ${PLACE_BID.height};
 	padding: 0.5rem 1rem;
 	background-color: none;
 	border: ${({ invalid }) =>
-		invalid ? `1px solid ${COLORS.errorPrimary}` : '1px solid gray'};
-	border-radius: 8px;
-	font-family: ${FONTS.sans};
-	font-size: 1rem;
+		invalid ? `1px solid ${COLORS.errorPrimary}` : '1px solid lightgray'};
+	border-radius: 0.5rem;
+	font-size: 2rem;
+	text-align: center;
 
-	&:focus {
+	&:focus,
+	&:hover {
 		border: 1px solid black;
 		outline: none;
 	}
@@ -24,17 +29,21 @@ const StyledInput = styled.input`
 `;
 
 const StyledSubmitButton = styled.button`
+	width: ${PLACE_BID.width};
+	height: ${PLACE_BID.height};
 	background-color: #6b9ac4;
-	font-size: 1rem;
-	font-family: ${FONTS.sans};
+	color: white;
+	font-size: 1.5rem;
+	font-family: inherit;
 	font-weight: 400;
 	padding: 0.5em 1em;
-	border: 1px solid black;
+	border: 1px solid lightgray;
+	border-radius: 0.5rem;
 	cursor: pointer;
 
 	&:hover {
-		background-color: lightgray;
+		background-color: orange;
 	}
 `;
 
-export { StyledInput, StyledSubmitButton };
+export { StyledForm, StyledInput, StyledSubmitButton };

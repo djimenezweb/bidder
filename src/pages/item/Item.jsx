@@ -13,6 +13,7 @@ import AuctionStatus from '../../components/auction-status/AuctionStatus';
 import DeleteItem from '../../components/delete-item/DeleteItem';
 import {
 	StyledActivePicture,
+	StyledCurrency,
 	StyledDot,
 	StyledDotContainer,
 	StyledGrid,
@@ -67,7 +68,16 @@ const Item = () => {
 			{item.pictures && (
 				<div>
 					<div>
-						<StyledActivePicture src={item.pictures[activePicture]} />
+						<StyledActivePicture
+							src={item.pictures[activePicture]}
+							onClick={() =>
+								nextPicture(
+									activePicture,
+									setActivePicture,
+									item.pictures.length
+								)
+							}
+						/>
 					</div>
 					<StyledDotContainer>
 						{item.pictures.map((picture, index) => {
@@ -91,8 +101,8 @@ const Item = () => {
 						{Number(item.currentPrice).toLocaleString('es-ES', {
 							minimumFractionDigits: 2,
 							maximumFractionDigits: 2
-						})}{' '}
-						€
+						})}
+						<StyledCurrency>EUR</StyledCurrency>
 					</StyledListItem>
 					<StyledListItem>
 						{item.bids} {Number(item.bids) === 1 ? 'puja' : 'pujas'}
@@ -123,13 +133,6 @@ const Item = () => {
 				{/* Si HAY loggedUser y NO ES el vendedor, puede PUJAR */}
 				{loggedUser?.email && loggedUser?.email !== item.sellerEmail && (
 					<>
-						<PlaceBid
-							itemId={itemId}
-							highestBid={item.highestBid}
-							currentPrice={item.currentPrice}
-							highestBidder={item.highestBidder}
-							bids={item.bids}
-						/>
 						<AuctionStatus
 							highestBid={item.highestBid}
 							highestBidder={item.highestBidder}
@@ -157,6 +160,14 @@ const Item = () => {
 			</div>
 		</StyledGrid>
 	);
+};
+
+const nextPicture = (activePicture, setActivePicture, length) => {
+	if (activePicture === length - 1) {
+		setActivePicture(0);
+	} else {
+		setActivePicture(activePicture + 1);
+	}
 };
 
 const printDate = date => {

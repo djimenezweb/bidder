@@ -8,7 +8,7 @@ import {
 import {
 	handleGithubLogin,
 	handleGoogleLogin
-} from '../../functions/sign-in-providers';
+} from '../../utils/sign-in-providers';
 
 const SignInOptions = () => {
 	const navigate = useNavigate();

@@ -8,6 +8,8 @@ const RequireAuth = ({ children }) => {
 	if (isLoading) return <h1>Loading...</h1>;
 
 	if (!isLoading && !loggedUser) {
+		console.log('LOADING', isLoading);
+		console.log('USER', loggedUser);
 		return <Navigate to='/signin' replace />;
 	}
 

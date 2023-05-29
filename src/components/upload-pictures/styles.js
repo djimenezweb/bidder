@@ -14,6 +14,7 @@ const StyledAddPictureButton = styled.div`
 	opacity: 0.5;
 	background-color: transparent;
 	border: 2px dashed black;
+	border-radius: 0.5rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;

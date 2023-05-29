@@ -1,10 +1,17 @@
 import styled from 'styled-components';
+import { BOX_SHADOWS, PLACE_BID } from '../../constants/styles';
 
 const StyledGrid = styled.div`
 	@media screen and (min-width: 768px) {
 		display: grid;
+		gap: 2rem;
+		grid-template-columns: 384px 1fr;
+	}
+
+	@media screen and (min-width: 960px) {
+		display: grid;
 		gap: 3rem;
-		grid-template-columns: 400px 1fr;
+		grid-template-columns: 36rem 1fr;
 	}
 `;
 
@@ -16,17 +23,27 @@ const StyledTitle = styled.h2`
 `;
 
 const StyledList = styled.ul`
-	height: 6rem;
 	display: flex;
 	justify-content: start;
 	align-items: stretch;
-	gap: 1rem;
-	border: 1px solid black;
+	gap: ${PLACE_BID.gap};
 `;
 
 const StyledListItem = styled.li`
-	width: 10rem;
-	border: 1px solid black;
+	margin: 0 0 ${PLACE_BID.gap} 0;
+	width: ${PLACE_BID.width};
+	height: ${PLACE_BID.height};
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-size: 1.5rem;
+	border: 1px solid lightgray;
+	border-radius: 0.5rem;
+	// box-shadow: ${BOX_SHADOWS.small};
+`;
+
+const StyledCurrency = styled.span`
+	opacity: 0.5;
 `;
 
 // Contenedor de fotos
@@ -35,9 +52,13 @@ const StyledActivePicture = styled.img`
 	width: 100%;
 	aspect-ratio: 1.25;
 	object-fit: contain;
+	box-shadow: ${BOX_SHADOWS.default};
+	border-radius: 0.5rem;
+	cursor: pointer;
+	background-color: white;
 
 	@media screen and (min-width: 640px) {
-		aspect-ratio: auto;
+		aspect-ratio: 1.33;
 	}
 `;
 
@@ -57,6 +78,7 @@ const StyledThumbnail = styled.img`
 `;
 
 const StyledDotContainer = styled.div`
+	margin-top: 1rem;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -64,10 +86,11 @@ const StyledDotContainer = styled.div`
 `;
 
 const StyledDot = styled.div`
-	width: ${({ active }) => (active ? '16px' : '8px')};
+	background-color: ${({ active }) => (active ? 'gray' : 'transparent')};
+	width: 8px;
 	aspect-ratio: 1;
 	border-radius: 50%;
-	background-color: grey;
+	border: 1px solid gray;
 	cursor: pointer;
 `;
 
@@ -76,6 +99,7 @@ export {
 	StyledTitle,
 	StyledList,
 	StyledListItem,
+	StyledCurrency,
 	StyledActivePicture,
 	StyledThumbnailContainer,
 	StyledThumbnail,

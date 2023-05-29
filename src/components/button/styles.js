@@ -2,7 +2,8 @@ import styled from 'styled-components';
 import { FONTS } from '../../constants/fonts';
 
 const StyledButton = styled.button`
-	background-color: white;
+	background-color: #6b9ac4;
+	color: white;
 	font-size: 1rem;
 	font-family: ${FONTS.sans};
 	font-weight: 400;

@@ -11,14 +11,14 @@ export const AuthProvider = ({ children }) => {
 		const unsubscribe = auth.onIdTokenChanged(user => {
 			if (user) {
 				// El usuario está autenticado
-				getUserInfo(user, setLoggedUser);
+				getUserInfo(user, setLoggedUser, setIsLoading);
 				console.log('Logged user: ', user.email);
 			} else {
 				// El usuario no está autenticado
 				setLoggedUser(null);
 				console.log('User is not logged in');
+				setIsLoading(false);
 			}
-			setIsLoading(false);
 		});
 		return () => unsubscribe();
 	}, []);
@@ -30,12 +30,13 @@ export const AuthProvider = ({ children }) => {
 	);
 };
 
-const getUserInfo = async (user, setLoggedUser) => {
+const getUserInfo = async (user, setLoggedUser, setLoading) => {
 	const userRef = doc(usersDB, user.email);
 	try {
 		const userToRead = await getDoc(userRef);
 		const response = userToRead.data();
 		setLoggedUser({ ...user, ...response });
+		setLoading(false);
 	} catch (err) {
 		console.error(err);
 	}
