@@ -11,6 +11,10 @@ const StyledSearchContainer = styled.div`
 	border-radius: 2rem;
 	border: ${({ focus }) => (focus ? '1px solid black' : '1px solid lightgray')};
 	overflow: hidden;
+
+	&:hover {
+		border: 1px solid black;
+	}
 `;
 
 const StyledSearchButton = styled.button`

@@ -1,39 +1,84 @@
 import styled from 'styled-components';
 
 const StyledImg = styled.img`
-	width: 3rem;
-	height: 3rem;
+	width: 2rem;
+	height: 2rem;
 	border-radius: 50%;
 	object-fit: cover;
 	object-position: center;
 `;
 
 const StyledRow = styled.div`
-	background-color: pink;
 	display: flex;
-	align-items: center;
+	flex-direction: column;
 	gap: 1rem;
+	background-color: white;
+	padding: 1rem;
 	cursor: pointer;
+
+	&:not(:last-child) {
+		border-bottom: 1px solid lightgray;
+	}
+
+	&:last-child {
+		margin-bottom: 2rem;
+	}
+
+	@media screen and (min-width: 960px) {
+		padding: 0.5rem 1rem;
+		flex-direction: row;
+		align-items: center;
+		gap: 1.5rem;
+	}
 `;
 
-const StyledTitle = styled.p`
-	flex-basis: 20rem;
+const StyledTitle = styled.div`
+	display: flex;
+	align-items: center;
+	gap: 1.5rem;
+	@media screen and (min-width: 960px) {
+		flex-basis: 12rem;
+	}
+
+	span {
+		font-weight: 600;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
 `;
-const StyledPrice = styled.p`
-	flex-basis: 7rem;
+
+const StyledFlexContainer = styled.div`
+	display: flex;
+	flex: 1 0 auto;
+	margin: 0 0 0 4.5rem;
+	gap: 2rem;
+	@media screen and (min-width: 960px) {
+		margin: 0;
+		flex-direction: row;
+		align-items: center;
+		gap: 1.5rem;
+	}
 `;
-const StyledBids = styled.p`
-	flex-basis: 7rem;
+
+const StyledCell = styled.p`
+	margin: 0;
+	@media screen and (min-width: 960px) {
+		flex-basis: 7rem;
+	}
 `;
+
 const StyledTimeLeft = styled.p`
-	background-color: green;
-	flex-basis: 12rem;
+	margin: 0 0 0 4.5rem;
+	@media screen and (min-width: 960px) {
+		margin: 0;
+		flex: 1 0 auto;
+	}
 `;
 export {
 	StyledImg,
 	StyledRow,
 	StyledTitle,
-	StyledPrice,
-	StyledBids,
+	StyledFlexContainer,
+	StyledCell,
 	StyledTimeLeft
 };

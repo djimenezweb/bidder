@@ -3,6 +3,19 @@ import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import { itemsDB } from '../../config/firebase.config';
 import { doc, updateDoc } from 'firebase/firestore';
 import Error from '../error/Error';
+import {
+	StyledContainer,
+	StyledErrorContainer,
+	StyledFlexContainer,
+	StyledFormField,
+	StyledInput,
+	StyledInputNumber,
+	StyledLabel,
+	StyledResetButton,
+	StyledSelect,
+	StyledSubmitButton,
+	StyledTextarea
+} from './styles';
 
 const EditItem = () => {
 	const { itemId } = useParams();
@@ -17,15 +30,16 @@ const EditItem = () => {
 	};
 	const [formData, setFormData] = useState(INITIAL_ITEM);
 	const [errors, setErrors] = useState({});
-	console.log(state);
 
 	return (
-		<>
-			<h2>Editar anuncio</h2>
-			<form>
-				<div>
-					<label htmlFor='title'>Título</label>
-					<input
+		<form
+			onSubmit={e => handleSubmit(e, itemId, formData, setErrors, navigate)}
+		>
+			<StyledContainer>
+				<h2>Editar anuncio</h2>
+				<StyledFormField>
+					<StyledLabel htmlFor='title'>Título</StyledLabel>
+					<StyledInput
 						type='text'
 						name='title'
 						id='title'
@@ -33,62 +47,69 @@ const EditItem = () => {
 						onChange={e =>
 							handleChange(formData, setFormData, 'title', e.target.value)
 						}
+						invalid={errors?.title}
 					/>
-					{<p>{errors?.title}</p>}
-				</div>
-				<div>
-					<label htmlFor='price'>Precio</label>
-					<input
-						type='number'
-						name='price'
-						id='price'
-						value={formData.price}
-						disabled
-					/>{' '}
-					€
-				</div>
-				<div>
-					<label htmlFor='duration'>Duración</label>
-					<select
-						name='duration'
-						id='duration'
-						value={formData.duration}
-						disabled
-					>
-						<option value={''}>No se puede modificar</option>
-					</select>
-				</div>
-				<div>
-					<label htmlFor='description'>Descripción</label>
-					<textarea
+				</StyledFormField>
+
+				<StyledFlexContainer>
+					<div>
+						<StyledLabel htmlFor='price'>Precio</StyledLabel>
+						<StyledInputNumber
+							type='number'
+							name='price'
+							id='price'
+							value={formData.price}
+							disabled
+						/>
+						<span>EUR</span>
+					</div>
+
+					<div>
+						<StyledLabel htmlFor='duration'>Duración</StyledLabel>
+						<StyledSelect
+							name='duration'
+							id='duration'
+							value={formData.duration}
+							disabled
+						>
+							<option value={''}>No se puede modificar</option>
+						</StyledSelect>
+					</div>
+				</StyledFlexContainer>
+				<StyledFormField>
+					<StyledLabel htmlFor='description'>Descripción</StyledLabel>
+					<StyledTextarea
 						name='description'
 						id='description'
 						value={formData.description}
 						onChange={e =>
 							handleChange(formData, setFormData, 'description', e.target.value)
 						}
-					></textarea>
-					{<p>{errors?.description}</p>}
-				</div>
+						invalid={errors?.description}
+					></StyledTextarea>
+				</StyledFormField>
 
-				<div>
-					<button type='button' onClick={() => navigate(`/itm/${itemId}`)}>
-						Volver
-					</button>
-					<button type='button' onClick={() => setFormData(INITIAL_ITEM)}>
-						Descartar cambios
-					</button>
-					<button
-						type='submit'
-						onClick={e =>
-							handleSubmit(e, itemId, formData, setErrors, navigate)
-						}
-					>
-						Publicar cambios
-					</button>
-				</div>
-			</form>
-		</>
+				{Object.keys(errors).length !== 0 && (
+					<StyledErrorContainer>
+						<p>{errors?.title}</p>
+						<p>{errors?.description}</p>
+					</StyledErrorContainer>
+				)}
+			</StyledContainer>
+
+			<StyledContainer>
+				<button type='button' onClick={() => navigate(`/itm/${itemId}`)}>
+					Volver
+				</button>
+				<StyledResetButton
+					type='button'
+					onClick={() => setFormData(INITIAL_ITEM)}
+				>
+					Descartar cambios
+				</StyledResetButton>
+				<StyledSubmitButton type='submit'>Publicar cambios</StyledSubmitButton>
+			</StyledContainer>
+		</form>
 	);
 };
 
@@ -103,8 +124,9 @@ const handleChange = (formData, setFormData, key, value) => {
 
 const validateForm = data => {
 	const errorMessages = {};
-	if (data.title === '') errorMessages.title = 'Campo requerido';
-	if (data.description === '') errorMessages.description = 'Campo requerido';
+	if (data.title === '') errorMessages.title = 'Título necesario';
+	if (data.description === '')
+		errorMessages.description = 'Descripción necesaria';
 	return Object.keys(errorMessages).length === 0 ? null : errorMessages;
 };
 

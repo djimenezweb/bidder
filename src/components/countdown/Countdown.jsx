@@ -14,7 +14,7 @@ const Countdown = ({ endDate }) => {
 
 	return (
 		<div>
-			{message ? <p>Termina en: {message}</p> : <p>La subasta ha finalizado</p>}
+			{message ? <p>Termina en {message}</p> : <p>La subasta ha finalizado</p>}
 		</div>
 	);
 };
@@ -36,7 +36,14 @@ const printDate = (setMessage, end) => {
 	const minutesLeft = Math.floor((timeSpan % hour) / minute);
 	const secondsLeft = Math.floor((timeSpan % minute) / second);
 	setMessage(
-		daysLeft + 'd ' + hoursLeft + 'h ' + minutesLeft + 'm ' + secondsLeft + 's'
+		daysLeft +
+			' días ' +
+			hoursLeft +
+			'h ' +
+			minutesLeft +
+			'm ' +
+			secondsLeft +
+			's'
 	);
 };
 

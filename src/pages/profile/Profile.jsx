@@ -4,28 +4,54 @@ import { AuthContext } from '../../contexts/Auth.context';
 // Firebase
 import { signOut } from 'firebase/auth';
 import { auth } from '../../config/firebase.config';
-import { Link, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import MyItems from '../my-items/MyItems';
 import MyAuctions from '../my-auctions/MyAuctions';
+import {
+	StyledFlexContainer,
+	StyledGrid,
+	StyledPictureRow,
+	StyledProfilePicture,
+	StyledStrongSpan,
+	StyledTextRow
+} from './styles';
+import { SignOut } from '@phosphor-icons/react';
 
 const Profile = () => {
 	const { loggedUser } = useContext(AuthContext);
 	const navigate = useNavigate();
 
 	return (
-		<>
-			<h2>{loggedUser.displayName}</h2>
-			<p>{loggedUser.email}</p>
-			<img src={loggedUser.photoURL} alt='Profile picture' />
-			<p>ID: {loggedUser.uid}</p>
-			<Link to='/myitems'>Mis anuncios</Link>
-			<Link to='/myauctions'>Mis subastas</Link>
-			<button onClick={() => logout(navigate)}>Cerrar sesión</button>
+		<StyledGrid>
+			<div>
+				<h2>Mi cuenta</h2>
+				<StyledFlexContainer>
+					<StyledPictureRow>
+						<StyledProfilePicture
+							src={loggedUser.photoURL}
+							alt='Profile picture'
+						/>
+					</StyledPictureRow>
+					<StyledTextRow>
+						<StyledStrongSpan>{loggedUser.displayName}</StyledStrongSpan>
+						<span>{loggedUser.email}</span>
+					</StyledTextRow>
+				</StyledFlexContainer>
 
-			<MyItems />
-
-			<MyAuctions />
-		</>
+				<StyledFlexContainer pointer>
+					<StyledPictureRow onClick={() => logout(navigate)}>
+						<SignOut size={48} />
+					</StyledPictureRow>
+					<StyledTextRow>
+						<span onClick={() => logout(navigate)}>Cerrar sesión</span>
+					</StyledTextRow>
+				</StyledFlexContainer>
+			</div>
+			<div>
+				<MyItems />
+				<MyAuctions />
+			</div>
+		</StyledGrid>
 	);
 };
 

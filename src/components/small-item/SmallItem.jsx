@@ -29,8 +29,15 @@ const SmallItem = ({ item, today }) => {
 					<StyledTimeLeft>{timeLeft}</StyledTimeLeft>
 				</StyledInfo>
 
-				<StyledPrice>{item.currentPrice} €</StyledPrice>
+				<StyledPrice>
+					{Number(item.currentPrice).toLocaleString('es-ES', {
+						minimumFractionDigits: 2,
+						maximumFractionDigits: 2
+					})}{' '}
+					€
+				</StyledPrice>
 			</StyledFlexContainer>
+			<span>{item.bids} pujas</span>
 		</StyledArticle>
 	);
 };

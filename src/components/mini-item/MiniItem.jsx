@@ -1,14 +1,13 @@
 import { useNavigate } from 'react-router-dom';
 import { printTimeLeft } from '../../functions/print-time-left';
 import {
-	StyledBids,
+	StyledCell,
+	StyledFlexContainer,
 	StyledImg,
-	StyledPrice,
 	StyledRow,
 	StyledTimeLeft,
 	StyledTitle
 } from './styles';
-import AuctionStatus from '../auction-status/AuctionStatus';
 
 const MiniItem = ({ item, today }) => {
 	const navigate = useNavigate();
@@ -18,16 +17,21 @@ const MiniItem = ({ item, today }) => {
 
 	return (
 		<StyledRow onClick={() => navigate(`/itm/${item.id}`)}>
-			<StyledImg src={item.pictures[0]} />
-			<StyledTitle>{item.title}</StyledTitle>
-			<StyledPrice>{item.currentPrice} EUR</StyledPrice>
-			<StyledBids>{item.bids} pujas</StyledBids>
+			<StyledTitle>
+				<StyledImg src={item.pictures[0]} />
+				<span>{item.title}</span>
+			</StyledTitle>
+			<StyledFlexContainer>
+				<StyledCell>
+					{Number(item.currentPrice).toLocaleString('es-ES', {
+						minimumFractionDigits: 2,
+						maximumFractionDigits: 2
+					})}{' '}
+					EUR
+				</StyledCell>
+				<StyledCell>{item.bids} pujas</StyledCell>
+			</StyledFlexContainer>
 			<StyledTimeLeft>{timeLeft}</StyledTimeLeft>
-			{/* <AuctionStatus
-				highestBid={item.highestBid}
-				highestBidder={item.highestBidder}
-				endDate={item.endDate}
-			/> */}
 		</StyledRow>
 	);
 };
