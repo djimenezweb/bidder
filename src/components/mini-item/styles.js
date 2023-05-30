@@ -11,6 +11,16 @@ const StyledRow = styled.div`
 	padding: 1rem;
 	cursor: pointer;
 
+	&:first-child {
+		border-top-left-radius: 0.5rem;
+		border-top-right-radius: 0.5rem;
+	}
+
+	&:last-child {
+		border-bottom-left-radius: 0.5rem;
+		border-bottom-right-radius: 0.5rem;
+	}
+
 	&:not(:last-child) {
 		border-bottom: 1px solid lightgray;
 	}

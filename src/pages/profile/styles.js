@@ -1,7 +1,9 @@
 import styled from 'styled-components';
 
 const StyledGrid = styled.div`
+	margin-top: 2rem;
 	@media screen and (min-width: 768px) {
+		margin-top: 4rem;
 		display: grid;
 		height: 100%;
 		grid-template-columns: 18rem 1fr;

@@ -3,6 +3,7 @@ import { AuthContext } from '../../contexts/Auth.context';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../config/firebase.config';
 import MiniItem from '../../components/mini-item/MiniItem';
+import { StyledContainer } from './styles';
 
 const MyItems = () => {
 	const { loggedUser } = useContext(AuthContext);
@@ -23,10 +24,11 @@ const MyItems = () => {
 
 			<div>
 				{items.length === 0 && <p>Todavía no has publicado ningún anuncio.</p>}
-
-				{items.map(item => (
-					<MiniItem key={item.id} item={item} today={today} />
-				))}
+				<StyledContainer>
+					{items.map(item => (
+						<MiniItem key={item.id} item={item} today={today} />
+					))}
+				</StyledContainer>
 			</div>
 		</>
 	);

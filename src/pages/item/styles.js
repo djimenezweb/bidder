@@ -2,6 +2,7 @@ import styled from 'styled-components';
 import { BOX_SHADOWS, PLACE_BID } from '../../constants/styles';
 
 const StyledGrid = styled.div`
+	padding: 2rem 0;
 	@media screen and (min-width: 768px) {
 		display: grid;
 		gap: 2rem;
