@@ -7,7 +7,7 @@ const StyledContainer = styled.div`
 	max-width: 1200px;
 	margin: 1rem auto 2rem;
 	padding: 2rem;
-	background-color: white;
+	background-color: ${COLORS.white};
 	border-radius: 8px;
 	box-shadow: ${BOX_SHADOWS.default};
 `;
@@ -26,20 +26,22 @@ const StyledInput = styled.input`
 	width: 100%;
 	margin: 0;
 	padding: 0.5rem 1rem;
-	background-color: none;
+	background-color: ${COLORS.white};
 	border: ${({ invalid }) =>
-		invalid ? `1px solid ${COLORS.errorPrimary}` : '1px solid gray'};
+		invalid
+			? `1px solid ${COLORS.errorPrimary}`
+			: `1px solid ${COLORS.gray400}`};
 	border-radius: 8px;
 	font-family: ${FONTS.sans};
 	font-size: 1rem;
 
 	&:focus {
-		border: 1px solid black;
+		border: 1px solid ${COLORS.black};
 		outline: none;
 	}
 
 	&:autofill {
-		background-color: white;
+		background-color: ${COLORS.white};
 	}
 `;
 
@@ -69,15 +71,17 @@ const StyledSelect = styled.select`
 	width: 8rem;
 	margin: 0;
 	padding: 0.5rem 1rem;
-	background-color: white;
+	background-color: ${COLORS.white};
 	border: ${({ invalid }) =>
-		invalid ? `1px solid ${COLORS.errorPrimary}` : '1px solid gray'};
+		invalid
+			? `1px solid ${COLORS.errorPrimary}`
+			: `1px solid ${COLORS.gray400}`};
 	border-radius: 8px;
 	font-family: ${FONTS.sans};
 	font-size: 1rem;
 
 	&:focus {
-		border: 1px solid black;
+		border: 1px solid ${COLORS.black};
 		outline: none;
 	}
 `;
@@ -94,15 +98,17 @@ const StyledTextarea = styled.textarea`
 	min-height: 6.5rem;
 	margin: 0;
 	padding: 1rem;
-	background-color: none;
+	background-color: ${COLORS.white};
 	border: ${({ invalid }) =>
-		invalid ? `1px solid ${COLORS.errorPrimary}` : '1px solid gray'};
+		invalid
+			? `1px solid ${COLORS.errorPrimary}`
+			: `1px solid ${COLORS.gray400}`};
 	border-radius: 8px;
 	font-family: ${FONTS.sans};
 	font-size: 1rem;
 
 	&:focus {
-		border: 1px solid black;
+		border: 1px solid ${COLORS.black};
 		outline: none;
 	}
 `;

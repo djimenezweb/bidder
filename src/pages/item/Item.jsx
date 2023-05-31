@@ -42,29 +42,6 @@ const Item = () => {
 
 	return (
 		<StyledGrid>
-			{/* 			{item.pictures && (
-				<div>
-					<div>
-						<StyledActivePicture src={item.pictures[activePicture]} />
-					</div>
-					<StyledThumbnailContainer>
-						{item.pictures.map((picture, index) => {
-							return (
-								<StyledThumbnail
-									key={`${itemId}-${index}`}
-									onClick={() => setActivePicture(index)}
-									src={picture}
-									active={index === activePicture}
-								/>
-							);
-						})}
-					</StyledThumbnailContainer>
-				</div>
-			)} 
-			<StyledId>ITEM {itemId}</StyledId>
-			
-			*/}
-
 			{item.pictures && (
 				<div>
 					<div>

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BOX_SHADOWS } from '../../constants/styles';
+import { BOX_SHADOWS, COLORS } from '../../constants/styles';
 
 const StyledArticle = styled.article`
 	padding: 0;
@@ -9,7 +9,7 @@ const StyledArticle = styled.article`
 const StyledImageContainer = styled.div`
 	max-width: 100%;
 	aspect-ratio: 1;
-	background-color: rgb(240 240 240);
+	background-color: ${COLORS.gray300};
 	border-radius: 0.5rem;
 	overflow: hidden;
 	box-shadow: ${BOX_SHADOWS.default};
@@ -58,7 +58,7 @@ const StyledBids = styled.p`
 const StyledTimeLeft = styled.p`
 	margin: 0;
 	font-size: 0.9rem;
-	color: #4059ad;
+	color: ${COLORS.accent400};
 `;
 
 export {

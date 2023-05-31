@@ -4,7 +4,28 @@ export const BOX_SHADOWS = {
 };
 
 export const COLORS = {
-	gray200: '#f6f7f9',
+	white: '#fff',
+
+	// gray200: 'hsl(220 20% 97%)',
+	gray200: 'hsl(160 10% 94%)',
+
+	// lightgray
+	gray300: 'hsl(0 0% 83%)',
+
+	// gray
+	gray400: 'hsl(0 0% 50%)',
+
+	black: '#000',
+
+	accent400: '#4059ad',
+	accent300: '#6b9ac4',
+	accent200: '#97d8c4',
+
+	cta: '#f4b942',
+
+	googleBlue: '#4285f4',
+	gitHubBlack: '#111',
+
 	errorPrimary: 'rgba(255 0 0 / 1)',
 	errorSecondary: 'rgba(255 0 0 / 0.2)'
 };

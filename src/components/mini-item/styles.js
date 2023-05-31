@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { COLORS } from '../../constants/styles';
 
 const StyledRow = styled.div`
 	display: grid;
@@ -6,7 +7,7 @@ const StyledRow = styled.div`
 	grid-template-areas:
 		'img tit tit tit'
 		'img pri bid tim';
-	background-color: white;
+	background-color: ${COLORS.white};
 	grid-gap: 0.5rem 0;
 	padding: 1rem;
 	cursor: pointer;
@@ -22,7 +23,7 @@ const StyledRow = styled.div`
 	}
 
 	&:not(:last-child) {
-		border-bottom: 1px solid lightgray;
+		border-bottom: 1px solid ${COLORS.gray300};
 	}
 
 	&:last-child {

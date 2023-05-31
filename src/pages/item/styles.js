@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BOX_SHADOWS, PLACE_BID } from '../../constants/styles';
+import { BOX_SHADOWS, COLORS, PLACE_BID } from '../../constants/styles';
 
 const StyledGrid = styled.div`
 	padding: 2rem 0;
@@ -38,7 +38,7 @@ const StyledListItem = styled.li`
 	justify-content: center;
 	align-items: center;
 	font-size: 1.5rem;
-	border: 1px solid lightgray;
+	border: 1px solid ${COLORS.gray300};
 	border-radius: 0.5rem;
 	// box-shadow: ${BOX_SHADOWS.small};
 `;
@@ -56,7 +56,7 @@ const StyledActivePicture = styled.img`
 	box-shadow: ${BOX_SHADOWS.default};
 	border-radius: 0.5rem;
 	cursor: pointer;
-	background-color: white;
+	background-color: ${COLORS.white};
 
 	@media screen and (min-width: 640px) {
 		aspect-ratio: 1.33;
@@ -69,15 +69,6 @@ const StyledThumbnailContainer = styled.div`
 	overflow-x: scroll;
 `;
 
-const StyledThumbnail = styled.img`
-	border: ${({ active }) =>
-		active ? '2px solid blue' : '2px solid transparent'};
-	width: 5rem;
-	height: 5rem;
-	object-fit: cover;
-	object-position: center;
-`;
-
 const StyledDotContainer = styled.div`
 	margin-top: 1rem;
 	display: flex;
@@ -87,11 +78,12 @@ const StyledDotContainer = styled.div`
 `;
 
 const StyledDot = styled.div`
-	background-color: ${({ active }) => (active ? 'gray' : 'transparent')};
+	background-color: ${({ active }) =>
+		active ? `${COLORS.gray400}` : 'transparent'};
 	width: 8px;
 	aspect-ratio: 1;
 	border-radius: 50%;
-	border: 1px solid gray;
+	border: 1px solid ${COLORS.gray400};
 	cursor: pointer;
 `;
 
@@ -103,7 +95,6 @@ export {
 	StyledCurrency,
 	StyledActivePicture,
 	StyledThumbnailContainer,
-	StyledThumbnail,
 	StyledDotContainer,
 	StyledDot
 };

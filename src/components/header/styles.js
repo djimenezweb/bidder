@@ -24,7 +24,7 @@ const StyledList = styled.ul`
 const StyledProfilePhoto = styled.img`
 	width: 2rem;
 	height: 2rem;
-	background-color: white;
+	background-color: ${COLORS.white};
 	border-radius: 50%;
 `;
 

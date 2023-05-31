@@ -13,7 +13,7 @@ const StyledContainer = styled.div`
 	width: min(100%, 448px);
 	margin: 2rem auto 1rem;
 	padding: 2rem;
-	background-color: white;
+	background-color: ${COLORS.white};
 	border-radius: 8px;
 	box-shadow: ${BOX_SHADOWS.default};
 `;
@@ -38,22 +38,24 @@ const StyledInput = styled.input`
 	padding: 0.5rem 1rem;
 	background-color: none;
 	border: ${({ invalid }) =>
-		invalid ? `1px solid ${COLORS.errorPrimary}` : '1px solid gray'};
+		invalid
+			? `1px solid ${COLORS.errorPrimary}`
+			: `1px solid ${COLORS.gray400}`};
 	border-radius: 2rem;
 	font-family: ${FONTS.sans};
 	font-size: 1rem;
 
 	&:focus {
-		border: 1px solid black;
+		border: 1px solid ${COLORS.black};
 		outline: none;
 	}
 
 	&:autofill {
-		background-color: white;
+		background-color: ${COLORS.white};
 	}
 
 	&:-webkit-autofill {
-		background-color: white;
+		background-color: ${COLORS.white};
 	}
 `;
 

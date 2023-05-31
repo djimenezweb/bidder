@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { StyledButton } from '../button/styles';
+import { COLORS } from '../../constants/styles';
 
 const StyledSeparator = styled.p`
 	position: relative;
@@ -10,7 +11,7 @@ const StyledSeparator = styled.p`
 	& span {
 		position: relative;
 		padding: 0 0.5rem;
-		background-color: white;
+		background-color: ${COLORS.white};
 	}
 
 	&::before {
@@ -19,7 +20,7 @@ const StyledSeparator = styled.p`
 		inset: 0;
 		height: 1px;
 		margin: auto;
-		background-color: gray;
+		background-color: ${COLORS.gray400};
 	}
 `;
 
@@ -32,15 +33,14 @@ const StyledGoogleSignInButton = styled(StyledButton)`
 	position: relative;
 	display: block;
 	margin: 0;
-	background-color: #4285f4;
-	color: white;
+	background-color: ${COLORS.googleBlue};
+	color: ${COLORS.white};
 	width: 100%;
 	overflow: hidden;
 	z-index: 10;
 
 	&::after {
 		content: '';
-		// outline: 1px solid red;
 		position: absolute;
 		width: 6rem;
 		height: 6rem;
@@ -58,15 +58,14 @@ const StyledGithubSignInButton = styled(StyledButton)`
 	position: relative;
 	display: block;
 	margin: 0;
-	background-color: #111;
-	color: white;
+	background-color: ${COLORS.gitHubBlack};
+	color: ${COLORS.white};
 	width: 100%;
 	overflow: hidden;
 	z-index: 10;
 
 	&::after {
 		content: '';
-		// outline: 1px solid red;
 		position: absolute;
 		width: 5rem;
 		height: 5rem;
