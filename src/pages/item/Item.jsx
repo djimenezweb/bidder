@@ -81,6 +81,7 @@ const Item = () => {
 							minimumFractionDigits: 2,
 							maximumFractionDigits: 2
 						})}
+						&nbsp;
 						<StyledCurrency>EUR</StyledCurrency>
 					</StyledListItem>
 					<StyledListItem>

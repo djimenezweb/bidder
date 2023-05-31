@@ -35,11 +35,10 @@ export const handleGithubLogin = async navigate => {
 		const result = await signInWithPopup(auth, provider);
 		const details = getAdditionalUserInfo(result);
 		// const credential = GithubAuthProvider.credentialFromResult(result);
-		// console.log(credential);
 		// const token = credential.accessToken;
 		// Si es la primera vez que inicia sesión con Github se crea su perfil en colección de usuarios
 		if (details.isNewUser) {
-			await setDoc(doc(db, 'users', details.profile.email), {
+			await setDoc(doc(db, 'users', result.user.email), {
 				myBids: '',
 				myItems: '',
 				myFavs: ''
