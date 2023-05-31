@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLORS } from '../../constants/styles';
+import { COLORS } from '../../constants/colors';
 
 const StyledRow = styled.div`
 	display: grid;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { FONTS } from '../../constants/fonts';
-import { BOX_SHADOWS, COLORS } from '../../constants/styles';
+import { BOX_SHADOWS, COLORS } from '../../constants/colors';
 
 const StyledForm = styled.form`
 	margin: 1rem 0;

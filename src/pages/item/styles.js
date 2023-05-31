@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BOX_SHADOWS, COLORS, PLACE_BID } from '../../constants/styles';
+import { BOX_SHADOWS, COLORS, PLACE_BID } from '../../constants/colors';
 
 const StyledGrid = styled.div`
 	padding: 2rem 0;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { StyledButton } from '../button/styles';
-import { COLORS } from '../../constants/styles';
+import { COLORS } from '../../constants/colors';
 
 const StyledSeparator = styled.p`
 	position: relative;

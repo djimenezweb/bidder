@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { FONTS } from '../../constants/fonts';
-import { BOX_SHADOWS, COLORS } from '../../constants/styles';
+import { BOX_SHADOWS, COLORS } from '../../constants/colors';
 import { StyledButton } from '../../components/button/styles';
 
 /* const StyledBackground = styled.div`

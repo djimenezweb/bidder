@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLORS } from '../../constants/styles';
+import { COLORS } from '../../constants/colors';
 
 const StyledGrid = styled.div`
 	margin: 0 0 1rem;

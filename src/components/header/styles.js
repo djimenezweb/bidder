@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 import { FONTS } from '../../constants/fonts';
-import { COLORS } from '../../constants/styles';
+import { COLORS } from '../../constants/colors';
 
 const StyledHeader = styled.header`
 	background-color: ${COLORS.gray200};

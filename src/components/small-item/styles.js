@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BOX_SHADOWS, COLORS } from '../../constants/styles';
+import { BOX_SHADOWS, COLORS } from '../../constants/colors';
 
 const StyledArticle = styled.article`
 	padding: 0;

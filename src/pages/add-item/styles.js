@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BOX_SHADOWS, COLORS } from '../../constants/styles';
+import { BOX_SHADOWS, COLORS } from '../../constants/colors';
 import { FONTS } from '../../constants/fonts';
 import { StyledButton } from '../../components/button/styles';
 

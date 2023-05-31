@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { COLORS, PLACE_BID } from '../../constants/styles';
+import { COLORS, PLACE_BID } from '../../constants/colors';
 
 const StyledForm = styled.form`
 	display: flex;
