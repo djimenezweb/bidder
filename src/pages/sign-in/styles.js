@@ -14,7 +14,7 @@ const StyledContainer = styled.div`
 	margin: 2rem auto 1rem;
 	padding: 2rem;
 	background-color: ${COLORS.white};
-	border-radius: 8px;
+	border-radius: 0.5rem;
 	box-shadow: ${BOX_SHADOWS.default};
 `;
 
@@ -69,6 +69,7 @@ const StyledErrorContainer = styled.div`
 	margin: 0 0 1rem;
 	padding: 0 1rem;
 	color: ${COLORS.errorPrimary};
+	border-radius: 0.5rem;
 	border: 1px solid ${COLORS.errorPrimary};
 	background-color: ${COLORS.errorSecondary};
 `;

@@ -97,6 +97,7 @@ const StyledErrorContainer = styled.div`
 	margin: 0 0 1rem;
 	padding: 0 1rem;
 	color: ${COLORS.errorPrimary};
+	border-radius: 0.5rem;
 	border: 1px solid ${COLORS.errorPrimary};
 	background-color: ${COLORS.errorSecondary};
 `;

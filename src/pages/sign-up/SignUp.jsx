@@ -27,6 +27,7 @@ import {
 	StyledTitle
 } from './styles';
 import SignInOptions from '../../components/sign-in-options/SignInOptions';
+import { useState } from 'react';
 
 const SignUp = () => {
 	const navigate = useNavigate();
@@ -36,13 +37,16 @@ const SignUp = () => {
 		getValues,
 		formState: { errors }
 	} = useForm({ mode: 'onBlur' });
+	const [authErrors, setAuthErrors] = useState({});
 
 	return (
 		<>
 			<StyledContainer>
 				<StyledTitle>Crea una cuenta</StyledTitle>
 				<form
-					onSubmit={handleSubmit((data, e) => onSubmit(data, e, navigate))}
+					onSubmit={handleSubmit((data, e) =>
+						onSubmit(data, e, navigate, setAuthErrors)
+					)}
 					autoComplete='off'
 				>
 					<StyledFormField>
@@ -93,14 +97,16 @@ const SignUp = () => {
 						/>
 					</StyledFormField>
 
-					{Object.keys(errors).length !== 0 && (
-						<StyledErrorContainer>
-							<p>{errors?.newDisplayName?.message}</p>
-							<p>{errors?.newEmail?.message}</p>
-							<p>{errors?.newPassword?.message}</p>
-							<p>{errors?.repeatPassword?.message}</p>
-						</StyledErrorContainer>
-					)}
+					{Object.keys(errors).length !== 0 ||
+						(authErrors.message && (
+							<StyledErrorContainer>
+								<p>{errors?.newDisplayName?.message}</p>
+								<p>{errors?.newEmail?.message}</p>
+								<p>{errors?.newPassword?.message}</p>
+								<p>{errors?.repeatPassword?.message}</p>
+								<p>{authErrors?.message}</p>
+							</StyledErrorContainer>
+						))}
 
 					<StyledSignUpButton>Crear cuenta</StyledSignUpButton>
 				</form>
@@ -114,7 +120,7 @@ const SignUp = () => {
 	);
 };
 
-const onSubmit = async (data, e, navigate) => {
+const onSubmit = async (data, e, navigate, setAuthErrors) => {
 	try {
 		await createUserWithEmailAndPassword(auth, data.newEmail, data.newPassword);
 		await updateProfile(auth.currentUser, {
@@ -132,6 +138,7 @@ const onSubmit = async (data, e, navigate) => {
 		navigate('/');
 	} catch (err) {
 		console.log(err);
+		setAuthErrors({ message: err.message });
 	}
 };
 
