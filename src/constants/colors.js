@@ -1,5 +1,6 @@
 export const BOX_SHADOWS = {
 	default: '0 0 1em rgba(0,0,0,.1)',
+	smallY: '0 0.5rem 0.5rem rgba(0,0,0,.1)',
 	small: '0 0 0.5rem rgba(0,0,0,.1)'
 };
 

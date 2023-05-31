@@ -56,6 +56,10 @@ button, input {
   font-family: inherit;
 }
 
+button {
+  cursor: pointer;
+}
+
 h1, h2, h3, h4 {
     margin-top: 0
 }

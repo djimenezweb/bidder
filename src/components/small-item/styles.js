@@ -9,7 +9,7 @@ const StyledArticle = styled.article`
 const StyledImageContainer = styled.div`
 	max-width: 100%;
 	aspect-ratio: 1;
-	background-color: ${COLORS.gray300};
+	background-color: ${COLORS.gray200};
 	border-radius: 0.5rem;
 	overflow: hidden;
 	box-shadow: ${BOX_SHADOWS.default};
