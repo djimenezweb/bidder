@@ -1,5 +1,6 @@
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/Auth.context';
+import { STATUS } from '../../constants/messages';
 
 const AuctionStatus = ({ highestBid, highestBidder, endDate }) => {
 	const { loggedUser } = useContext(AuthContext);
@@ -7,23 +8,31 @@ const AuctionStatus = ({ highestBid, highestBidder, endDate }) => {
 	const today = new Date();
 	const timeSpan = end - today;
 
+	if (!loggedUser) {
+		return <p>{STATUS.disabled}</p>;
+	}
+
 	if (highestBid === 0) {
-		return <p>No hay ningún pujador, ¡tú puedes ser el primero!</p>;
+		return <p>{STATUS.firstBidder}</p>;
 	}
 
 	if (timeSpan <= 0 && highestBidder === loggedUser?.email) {
-		return <p>¡Enhorabuena! Has ganado la subasta</p>;
+		return <p>{STATUS.winner}</p>;
 	}
 
 	if (highestBidder === loggedUser?.email) {
-		return <p>Eres el mayor postor. Tu precio máximo es {highestBid} €.</p>;
+		return (
+			<p>
+				{STATUS.highestBidder} {highestBid} €.
+			</p>
+		);
 	}
 
 	if (timeSpan <= 0) {
-		return <p>La subasta ha finalizado</p>;
+		return <p>{STATUS.end}</p>;
 	}
 
-	return <p>Haz una puja si quieres conseguir este artículo</p>;
+	return <p>{STATUS.default}</p>;
 };
 
 export default AuctionStatus;

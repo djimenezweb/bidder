@@ -38,6 +38,8 @@ const Item = () => {
 		return () => unsub();
 	}, []);
 
+	const [status, setStatus] = useState(null);
+
 	if (!item) return <p>Loading...</p>;
 
 	return (
@@ -94,6 +96,17 @@ const Item = () => {
 						currentPrice={item.currentPrice}
 						highestBidder={item.highestBidder}
 						bids={item.bids}
+						setStatus={setStatus}
+					/>
+				)}
+
+				{status ? (
+					<p>{status}</p>
+				) : (
+					<AuctionStatus
+						highestBid={item.highestBid}
+						highestBidder={item.highestBidder}
+						endDate={item.endDate}
 					/>
 				)}
 

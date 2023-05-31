@@ -3,13 +3,15 @@ import { db } from '../../config/firebase.config';
 import { AuthContext } from '../../contexts/Auth.context';
 import { useContext, useState } from 'react';
 import { StyledForm, StyledInput, StyledSubmitButton } from './styles';
+import { STATUS } from '../../constants/messages';
 
 const PlaceBid = ({
 	itemId,
 	highestBid,
 	currentPrice,
 	highestBidder,
-	bids
+	bids,
+	setStatus
 }) => {
 	const { loggedUser } = useContext(AuthContext);
 	const [bid, setBid] = useState('');
@@ -26,7 +28,8 @@ const PlaceBid = ({
 					highestBidder,
 					bids,
 					loggedUser.email,
-					setBid
+					setBid,
+					setStatus
 				)
 			}
 		>
@@ -76,7 +79,8 @@ const handleSubmit = async (
 	highestBidder,
 	bids,
 	email,
-	setBid
+	setBid,
+	setStatus
 ) => {
 	e.preventDefault();
 	console.log('bid: ' + bid);
@@ -88,6 +92,7 @@ const handleSubmit = async (
 	// Invalid
 	if (bid < currentPrice) {
 		console.log('Bid must be higher than current price');
+		setStatus(STATUS.lowPrice);
 		return;
 	}
 
@@ -97,7 +102,8 @@ const handleSubmit = async (
 		// newHighestBid = bid;
 		// newPrice = currentPrice;
 		// newHighestBidder = email;
-		updateAuction(id, currentPrice, bid, email, setBid, newBids);
+		await updateAuction(id, currentPrice, bid, email, setBid, newBids);
+		setStatus(null);
 		// updateAuction(id, newPrice, newHighestBid, newHighestBidder, setBid);
 		return;
 	}
@@ -114,7 +120,7 @@ const handleSubmit = async (
 			console.log('add 1');
 			newPrice = highestBid + 1;
 		}
-		updateAuction(
+		await updateAuction(
 			id,
 			newPrice,
 			newHighestBid,
@@ -122,10 +128,11 @@ const handleSubmit = async (
 			setBid,
 			newBids
 		);
+		setStatus(null);
 		return;
 	}
 
-	// Bidder is overbid by previous user
+	// Bidder is outbid by previous user
 	if (bid <= highestBid) {
 		console.log('You have been outbid');
 		newHighestBid = highestBid;
@@ -137,7 +144,7 @@ const handleSubmit = async (
 			console.log('add 1');
 			newPrice = bid + 1;
 		}
-		updateAuction(
+		await updateAuction(
 			id,
 			newPrice,
 			newHighestBid,
@@ -145,11 +152,13 @@ const handleSubmit = async (
 			setBid,
 			newBids
 		);
+		setStatus(STATUS.outBid);
 		return;
 	}
 
 	// Invalid bid
 	console.log('Invalid bid');
+	setStatus(STATUS.invalid);
 };
 
 export default PlaceBid;
