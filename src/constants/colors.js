@@ -28,13 +28,10 @@ export const COLORS = {
 	gitHubBlack: '#111',
 
 	errorPrimary: 'rgba(255 0 0 / 1)',
-	errorSecondary: 'rgba(255 0 0 / 0.2)'
-};
+	errorSecondary: 'rgba(255 0 0 / 0.2)',
 
-export const PLACE_BID = {
-	width: '12rem',
-	height: '4rem',
-	gap: '1rem'
+	warningPrimary: 'rgba(255 0 0 / 1)',
+	warningSecondary: 'rgba(255 0 0 / 0.5)'
 };
 
 /* 

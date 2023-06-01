@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { BOX_SHADOWS, COLORS, PLACE_BID } from '../../constants/colors';
+import { BOX_SHADOWS, COLORS } from '../../constants/colors';
 
 const StyledGrid = styled.div`
 	padding: 2rem 0;
@@ -12,7 +12,7 @@ const StyledGrid = styled.div`
 	@media screen and (min-width: 960px) {
 		display: grid;
 		gap: 3rem;
-		grid-template-columns: 36rem 1fr;
+		grid-template-columns: 32rem 1fr;
 	}
 `;
 
@@ -23,28 +23,80 @@ const StyledTitle = styled.h2`
 	font-weight: 500;
 `;
 
-const StyledList = styled.ul`
-	display: flex;
-	justify-content: start;
-	align-items: stretch;
-	gap: ${PLACE_BID.gap};
+const StyledDetailsGrid = styled.div`
+	width: min(100%, 46rem);
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	grid-auto-rows: 3rem;
+	place-items: stretch stretch;
+	gap: 1rem;
+
+	@media screen and (min-width: 960px) {
+		grid-auto-rows: 4rem;
+	}
 `;
 
-const StyledListItem = styled.li`
-	margin: 0 0 ${PLACE_BID.gap} 0;
-	width: ${PLACE_BID.width};
-	height: ${PLACE_BID.height};
+const StyledGridItem = styled.p`
+	margin: 0;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	font-size: 1.5rem;
+	font-size: 1.25rem;
 	border: 1px solid ${COLORS.gray300};
 	border-radius: 0.5rem;
 	// box-shadow: ${BOX_SHADOWS.small};
+
+	@media screen and (min-width: 960px) {
+		font-size: 1.5rem;
+	}
 `;
 
 const StyledCurrency = styled.span`
 	opacity: 0.5;
+`;
+
+const StyledGridItem2Cols = styled(StyledGridItem)`
+	grid-column: span 2;
+	font-size: 1rem;
+	gap: 0.5rem;
+
+	@media screen and (min-width: 960px) {
+		font-size: 1.25rem;
+	}
+`;
+
+const StyledSpecialButton = styled.button`
+	color: ${COLORS.white};
+	font-size: 1rem;
+	font-family: inherit;
+	font-weight: 400;
+	padding: 0.5em 1em;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	gap: 0.5rem;
+	border-radius: 0.5rem;
+	cursor: pointer;
+
+	@media screen and (min-width: 960px) {
+		font-size: 1.25rem;
+	}
+`;
+
+const StyledEditButton = styled(StyledSpecialButton)`
+	background-color: ${COLORS.accent300};
+	border: 1px solid ${COLORS.gray300};
+	&:hover {
+		background-color: ${COLORS.cta};
+	}
+`;
+
+const StyledDeleteButton = styled(StyledSpecialButton)`
+	background-color: ${COLORS.warningSecondary};
+	border: 1px solid ${COLORS.warningPrimary};
+	&:hover {
+		background-color: ${COLORS.warningPrimary};
+	}
 `;
 
 // Contenedor de fotos
@@ -58,7 +110,7 @@ const StyledActivePicture = styled.img`
 	cursor: pointer;
 	background-color: ${COLORS.white};
 
-	@media screen and (min-width: 640px) {
+	@media screen and (min-width: 960px) {
 		aspect-ratio: 1.33;
 	}
 `;
@@ -90,9 +142,12 @@ const StyledDot = styled.div`
 export {
 	StyledGrid,
 	StyledTitle,
-	StyledList,
-	StyledListItem,
+	StyledDetailsGrid,
+	StyledGridItem,
+	StyledGridItem2Cols,
 	StyledCurrency,
+	StyledEditButton,
+	StyledDeleteButton,
 	StyledActivePicture,
 	StyledThumbnailContainer,
 	StyledDotContainer,

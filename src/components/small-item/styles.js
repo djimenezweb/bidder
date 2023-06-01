@@ -58,7 +58,8 @@ const StyledBids = styled.p`
 const StyledTimeLeft = styled.p`
 	margin: 0;
 	font-size: 0.9rem;
-	color: ${COLORS.accent400};
+	color: ${({ color }) =>
+		color <= 3600000 ? COLORS.errorPrimary : COLORS.accent400};
 `;
 
 export {

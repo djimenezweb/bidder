@@ -7,7 +7,7 @@ export const STATUS = {
 	highestBidder: 'Eres el mayor postor. Tu precio máximo es ',
 	end: 'La subasta de este artículo ha finalizado',
 	winner: '¡Enhorabuena, has ganado esta subasta!',
-	seller: 'No puedes pujar por sus propios artículos',
+	seller: 'No puedes pujar por tus propios artículos',
 	lowPrice: 'Introduce una cantidad mayor que el precio actual',
 	invalidPrice: 'Introduce un precio válido'
 };

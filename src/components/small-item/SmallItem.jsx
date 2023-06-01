@@ -35,7 +35,7 @@ const SmallItem = ({ item, today }) => {
 			<StyledBids>
 				{item.bids} {item.bids === 1 ? 'puja' : 'pujas'}
 			</StyledBids>
-			<StyledTimeLeft>{timeLeft}</StyledTimeLeft>
+			<StyledTimeLeft color={timeSpan}>{timeLeft}</StyledTimeLeft>
 		</StyledArticle>
 	);
 };

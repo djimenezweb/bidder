@@ -14,13 +14,17 @@ import DeleteItem from '../../components/delete-item/DeleteItem';
 import {
 	StyledActivePicture,
 	StyledCurrency,
+	StyledDeleteButton,
+	StyledDetailsGrid,
 	StyledDot,
 	StyledDotContainer,
+	StyledEditButton,
 	StyledGrid,
-	StyledList,
-	StyledListItem,
+	StyledGridItem,
+	StyledGridItem2Cols,
 	StyledTitle
 } from './styles';
+import { ClockCountdown, PencilSimple, XCircle } from '@phosphor-icons/react';
 
 const Item = () => {
 	const { itemId } = useParams();
@@ -73,74 +77,77 @@ const Item = () => {
 			)}
 			<div>
 				<StyledTitle>{item.title}</StyledTitle>
+				<p>
+					Vendido por{' '}
+					<strong>
+						{item.sellerEmail.substring(0, item.sellerEmail.indexOf('@'))}
+					</strong>
+				</p>
 				<p>{item.description}</p>
+				<p>
+					La subasta finaliza el {printDate(item.endDate)} a las{' '}
+					{printTime(item.endDate)}
+				</p>
 
-				<StyledList>
-					<StyledListItem>
+				<StyledDetailsGrid>
+					<StyledGridItem2Cols>
+						<ClockCountdown size={24} color='currentColor' />
+						<Countdown endDate={item.endDate} />
+					</StyledGridItem2Cols>
+					<StyledGridItem>
 						{Number(item.currentPrice).toLocaleString('es-ES', {
 							minimumFractionDigits: 2,
 							maximumFractionDigits: 2
 						})}
 						&nbsp;
 						<StyledCurrency>EUR</StyledCurrency>
-					</StyledListItem>
-					<StyledListItem>
+					</StyledGridItem>
+					<StyledGridItem>
 						{item.bids} {Number(item.bids) === 1 ? 'puja' : 'pujas'}
-					</StyledListItem>
-				</StyledList>
+					</StyledGridItem>
 
-				{/* Si HAY loggedUser y NO ES el vendedor, puede PUJAR */}
-				{loggedUser?.email && loggedUser?.email !== item.sellerEmail && (
-					<PlaceBid
-						itemId={itemId}
-						highestBid={item.highestBid}
-						currentPrice={item.currentPrice}
-						highestBidder={item.highestBidder}
-						bids={item.bids}
-						setStatus={setStatus}
-					/>
-				)}
-
-				{status ? (
-					<p>{status}</p>
-				) : (
-					<AuctionStatus
-						highestBid={item.highestBid}
-						highestBidder={item.highestBidder}
-						endDate={item.endDate}
-					/>
-				)}
-
-				<p>Vendido por {item.sellerEmail}</p>
-				<p>
-					La subasta finaliza el {printDate(item.endDate)} a las{' '}
-					{printTime(item.endDate)}
-				</p>
-				<Countdown endDate={item.endDate} />
-
-				{/* Si NO HAY loggedUser se le pide que inicie sesión */}
-				{!loggedUser?.email && <p>Inicia sesión para pujar</p>}
-
-				{/* Si HAY loggedUser y NO ES el vendedor, puede PUJAR */}
-				{loggedUser?.email && loggedUser?.email !== item.sellerEmail && (
-					<>
-						<AuctionStatus
+					{/* Si HAY loggedUser y NO ES el vendedor, puede PUJAR */}
+					{loggedUser?.email && loggedUser?.email !== item.sellerEmail && (
+						<PlaceBid
+							itemId={itemId}
 							highestBid={item.highestBid}
+							currentPrice={item.currentPrice}
 							highestBidder={item.highestBidder}
-							endDate={item.endDate}
+							bids={item.bids}
+							setStatus={setStatus}
 						/>
-					</>
-				)}
+					)}
 
-				{/* Si HAY loggedUser y ES el vendedor, puede EDITAR y BORRAR */}
-				{loggedUser?.email && loggedUser?.email === item.sellerEmail && (
-					<>
-						<button onClick={() => navigate('edit', { state: item })}>
-							Editar
-						</button>
-						<DeleteItem itemId={itemId} picturesArray={item.pictures} />
-					</>
-				)}
+					{/* Si HAY loggedUser y ES el vendedor, puede EDITAR y BORRAR */}
+					{loggedUser?.email && loggedUser?.email === item.sellerEmail && (
+						<>
+							{/* <DeleteItem itemId={itemId} picturesArray={item.pictures} /> */}
+							<StyledDeleteButton>
+								<XCircle size={24} color='currentColor' />
+								Borrar anuncio
+							</StyledDeleteButton>
+							<StyledEditButton
+								onClick={() => navigate('edit', { state: item })}
+							>
+								<PencilSimple size={24} color='currentColor' />
+								Editar anuncio
+							</StyledEditButton>
+						</>
+					)}
+
+					<StyledGridItem2Cols>
+						{status ? (
+							<p>{status}</p>
+						) : (
+							<AuctionStatus
+								highestBid={item.highestBid}
+								highestBidder={item.highestBidder}
+								endDate={item.endDate}
+								seller={item.sellerEmail}
+							/>
+						)}
+					</StyledGridItem2Cols>
+				</StyledDetailsGrid>
 
 				<p style={{ opacity: 0.33 }}>
 					<small>highestBid: {item.highestBid} €</small>

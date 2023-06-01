@@ -4,6 +4,7 @@ import { AuthContext } from '../../contexts/Auth.context';
 import { useContext, useState } from 'react';
 import { StyledForm, StyledInput, StyledSubmitButton } from './styles';
 import { STATUS } from '../../constants/messages';
+import { Gavel } from '@phosphor-icons/react';
 
 const PlaceBid = ({
 	itemId,
@@ -35,12 +36,16 @@ const PlaceBid = ({
 		>
 			<StyledInput
 				type='text'
+				size={1}
 				name='bid'
 				id='bid'
 				value={bid}
 				onChange={e => setBid(e.target.value)}
 			/>
-			<StyledSubmitButton>Pujar</StyledSubmitButton>
+			<StyledSubmitButton>
+				<Gavel size={24} color='currentColor' />
+				Pujar
+			</StyledSubmitButton>
 		</StyledForm>
 	);
 };
