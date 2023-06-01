@@ -11,3 +11,9 @@ export const STATUS = {
 	lowPrice: 'Introduce una cantidad mayor que el precio actual',
 	invalidPrice: 'Introduce un precio válido'
 };
+
+export const MESSAGES = {
+	deleteWarning:
+		'¿Seguro que deseas borrar este anuncio y las imágenes vinculadas?',
+	irreversible: 'Esta acción no se puede deshacer.'
+};

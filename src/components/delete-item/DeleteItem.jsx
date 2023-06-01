@@ -2,13 +2,30 @@ import { deleteDoc, doc } from 'firebase/firestore';
 import { itemsDB, storage } from '../../config/firebase.config';
 import { useNavigate } from 'react-router-dom';
 import { deleteObject, ref } from 'firebase/storage';
+import { MESSAGES } from '../../constants/messages';
+import {
+	StyledButtonContainer,
+	StyledCancelButton,
+	StyledDeleteButton
+} from '../modal/styles';
 
-const DeleteItem = ({ itemId, picturesArray }) => {
+const DeleteItem = ({ itemId, picturesArray, setModalContent }) => {
 	const navigate = useNavigate();
 	return (
-		<button onClick={() => handleDelete(itemId, picturesArray, navigate)}>
-			Borrar anuncio
-		</button>
+		<>
+			<p>{MESSAGES.deleteWarning}</p>
+			<p>{MESSAGES.irreversible}</p>
+			<StyledButtonContainer>
+				<StyledCancelButton onClick={() => setModalContent(null)}>
+					Cancelar
+				</StyledCancelButton>
+				<StyledDeleteButton
+					onClick={() => handleDelete(itemId, picturesArray, navigate)}
+				>
+					Borrar anuncio
+				</StyledDeleteButton>
+			</StyledButtonContainer>
+		</>
 	);
 };
 
