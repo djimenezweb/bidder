@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
-
-// Firebase
 import { onSnapshot } from 'firebase/firestore';
 import { itemsDB } from '../../config/firebase.config';
 import SearchBar from '../../components/search-bar/SearchBar';
 import SmallItem from '../../components/small-item/SmallItem';
 import { StyledGrid } from './styles';
+import { MESSAGES } from '../../constants/messages';
 
 const Home = () => {
 	const today = new Date();
@@ -36,15 +35,15 @@ const Home = () => {
 		return () => subscribeToData();
 	}, []);
 
-	if (!allItems) return <p>Loading...</p>;
+	if (!allItems) return <p>{MESSAGES.loading}</p>;
 
 	return (
 		<>
 			<SearchBar allItems={allItems} setSearchResults={setSearchResults} />
 
-			<StyledGrid>
-				{searchResults.length === 0 && <h1>No hay resultados</h1>}
+			{searchResults.length === 0 && <p>{MESSAGES.noResults}</p>}
 
+			<StyledGrid>
 				{searchResults.map(item => (
 					<SmallItem key={item.id} item={item} today={today} />
 				))}

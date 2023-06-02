@@ -1,10 +1,6 @@
-// Firebase
 import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../../config/firebase.config';
-
-// Router
 import { useNavigate, useParams } from 'react-router-dom';
-
 import { useContext, useEffect, useState } from 'react';
 import Countdown from '../../components/countdown/Countdown';
 import { AuthContext } from '../../contexts/Auth.context';
@@ -26,6 +22,7 @@ import {
 } from './styles';
 import { ClockCountdown, PencilSimple, XCircle } from '@phosphor-icons/react';
 import Modal from '../../components/modal/Modal';
+import { MESSAGES } from '../../constants/messages';
 
 const Item = () => {
 	const { itemId } = useParams();
@@ -34,6 +31,9 @@ const Item = () => {
 	const [activePicture, setActivePicture] = useState(0);
 	const { loggedUser } = useContext(AuthContext);
 	const navigate = useNavigate();
+
+	// const today = new Date();
+	// const active = item.endDate > today.toISOString();
 
 	useEffect(() => {
 		const unsub = onSnapshot(doc(db, 'items', itemId), doc => {
@@ -45,8 +45,9 @@ const Item = () => {
 	}, []);
 
 	const [status, setStatus] = useState(null);
+	const [active, setActive] = useState(true);
 
-	if (!item) return <p>Loading...</p>;
+	if (!item) return <p>{MESSAGES.loading}</p>;
 
 	return (
 		<>
@@ -95,7 +96,7 @@ const Item = () => {
 					<StyledDetailsGrid>
 						<StyledGridItem2Cols>
 							<ClockCountdown size={24} color='currentColor' />
-							<Countdown endDate={item.endDate} />
+							<Countdown endDate={item.endDate} setActive={setActive} />
 						</StyledGridItem2Cols>
 						<StyledGridItem>
 							{Number(item.currentPrice).toLocaleString('es-ES', {
@@ -109,17 +110,19 @@ const Item = () => {
 							{item.bids} {Number(item.bids) === 1 ? 'puja' : 'pujas'}
 						</StyledGridItem>
 
-						{/* Si HAY loggedUser y NO ES el vendedor, puede PUJAR */}
-						{loggedUser?.email && loggedUser?.email !== item.sellerEmail && (
-							<PlaceBid
-								itemId={itemId}
-								highestBid={item.highestBid}
-								currentPrice={item.currentPrice}
-								highestBidder={item.highestBidder}
-								bids={item.bids}
-								setStatus={setStatus}
-							/>
-						)}
+						{/* Si el anuncio está activo, Si HAY loggedUser y NO ES el vendedor, puede PUJAR */}
+						{active &&
+							loggedUser?.email &&
+							loggedUser?.email !== item.sellerEmail && (
+								<PlaceBid
+									itemId={itemId}
+									highestBid={item.highestBid}
+									currentPrice={item.currentPrice}
+									highestBidder={item.highestBidder}
+									bids={item.bids}
+									setStatus={setStatus}
+								/>
+							)}
 
 						{/* Si HAY loggedUser y ES el vendedor, puede EDITAR y BORRAR */}
 						{loggedUser?.email && loggedUser?.email === item.sellerEmail && (
@@ -141,6 +144,7 @@ const Item = () => {
 								</StyledDeleteButton>
 								<StyledEditButton
 									onClick={() => navigate('edit', { state: item })}
+									disabled={!active}
 								>
 									<PencilSimple size={24} color='currentColor' />
 									Editar anuncio
@@ -161,13 +165,6 @@ const Item = () => {
 							)}
 						</StyledGridItem2Cols>
 					</StyledDetailsGrid>
-
-					<p style={{ opacity: 0.33 }}>
-						<small>highestBid: {item.highestBid} €</small>
-					</p>
-					<p style={{ opacity: 0.33 }}>
-						<small>highestBidder: {item.highestBidder}</small>
-					</p>
 				</div>
 			</StyledGrid>
 			<Modal setModalContent={setModalContent}>{modalContent}</Modal>

@@ -89,6 +89,11 @@ const StyledEditButton = styled(StyledSpecialButton)`
 	&:hover {
 		background-color: ${COLORS.cta};
 	}
+	&:disabled {
+		background-color: ${COLORS.gray300};
+		color: ${COLORS.gray400};
+		pointer-events: none;
+	}
 `;
 
 const StyledDeleteButton = styled(StyledSpecialButton)`

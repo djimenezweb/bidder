@@ -4,6 +4,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { itemsDB } from '../../config/firebase.config';
 import MiniItem from '../../components/mini-item/MiniItem';
 import { StyledContainer } from './styles';
+import { MESSAGES } from '../../constants/messages';
 
 const MyAuctions = () => {
 	const { loggedUser } = useContext(AuthContext);
@@ -16,14 +17,14 @@ const MyAuctions = () => {
 		getItemsById(loggedUser.myAuctions, setItems, setLoading);
 	}, [loggedUser]);
 
-	if (loading) return <p>Cargando...</p>;
+	if (loading) return <p>{MESSAGES.loading}</p>;
 
 	return (
 		<>
-			<h2>Mis subastas</h2>
+			<h2>{MESSAGES.myAuctions}</h2>
 
 			<div>
-				{items.length === 0 && <p>Todavía no has pujado en ninguna subasta</p>}
+				{items.length === 0 && <p>{MESSAGES.nullAuctions}</p>}
 				<StyledContainer>
 					{items.map(item => (
 						<MiniItem key={item.id} item={item} today={today} />
@@ -40,13 +41,18 @@ const getItemsById = async (myAuctions, setItems, setLoading) => {
 		return;
 	}
 	try {
-		const docRefs = myAuctions.map(id => doc(itemsDB, id));
+		const docRefs = await myAuctions.map(id => doc(itemsDB, id));
+		console.log('docRefs', docRefs);
 		const docSnapshots = await Promise.all(docRefs.map(ref => getDoc(ref)));
+		console.log('docSnapshots', docSnapshots);
 		const data = docSnapshots.map(snapshot => ({
 			id: snapshot.id,
 			...snapshot.data()
 		}));
-		setItems(data);
+		console.log('data', data);
+		const filteredData = data.filter(item => item.title);
+		console.log('filteredData', filteredData);
+		setItems(filteredData);
 		setLoading(false);
 	} catch (err) {
 		console.log(err);

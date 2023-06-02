@@ -55,7 +55,8 @@ const Header = () => {
 									<span>{loggedUser.displayName}</span>
 									<StyledProfilePhoto
 										src={loggedUser.photoURL}
-										alt={loggedUser.displayName}
+										alt='Profile picture'
+										referrerpolicy='no-referrer'
 									/>
 								</StyledProfileInfo>
 							</li>

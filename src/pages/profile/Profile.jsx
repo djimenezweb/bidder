@@ -30,6 +30,7 @@ const Profile = () => {
 						<StyledProfilePicture
 							src={loggedUser.photoURL}
 							alt='Profile picture'
+							referrerpolicy='no-referrer'
 						/>
 					</StyledPictureRow>
 					<StyledTextRow>

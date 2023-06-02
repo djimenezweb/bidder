@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react';
 
-const Countdown = ({ endDate }) => {
+const Countdown = ({ endDate, setActive }) => {
 	const end = new Date(endDate);
 
 	const [message, setMessage] = useState('0d 0h 0m 0s');
 
 	useEffect(() => {
-		printDate(setMessage, end);
+		printDate(setMessage, end, setActive);
 
-		const timeoutID = setTimeout(() => printDate(setMessage, end), 1000);
+		const timeoutID = setTimeout(
+			() => printDate(setMessage, end, setActive),
+			1000
+		);
 		return () => clearTimeout(timeoutID);
 	}, [message]);
 
@@ -19,7 +22,7 @@ const Countdown = ({ endDate }) => {
 	);
 };
 
-const printDate = (setMessage, end) => {
+const printDate = (setMessage, end, setActive) => {
 	const second = 1000;
 	const minute = second * 60;
 	const hour = minute * 60;
@@ -29,6 +32,7 @@ const printDate = (setMessage, end) => {
 	const timeSpan = end - today;
 	if (timeSpan <= 0) {
 		setMessage(null);
+		setActive(false);
 		return;
 	}
 	const daysLeft = Math.floor(timeSpan / day);

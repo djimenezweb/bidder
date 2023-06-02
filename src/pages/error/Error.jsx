@@ -5,7 +5,7 @@ const Error = ({ children }) => {
 
 	return (
 		<>
-			<h2>{children}</h2>
+			<h3>{children}</h3>
 			<button onClick={() => navigate(-1)}>Volver</button>
 		</>
 	);
