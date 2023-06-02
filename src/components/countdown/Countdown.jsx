@@ -15,11 +15,7 @@ const Countdown = ({ endDate, setActive }) => {
 		return () => clearTimeout(timeoutID);
 	}, [message]);
 
-	return (
-		<div>
-			{message ? <p>Termina en {message}</p> : <p>La subasta ha finalizado</p>}
-		</div>
-	);
+	return <>{message ? `Termina en ${message}` : 'La subasta ha finalizado'}</>;
 };
 
 const printDate = (setMessage, end, setActive) => {

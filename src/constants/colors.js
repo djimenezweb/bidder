@@ -31,7 +31,10 @@ export const COLORS = {
 	errorSecondary: 'rgba(255 0 0 / 0.2)',
 
 	warningPrimary: 'rgba(255 0 0 / 1)',
-	warningSecondary: 'rgba(255 0 0 / 0.5)'
+	warningSecondary: 'rgba(255 0 0 / 0.5)',
+
+	successPrimary: 'rgba(0 255 0 / 1)',
+	successSecondary: 'rgba(0 255 0 / 0.5)'
 };
 
 /* 

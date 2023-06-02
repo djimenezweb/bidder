@@ -42,16 +42,23 @@ const getItemsById = async (myAuctions, setItems, setLoading) => {
 	}
 	try {
 		const docRefs = await myAuctions.map(id => doc(itemsDB, id));
-		console.log('docRefs', docRefs);
 		const docSnapshots = await Promise.all(docRefs.map(ref => getDoc(ref)));
-		console.log('docSnapshots', docSnapshots);
 		const data = docSnapshots.map(snapshot => ({
 			id: snapshot.id,
 			...snapshot.data()
 		}));
-		console.log('data', data);
+
+		// Filtrar por anuncios que tengan contenido (título)
 		const filteredData = data.filter(item => item.title);
-		console.log('filteredData', filteredData);
+
+		// Ordenar array de pictures de cada anuncio
+		filteredData.forEach(item =>
+			item.pictures.sort((a, b) => {
+				if (a < b) return -1;
+				if (a > b) return 1;
+				return 0;
+			})
+		);
 		setItems(filteredData);
 		setLoading(false);
 	} catch (err) {

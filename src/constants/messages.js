@@ -8,7 +8,9 @@ export const STATUS = {
 	end: 'Lo sentimos, no has conseguido este artículo',
 	winner: '¡Enhorabuena, has ganado esta subasta!',
 	seller: 'No puedes pujar por tus propios artículos',
+	sellerEnded: 'No puedes modificar los datos de una subasta finalizada',
 	lowPrice: 'Introduce una cantidad mayor que el precio actual',
+	lowerThanMaxPrice: 'No puedes pujar por menos de tu precio máximo',
 	invalidPrice: 'Introduce un precio válido'
 };
 

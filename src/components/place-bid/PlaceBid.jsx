@@ -5,6 +5,7 @@ import { useContext, useState } from 'react';
 import { StyledForm, StyledInput, StyledSubmitButton } from './styles';
 import { STATUS } from '../../constants/messages';
 import { Gavel } from '@phosphor-icons/react';
+import { COLORS } from '../../constants/colors';
 
 const PlaceBid = ({
 	itemId,
@@ -40,7 +41,7 @@ const PlaceBid = ({
 				name='bid'
 				id='bid'
 				value={bid}
-				onChange={e => setBid(e.target.value)}
+				onChange={e => validateBid(e.target.value, setBid, setStatus, STATUS)}
 			/>
 			<StyledSubmitButton>
 				<Gavel size={24} color='currentColor' />
@@ -48,6 +49,19 @@ const PlaceBid = ({
 			</StyledSubmitButton>
 		</StyledForm>
 	);
+};
+
+const validateBid = (value, setBid, setStatus, STATUS) => {
+	if (isNaN(value)) {
+		setStatus({
+			text: STATUS.invalidPrice,
+			primaryColor: COLORS.warningPrimary,
+			secondaryColor: COLORS.warningSecondary
+		});
+	} else {
+		setStatus('');
+	}
+	setBid(value);
 };
 
 const updateAuction = async (
@@ -97,7 +111,23 @@ const handleSubmit = async (
 	// Invalid
 	if (bid < currentPrice) {
 		console.log('Bid must be higher than current price');
-		setStatus(STATUS.lowPrice);
+		setStatus({
+			text: STATUS.lowPrice,
+			primaryColor: COLORS.warningPrimary,
+			secondaryColor: COLORS.warningSecondary
+		});
+		return;
+	}
+
+	// Invalid: Bid is lower than your own previous bid
+	if (highestBidder === email && bid < highestBid) {
+		console.log('Bid must be higher than your max price');
+		// setStatus(`${STATUS.lowerThanMaxPrice} (${highestBid} EUR)`);
+		setStatus({
+			text: `${STATUS.lowerThanMaxPrice} (${highestBid} EUR)`,
+			primaryColor: COLORS.warningPrimary,
+			secondaryColor: COLORS.warningSecondary
+		});
 		return;
 	}
 
@@ -157,13 +187,24 @@ const handleSubmit = async (
 			setBid,
 			newBids
 		);
-		setStatus(STATUS.outBid);
+		// setStatus(STATUS.outBid);
+		setStatus({
+			text: STATUS.outBid,
+			primaryColor: COLORS.warningPrimary,
+			secondaryColor: COLORS.warningSecondary
+		});
+
 		return;
 	}
 
 	// Invalid bid
 	console.log('Invalid bid');
-	setStatus(STATUS.invalid);
+	// setStatus(STATUS.invalid);
+	setStatus({
+		text: STATUS.invalid,
+		primaryColor: COLORS.warningPrimary,
+		secondaryColor: COLORS.warningSecondary
+	});
 };
 
 export default PlaceBid;

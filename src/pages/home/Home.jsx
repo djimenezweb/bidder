@@ -13,18 +13,34 @@ const Home = () => {
 
 	useEffect(() => {
 		const subscribeToData = onSnapshot(itemsDB, snapshot => {
+			// Recuperar datos
 			const response = snapshot.docs.map(doc => ({
 				...doc.data(),
 				id: doc.id
 			}));
+
+			// Filtrar por anuncios vigentes
 			const activeOnly = response.filter(
 				item => item.endDate > today.toISOString()
 			);
+
+			// Ordenar array de pictures de cada anuncio
+			activeOnly.forEach(item =>
+				item.pictures.sort((a, b) => {
+					if (a < b) return -1;
+					if (a > b) return 1;
+					return 0;
+				})
+			);
+
+			// Ordenar cada anuncio por fecha de fin de subasta
 			const orderedByEndDate = activeOnly.sort((a, b) => {
 				if (a.endDate > b.endDate) return 1;
 				if (a.endDate < b.endDate) return -1;
 				return 0;
 			});
+
+			// Enviar datos filtrados y ordenados al estado
 			orderedByEndDate.length === 0
 				? setAllItems([])
 				: setAllItems(orderedByEndDate);

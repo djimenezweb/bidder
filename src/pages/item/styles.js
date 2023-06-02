@@ -36,7 +36,7 @@ const StyledDetailsGrid = styled.div`
 	}
 `;
 
-const StyledGridItem = styled.p`
+const StyledGridItem = styled.div`
 	margin: 0;
 	display: flex;
 	justify-content: center;
@@ -63,6 +63,12 @@ const StyledGridItem2Cols = styled(StyledGridItem)`
 	@media screen and (min-width: 960px) {
 		font-size: 1.25rem;
 	}
+`;
+
+const StyledStatusContainer = styled(StyledGridItem2Cols)`
+	background-color: ${({ secondaryColor }) => secondaryColor || 'transparent'};
+	border: 1px solid ${({ primaryColor }) => primaryColor || COLORS.gray300};
+	color: ${({ primaryColor }) => primaryColor || 'inherit'};
 `;
 
 const StyledSpecialButton = styled.button`
@@ -150,6 +156,7 @@ export {
 	StyledDetailsGrid,
 	StyledGridItem,
 	StyledGridItem2Cols,
+	StyledStatusContainer,
 	StyledCurrency,
 	StyledEditButton,
 	StyledDeleteButton,

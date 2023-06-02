@@ -18,6 +18,7 @@ import {
 	StyledGrid,
 	StyledGridItem,
 	StyledGridItem2Cols,
+	StyledStatusContainer,
 	StyledTitle
 } from './styles';
 import { ClockCountdown, PencilSimple, XCircle } from '@phosphor-icons/react';
@@ -32,13 +33,16 @@ const Item = () => {
 	const { loggedUser } = useContext(AuthContext);
 	const navigate = useNavigate();
 
-	// const today = new Date();
-	// const active = item.endDate > today.toISOString();
-
 	useEffect(() => {
 		const unsub = onSnapshot(doc(db, 'items', itemId), doc => {
 			const response = doc.data();
+			response.pictures.sort((a, b) => {
+				if (a < b) return -1;
+				if (a > b) return 1;
+				return 0;
+			});
 			setItem(response);
+			console.log(response);
 		});
 
 		return () => unsub();
@@ -152,18 +156,21 @@ const Item = () => {
 							</>
 						)}
 
-						<StyledGridItem2Cols>
-							{status ? (
-								<p>{status}</p>
-							) : (
-								<AuctionStatus
-									highestBid={item.highestBid}
-									highestBidder={item.highestBidder}
-									endDate={item.endDate}
-									seller={item.sellerEmail}
-								/>
-							)}
-						</StyledGridItem2Cols>
+						{status ? (
+							<StyledStatusContainer
+								primaryColor={status.primaryColor}
+								secondaryColor={status.secondaryColor}
+							>
+								{status.text}
+							</StyledStatusContainer>
+						) : (
+							<AuctionStatus
+								highestBid={item.highestBid}
+								highestBidder={item.highestBidder}
+								endDate={item.endDate}
+								seller={item.sellerEmail}
+							/>
+						)}
 					</StyledDetailsGrid>
 				</div>
 			</StyledGrid>

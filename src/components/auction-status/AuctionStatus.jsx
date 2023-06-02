@@ -1,6 +1,8 @@
 import { useContext } from 'react';
 import { AuthContext } from '../../contexts/Auth.context';
 import { STATUS } from '../../constants/messages';
+import { StyledGridItem2Cols } from './styles';
+import { COLORS } from '../../constants/colors';
 
 const AuctionStatus = ({ highestBid, highestBidder, endDate, seller }) => {
 	const { loggedUser } = useContext(AuthContext);
@@ -9,34 +11,41 @@ const AuctionStatus = ({ highestBid, highestBidder, endDate, seller }) => {
 	const timeSpan = end - today;
 
 	if (!loggedUser) {
-		return <p>{STATUS.disabled}</p>;
+		return <StyledGridItem2Cols>{STATUS.disabled}</StyledGridItem2Cols>;
+	}
+
+	if (loggedUser.email === seller && timeSpan <= 0) {
+		return <StyledGridItem2Cols>{STATUS.sellerEnded}</StyledGridItem2Cols>;
 	}
 
 	if (loggedUser.email === seller) {
-		return <p>{STATUS.seller}</p>;
+		return <StyledGridItem2Cols>{STATUS.seller}</StyledGridItem2Cols>;
 	}
 
 	if (highestBid === 0) {
-		return <p>{STATUS.firstBidder}</p>;
+		return <StyledGridItem2Cols>{STATUS.firstBidder}</StyledGridItem2Cols>;
 	}
 
 	if (timeSpan <= 0 && highestBidder === loggedUser?.email) {
-		return <p>{STATUS.winner}</p>;
+		return <StyledGridItem2Cols>{STATUS.winner}</StyledGridItem2Cols>;
 	}
 
 	if (highestBidder === loggedUser?.email) {
 		return (
-			<p>
-				{STATUS.highestBidder} {highestBid} €.
-			</p>
+			<StyledGridItem2Cols
+				primaryColor={COLORS.successPrimary}
+				secondaryColor={COLORS.successSecondary}
+			>
+				{STATUS.highestBidder} {highestBid} EUR.
+			</StyledGridItem2Cols>
 		);
 	}
 
 	if (timeSpan <= 0) {
-		return <p>{STATUS.end}</p>;
+		return <StyledGridItem2Cols>{STATUS.end}</StyledGridItem2Cols>;
 	}
 
-	return <p>{STATUS.default}</p>;
+	return <StyledGridItem2Cols>{STATUS.default}</StyledGridItem2Cols>;
 };
 
 export default AuctionStatus;
