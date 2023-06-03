@@ -24,5 +24,11 @@ export const MESSAGES = {
 	myItems: 'Mis anuncios',
 	nullAuctions: 'Todavía no has pujado en ninguna subasta',
 	nullItems: 'Todavía no has publicado ningún anuncio',
-	notFound: 'Página no encontrada'
+	notFound: 'Página no encontrada',
+	cannotEdit: 'No tienes permiso para editar este anuncio',
+	requiredTitle: 'Título necesario',
+	requiredDescription: 'Descripción necesaria',
+	requiredPicture: 'Es necesario subir al menos 1 foto',
+	invalidStartingPrice:
+		'Introduce un número válido. El precio debe ser igual o mayor que 1 EUR.'
 };

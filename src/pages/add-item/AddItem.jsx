@@ -23,6 +23,7 @@ import {
 	StyledSubmitButton,
 	StyledTextarea
 } from './styles';
+import { MESSAGES } from '../../constants/messages';
 
 const AddItem = () => {
 	const navigate = useNavigate();
@@ -144,6 +145,7 @@ const AddItem = () => {
 					errors={errors}
 				/>
 			</StyledContainer>
+
 			<StyledContainer>
 				<StyledResetButton
 					type='button'
@@ -176,14 +178,12 @@ const handleChange = (formData, setFormData, key, value) => {
 
 const validateForm = (formData, pictures) => {
 	const errorMessages = {};
-	if (formData.title === '') errorMessages.title = 'Título necesario';
+	if (formData.title === '') errorMessages.title = MESSAGES.requiredTitle;
 	if (formData.startingPrice < 1)
-		errorMessages.startingPrice =
-			'Introduce un número válido. El precio debe ser igual o mayor que 1€.';
+		errorMessages.startingPrice = MESSAGES.invalidStartingPrice;
 	if (formData.description === '')
-		errorMessages.description = 'Descripción necesaria';
-	if (pictures.length === 0)
-		errorMessages.pictures = 'Es necesario subir al menos 1 foto';
+		errorMessages.description = MESSAGES.requiredDescription;
+	if (pictures.length === 0) errorMessages.pictures = MESSAGES.requiredPicture;
 	return Object.keys(errorMessages).length === 0 ? null : errorMessages;
 };
 
@@ -219,7 +219,7 @@ const handleSubmit = async (
 			pictures.map(async (picture, index) => {
 				const storageRef = ref(
 					storage,
-					`${loggedUser.email}/${id}/picture${index}`
+					`${loggedUser.email}/${id}/picture0${index}`
 				);
 				await uploadBytes(storageRef, picture);
 				const pictureURL = await getDownloadURL(storageRef);
