@@ -11,11 +11,11 @@ import SignUp from '../pages/sign-up/SignUp';
 import Profile from '../pages/profile/Profile';
 import AddItem from '../pages/add-item/AddItem';
 import Item from '../pages/item/Item';
-import MyItems from '../pages/my-items/MyItems';
 import EditItem from '../pages/edit-item/EditItem';
-import MyAuctions from '../pages/my-auctions/MyAuctions';
 import Error from '../pages/error/Error';
 import SellerItems from '../pages/seller-items/SellerItems';
+import RedirectLoggedUser from './RedirectLoggedUser';
+import { MESSAGES } from '../constants/messages';
 
 const Router = () => {
 	return (
@@ -41,12 +41,24 @@ const Router = () => {
 						</RequireAuth>
 					}
 				/>
-				<Route path='/myitems' element={<MyItems />} />
-				<Route path='/myauctions' element={<MyAuctions />} />
-				<Route path='/signin' element={<SignIn />} />
+				<Route
+					path='/signin'
+					element={
+						<RedirectLoggedUser>
+							<SignIn />
+						</RedirectLoggedUser>
+					}
+				/>
 				<Route path='/login' element={<Navigate to='/signin' />} />
-				<Route path='/signup' element={<SignUp />} />
-				<Route path='*' element={<Error>Página no encontrada</Error>} />
+				<Route
+					path='/signup'
+					element={
+						<RedirectLoggedUser>
+							<SignUp />
+						</RedirectLoggedUser>
+					}
+				/>
+				<Route path='*' element={<Error>{MESSAGES.notFound}</Error>} />
 			</Route>
 		</Routes>
 	);

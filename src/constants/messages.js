@@ -23,5 +23,6 @@ export const MESSAGES = {
 	myAuctions: 'Mis subastas',
 	myItems: 'Mis anuncios',
 	nullAuctions: 'Todavía no has pujado en ninguna subasta',
-	nullItems: 'Todavía no has publicado ningún anuncio'
+	nullItems: 'Todavía no has publicado ningún anuncio',
+	notFound: 'Página no encontrada'
 };
