@@ -160,8 +160,9 @@ const Item = () => {
 
 						{status ? (
 							<StyledStatusContainer
-								primaryColor={status.primaryColor}
-								secondaryColor={status.secondaryColor}
+								backgroundColor={status.primaryColor}
+								foregroundColor={status.secondaryColor}
+								borderColor={status.secondaryColor}
 							>
 								{status.text}
 							</StyledStatusContainer>

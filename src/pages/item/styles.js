@@ -21,6 +21,7 @@ const StyledTitle = styled.h2`
 	font-size: 2.5rem;
 	line-height: 1;
 	font-weight: 500;
+	color: ${COLORS.accent300};
 `;
 
 const StyledDetailsGrid = styled.div`
@@ -66,9 +67,10 @@ const StyledGridItem2Cols = styled(StyledGridItem)`
 `;
 
 const StyledStatusContainer = styled(StyledGridItem2Cols)`
-	background-color: ${({ secondaryColor }) => secondaryColor || 'transparent'};
-	border: 1px solid ${({ primaryColor }) => primaryColor || COLORS.gray300};
-	color: ${({ primaryColor }) => primaryColor || 'inherit'};
+	background-color: ${({ backgroundColor }) =>
+		backgroundColor || 'transparent'};
+	border: 1px solid ${({ borderColor }) => borderColor || COLORS.gray300};
+	color: ${({ foregroundColor }) => foregroundColor || 'inherit'};
 `;
 
 const StyledSpecialButton = styled.button`
@@ -90,10 +92,10 @@ const StyledSpecialButton = styled.button`
 `;
 
 const StyledEditButton = styled(StyledSpecialButton)`
-	background-color: ${COLORS.accent300};
+	background-color: ${COLORS.accent100};
 	border: 1px solid ${COLORS.gray300};
 	&:hover {
-		background-color: ${COLORS.cta};
+		background-color: ${COLORS.accent100};
 	}
 	&:disabled {
 		background-color: ${COLORS.gray300};
@@ -103,10 +105,10 @@ const StyledEditButton = styled(StyledSpecialButton)`
 `;
 
 const StyledDeleteButton = styled(StyledSpecialButton)`
-	background-color: ${COLORS.warningSecondary};
-	border: 1px solid ${COLORS.warningPrimary};
+	background-color: ${COLORS.warningBackground};
+	border: 1px solid ${COLORS.warningBorder};
 	&:hover {
-		background-color: ${COLORS.warningPrimary};
+		background-color: ${COLORS.warningForeground};
 	}
 `;
 

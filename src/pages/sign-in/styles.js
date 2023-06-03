@@ -37,16 +37,17 @@ const StyledInput = styled.input`
 	margin: 0 0 1rem 0;
 	padding: 0.5rem 1rem;
 	background-color: none;
+	color: ${COLORS.accent400};
 	border: ${({ invalid }) =>
 		invalid
-			? `1px solid ${COLORS.errorPrimary}`
-			: `1px solid ${COLORS.gray400}`};
+			? `1px solid ${COLORS.warningBorder}`
+			: `1px solid ${COLORS.gray200}`};
 	border-radius: 2rem;
 	font-family: ${FONTS.sans};
 	font-size: 1rem;
 
 	&:focus {
-		border: 1px solid ${COLORS.black};
+		border: 1px solid ${COLORS.accent100};
 		outline: none;
 	}
 
@@ -68,10 +69,10 @@ const StyledSignInButton = styled(StyledButton)`
 const StyledErrorContainer = styled.div`
 	margin: 0 0 1rem;
 	padding: 0 1rem;
-	color: ${COLORS.errorPrimary};
+	color: ${COLORS.warningForeground};
 	border-radius: 0.5rem;
-	border: 1px solid ${COLORS.errorPrimary};
-	background-color: ${COLORS.errorSecondary};
+	border: 1px solid ${COLORS.warningBorder};
+	background-color: ${COLORS.warningBackground};
 `;
 
 export {

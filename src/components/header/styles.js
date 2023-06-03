@@ -1,10 +1,9 @@
 import styled from 'styled-components';
-import { FONTS } from '../../constants/fonts';
 import { BOX_SHADOWS, COLORS } from '../../constants/colors';
 import { NavLink } from 'react-router-dom';
 
 const StyledHeader = styled.header`
-	background-color: ${COLORS.gray200};
+	background-color: ${COLORS.light100};
 	padding: 0.5rem 0;
 
 	@media screen and (min-width: 576px) {
@@ -33,7 +32,7 @@ const StyledList = styled.ul`
 		border-bottom-left-radius: 0.5rem;
 		transform: ${({ openMenu }) =>
 			openMenu ? 'translateX(0%)' : 'translateX(100%)'};
-		background-color: ${COLORS.gray200};
+		background-color: ${COLORS.light100};
 		display: flex;
 		flex-direction: column;
 		gap: 2rem;
@@ -54,20 +53,8 @@ const StyledProfileInfo = styled(NavLink)`
 const StyledProfilePhoto = styled.img`
 	width: 2rem;
 	height: 2rem;
-	background-color: ${COLORS.white};
+	background-color: transparent;
 	border-radius: 50%;
-`;
-
-const StyledLogo = styled.h1`
-	margin: 0;
-	font-family: ${FONTS.cursive};
-	font-size: 1.5rem;
-	font-weight: 700;
-	letter-spacing: auto;
-
-	@media screen and (min-width: 576px) {
-		font-size: 2rem;
-	}
 `;
 
 const StyledMenuButton = styled.button`
@@ -87,7 +74,6 @@ const StyledMenuButton = styled.button`
 export {
 	StyledHeader,
 	StyledNav,
-	StyledLogo,
 	StyledProfileInfo,
 	StyledProfilePhoto,
 	StyledList,

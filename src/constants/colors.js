@@ -1,10 +1,10 @@
 export const BOX_SHADOWS = {
-	default: '0 0 1em rgba(0,0,0,.1)',
-	smallY: '0 0.5rem 0.5rem rgba(0,0,0,.1)',
-	small: '0 0 0.5rem rgba(0,0,0,.1)'
+	default: '0 0 1em rgba(0,0,0,.05)',
+	smallY: '0 0.5rem 0.5rem rgba(0,0,0,.05)',
+	small: '0 0 0.5rem rgba(0,0,0,.05)'
 };
 
-export const COLORS = {
+export const COLORS1 = {
 	white: '#fff',
 
 	// gray200: 'hsl(220 20% 97%)',
@@ -37,7 +37,92 @@ export const COLORS = {
 	successSecondary: 'rgba(0 255 0 / 0.5)'
 };
 
+export const COLORS = {
+	white: '#fff',
+
+	// Background morado muy clarito
+	// light100: '#fafaff',
+	light100: '#f4f5ff',
+
+	// Background recuadros texto
+	light200: '#ebe4ff',
+	light300: '#d5dfff',
+
+	// Background gris hover muy clarito
+	gray100: '#f6f7f8',
+
+	// Borde formulario
+	gray200: '#dadce0',
+
+	// Texto gris claro
+	gray300: '#c3c2ca',
+
+	// Texto gris oscuro
+	gray400: '#727586',
+
+	// Accent principal
+	accent100: '#673de6',
+	accent101: '#6747c7',
+
+	// Accent:hover
+	accent200: '#5025d1',
+
+	// Texto morado muy oscuro negro
+	accent300: '#2f1c6a',
+
+	// Background morado oscuro
+	accent400: '#36344d',
+
+	// Texto casi casi negro
+	dark: '#1d1e20',
+	black: '#000',
+
+	successForeground: '#00b090',
+	successBackground: '#00b090',
+	successBorder: '#00b090',
+
+	warningForeground: '#fc5185',
+	warningBackground: '#ffe8ef',
+	warningBorder: '#fc5185',
+
+	googleBlue: '#4285f4',
+	gitHubBlack: '#111'
+};
+
 /* 
+
+HOSTINGER
+
+#ffffff		Background blanco
+#f4f5ff		Background morado muy clarito
+#d5dfff		Background recuadros texto
+#ebe4ff		Background recuadros texto
+#36344d		Background morado oscuro
+#f6f7f8		Background gris hover muy clarito
+
+#1d1e20		Texto casi casi negro
+#2f1c6a		Texto morado muy oscuro negro
+#727586		Texto gris oscuro
+#c3c2ca		Texto gris claro
+
+#673de6		Llamativo dentro de texto casi negro
+			Botón, iconos, decoraciones...
+#5025d1		Hover de color anterior
+
+#6747c7		Otro botón, muy parecido
+
+#dadce0		Borde input formulario gris claro
+
+#00b090		Verde avisos
+
+#fc5185		Rojo texto warning
+#ffe8ef		Rojo background warning
+
+
+Opacidad hover: 0.7
+
+
+
 
 PALETAS DE COLORES
 
@@ -53,5 +138,12 @@ PALETAS DE COLORES
 10	264653	2a9d8f	e9c46a	f4a261	e76f51
 11	b8b8d1	5b5f97	ffc145	fffffb	ff6b6c
 12	fbfef9	191923	0e8+b2	bf1363	f39237
+
+
+
+
+
+
+
 
 */

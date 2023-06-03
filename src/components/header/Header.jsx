@@ -2,7 +2,6 @@ import { Link, NavLink } from 'react-router-dom';
 import {
 	StyledHeader,
 	StyledList,
-	StyledLogo,
 	StyledMenuButton,
 	StyledNav,
 	StyledProfileInfo,
@@ -10,6 +9,7 @@ import {
 } from './styles';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../contexts/Auth.context';
+import Logo from '../logo/Logo';
 
 const Header = () => {
 	const { loggedUser } = useContext(AuthContext);
@@ -19,7 +19,7 @@ const Header = () => {
 		<StyledHeader>
 			<StyledNav>
 				<Link to='/'>
-					<StyledLogo>bidder</StyledLogo>
+					<Logo>bidder</Logo>
 				</Link>
 				<StyledMenuButton onClick={() => setOpenMenu(!openMenu)}>
 					<img

@@ -16,7 +16,7 @@ const StyledInput = styled.input`
 	background-color: none;
 	border: ${({ invalid }) =>
 		invalid
-			? `1px solid ${COLORS.errorPrimary}`
+			? `1px solid ${COLORS.warningBorder}`
 			: `1px solid ${COLORS.gray300}`};
 	border-radius: 0.5rem;
 	font-size: 1.5rem;
@@ -38,7 +38,7 @@ const StyledInput = styled.input`
 `;
 
 const StyledSubmitButton = styled.button`
-	background-color: ${COLORS.accent300};
+	background-color: ${COLORS.accent100};
 	color: ${COLORS.white};
 	font-size: 1.25rem;
 	font-family: inherit;
@@ -57,7 +57,7 @@ const StyledSubmitButton = styled.button`
 	}
 
 	&:hover {
-		background-color: ${COLORS.cta};
+		background-color: ${COLORS.accent200};
 	}
 `;
 

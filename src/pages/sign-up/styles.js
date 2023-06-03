@@ -39,14 +39,14 @@ const StyledInput = styled.input`
 	background-color: none;
 	border: ${({ invalid }) =>
 		invalid
-			? `1px solid ${COLORS.errorPrimary}`
-			: `1px solid ${COLORS.gray400}`};
+			? `1px solid ${COLORS.warningBorder}`
+			: `1px solid ${COLORS.gray200}`};
 	border-radius: 2rem;
 	font-family: ${FONTS.sans};
 	font-size: 1rem;
 
 	&:focus {
-		border: 1px solid ${COLORS.black};
+		border: 1px solid ${COLORS.accent100};
 		outline: none;
 	}
 
@@ -65,28 +65,6 @@ const StyledSignUpButton = styled(StyledButton)`
 	margin: 1rem auto 1rem;
 `;
 
-const StyledSeparator = styled.p`
-	position: relative;
-	margin: 2rem auto;
-	font-size: 0.875rem;
-	text-align: center;
-
-	& span {
-		position: relative;
-		padding: 0 0.5rem;
-		background-color: ${COLORS.white};
-	}
-
-	&::before {
-		content: '';
-		position: absolute;
-		inset: 0;
-		height: 1px;
-		margin: auto;
-		background-color: ${COLORS.gray400};
-	}
-`;
-
 const StyledGoogleSignInButton = styled(StyledButton)`
 	display: block;
 	width: 100%;
@@ -96,10 +74,10 @@ const StyledGoogleSignInButton = styled(StyledButton)`
 const StyledErrorContainer = styled.div`
 	margin: 0 0 1rem;
 	padding: 0 1rem;
-	color: ${COLORS.errorPrimary};
+	color: ${COLORS.warningForeground};
 	border-radius: 0.5rem;
-	border: 1px solid ${COLORS.errorPrimary};
-	background-color: ${COLORS.errorSecondary};
+	border: 1px solid ${COLORS.warningBorder};
+	background-color: ${COLORS.warningBackground};
 `;
 
 export {
@@ -109,7 +87,6 @@ export {
 	StyledFormField,
 	StyledInput,
 	StyledSignUpButton,
-	StyledSeparator,
 	StyledGoogleSignInButton,
 	StyledErrorContainer
 };

@@ -97,16 +97,15 @@ const SignUp = () => {
 						/>
 					</StyledFormField>
 
-					{Object.keys(errors).length !== 0 ||
-						(authErrors.message && (
-							<StyledErrorContainer>
-								<p>{errors?.newDisplayName?.message}</p>
-								<p>{errors?.newEmail?.message}</p>
-								<p>{errors?.newPassword?.message}</p>
-								<p>{errors?.repeatPassword?.message}</p>
-								<p>{authErrors?.message}</p>
-							</StyledErrorContainer>
-						))}
+					{(Object.keys(errors).length !== 0 || authErrors.message) && (
+						<StyledErrorContainer>
+							<p>{errors?.newDisplayName?.message}</p>
+							<p>{errors?.newEmail?.message}</p>
+							<p>{errors?.newPassword?.message}</p>
+							<p>{errors?.repeatPassword?.message}</p>
+							<p>{authErrors?.message}</p>
+						</StyledErrorContainer>
+					)}
 
 					<StyledSignUpButton>Crear cuenta</StyledSignUpButton>
 				</form>

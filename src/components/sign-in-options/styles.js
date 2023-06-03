@@ -20,7 +20,7 @@ const StyledSeparator = styled.p`
 		inset: 0;
 		height: 1px;
 		margin: auto;
-		background-color: ${COLORS.gray400};
+		background-color: ${COLORS.gray200};
 	}
 `;
 
@@ -38,6 +38,10 @@ const StyledGoogleSignInButton = styled(StyledButton)`
 	width: 100%;
 	overflow: hidden;
 	z-index: 10;
+
+	&:hover {
+		opacity: 0.9;
+	}
 
 	&::after {
 		content: '';
