@@ -1,6 +1,6 @@
 import { doc, onSnapshot } from 'firebase/firestore';
 import { db } from '../../config/firebase.config';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { useContext, useEffect, useState } from 'react';
 import Countdown from '../../components/countdown/Countdown';
 import { AuthContext } from '../../contexts/Auth.context';
@@ -87,9 +87,11 @@ const Item = () => {
 					<StyledTitle>{item.title}</StyledTitle>
 					<p>
 						Vendido por{' '}
-						<strong>
-							{item.sellerEmail.substring(0, item.sellerEmail.indexOf('@'))}
-						</strong>
+						<Link to={`/usr/${item.sellerEmail}`}>
+							<strong>
+								{item.sellerEmail.substring(0, item.sellerEmail.indexOf('@'))}
+							</strong>
+						</Link>
 					</p>
 					<p>{item.description}</p>
 					<p>

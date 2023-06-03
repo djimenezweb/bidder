@@ -16,6 +16,7 @@ import {
 	StyledTextRow
 } from './styles';
 import { SignOut } from '@phosphor-icons/react';
+import { MESSAGES } from '../../constants/messages';
 
 const Profile = () => {
 	const { loggedUser } = useContext(AuthContext);
@@ -49,7 +50,7 @@ const Profile = () => {
 				</StyledFlexContainer>
 			</div>
 			<div>
-				<MyItems />
+				<MyItems user={loggedUser.email} title={MESSAGES.myItems} />
 				<MyAuctions />
 			</div>
 		</StyledGrid>

@@ -15,6 +15,7 @@ import MyItems from '../pages/my-items/MyItems';
 import EditItem from '../pages/edit-item/EditItem';
 import MyAuctions from '../pages/my-auctions/MyAuctions';
 import Error from '../pages/error/Error';
+import SellerItems from '../pages/seller-items/SellerItems';
 
 const Router = () => {
 	return (
@@ -23,6 +24,7 @@ const Router = () => {
 				<Route index element={<Home />} />
 				<Route path='/itm/:itemId' element={<Item />} />
 				<Route path='/itm/:itemId/edit' element={<EditItem />} />
+				<Route path='/usr/:userEmail' element={<SellerItems />} />
 				<Route
 					path='/profile'
 					element={

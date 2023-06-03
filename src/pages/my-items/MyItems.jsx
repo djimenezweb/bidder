@@ -1,27 +1,31 @@
-import { useContext, useEffect, useState } from 'react';
-import { AuthContext } from '../../contexts/Auth.context';
+import { useEffect, useState } from 'react';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from '../../config/firebase.config';
 import MiniItem from '../../components/mini-item/MiniItem';
 import { StyledContainer } from './styles';
 import { MESSAGES } from '../../constants/messages';
 
-const MyItems = () => {
-	const { loggedUser } = useContext(AuthContext);
+const MyItems = ({ user, title }) => {
+	// const { loggedUser } = useContext(AuthContext);
 	const [items, setItems] = useState([]);
 	const [loading, setLoading] = useState(true);
 	const today = new Date();
 
+	// useEffect(() => {
+	// 	if (!loggedUser) return;
+	// 	getItemsByEmail(loggedUser.email, setItems, setLoading);
+	// }, [loggedUser]);
+
 	useEffect(() => {
-		if (!loggedUser) return;
-		getItemsByEmail(loggedUser.email, setItems, setLoading);
-	}, [loggedUser]);
+		if (!user) return;
+		getItemsByEmail(user, setItems, setLoading);
+	}, [user]);
 
 	if (loading) return <p>{MESSAGES.loading}</p>;
 
 	return (
 		<>
-			<h2>{MESSAGES.myItems}</h2>
+			<h2>{title}</h2>
 
 			<div>
 				{items.length === 0 && <p>{MESSAGES.nullItems}</p>}
