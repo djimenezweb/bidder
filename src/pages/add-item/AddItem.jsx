@@ -1,8 +1,6 @@
 import { useContext, useState } from 'react';
 import UploadPictures from '../../components/upload-pictures/UploadPictures';
 import { DURATION } from '../../constants/add-item';
-
-// Firebase
 import { arrayUnion, doc, setDoc, updateDoc } from 'firebase/firestore';
 import { db, storage } from '../../config/firebase.config';
 import { AuthContext } from '../../contexts/Auth.context';
@@ -214,6 +212,9 @@ const handleSubmit = async (
 	const today = new Date();
 	const endDate = new Date();
 	endDate.setDate(endDate.getDate() + Number(formData.duration));
+	if (formData.duration === '0') {
+		endDate.setMinutes(endDate.getMinutes() + 5);
+	}
 	const userToUpdate = doc(db, 'users', loggedUser.email);
 
 	try {

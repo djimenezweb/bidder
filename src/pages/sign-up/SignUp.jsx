@@ -125,12 +125,12 @@ const onSubmit = async (data, e, navigate, setAuthErrors) => {
 		await updateProfile(auth.currentUser, {
 			displayName: data.newDisplayName,
 			photoURL:
-				'https://firebasestorage.googleapis.com/v0/b/bidder-89e7b.appspot.com/o/defaults%2Fuser-circle-light-96px.png?alt=media&token=15eab190-4efb-4e9d-b20c-bf9f330882ad'
+				'https://firebasestorage.googleapis.com/v0/b/bidder-89e7b.appspot.com/o/defaults%2Fuser-circle-light.svg?alt=media&token=0f8102e5-05f1-47f6-acf7-2a50819e99eb'
 		});
 		await setDoc(doc(db, 'users', data.newEmail), {
-			myBids: '',
-			myItems: '',
-			myFavs: ''
+			myAuctions: [],
+			myItems: [],
+			myFavs: []
 		});
 		// Fuerza actualización del token para que se muestre displayName y foto perfil
 		await getIdToken(auth.currentUser, true);
