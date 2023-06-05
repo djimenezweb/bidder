@@ -4,6 +4,7 @@ import { db } from '../../config/firebase.config';
 import MiniItem from '../../components/mini-item/MiniItem';
 import { StyledContainer } from './styles';
 import { MESSAGES } from '../../constants/messages';
+import Loader from '../../components/loader/Loader';
 
 const MyItems = ({ user, title }) => {
 	// const { loggedUser } = useContext(AuthContext);
@@ -21,7 +22,7 @@ const MyItems = ({ user, title }) => {
 		getItemsByEmail(user, setItems, setLoading);
 	}, [user]);
 
-	if (loading) return <p>{MESSAGES.loading}</p>;
+	if (loading) return <Loader />;
 
 	return (
 		<>

@@ -24,8 +24,8 @@ import {
 } from './styles';
 import { ClockCountdown, PencilSimple, XCircle } from '@phosphor-icons/react';
 import Modal from '../../components/modal/Modal';
-import { MESSAGES } from '../../constants/messages';
 import { COLORS } from '../../constants/colors';
+import Loader from '../../components/loader/Loader';
 
 const Item = () => {
 	const { itemId } = useParams();
@@ -53,7 +53,7 @@ const Item = () => {
 	const [status, setStatus] = useState(null);
 	const [active, setActive] = useState(true);
 
-	if (!item) return <p>{MESSAGES.loading}</p>;
+	if (!item) return <Loader />;
 
 	return (
 		<>

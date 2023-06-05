@@ -8,7 +8,7 @@ export const printTimeLeft = timeSpan => {
 	}
 	// 5 minutos
 	if (timeSpan <= 300000) {
-		return 'unos minutos!';
+		return '¡Termina muy pronto!';
 	}
 	// Menos de 1 hora
 	if (timeSpan <= 3600000) {

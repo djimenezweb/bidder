@@ -5,6 +5,7 @@ import { itemsDB } from '../../config/firebase.config';
 import MiniItem from '../../components/mini-item/MiniItem';
 import { StyledContainer } from './styles';
 import { MESSAGES } from '../../constants/messages';
+import Loader from '../../components/loader/Loader';
 
 const MyAuctions = () => {
 	const { loggedUser } = useContext(AuthContext);
@@ -17,7 +18,7 @@ const MyAuctions = () => {
 		getItemsById(loggedUser.myAuctions, setItems, setLoading);
 	}, [loggedUser]);
 
-	if (loading) return <p>{MESSAGES.loading}</p>;
+	if (loading) return <Loader />;
 
 	return (
 		<>

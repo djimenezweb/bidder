@@ -5,6 +5,7 @@ import SearchBar from '../../components/search-bar/SearchBar';
 import SmallItem from '../../components/small-item/SmallItem';
 import { StyledGrid } from './styles';
 import { MESSAGES } from '../../constants/messages';
+import Loader from '../../components/loader/Loader';
 
 const Home = () => {
 	const today = new Date();
@@ -51,13 +52,15 @@ const Home = () => {
 		return () => subscribeToData();
 	}, []);
 
-	if (!allItems) return <p>{MESSAGES.loading}</p>;
+	if (!allItems) return <Loader />;
 
 	return (
 		<>
 			<SearchBar allItems={allItems} setSearchResults={setSearchResults} />
 
 			{searchResults.length === 0 && <p>{MESSAGES.noResults}</p>}
+
+			<Loader />
 
 			<StyledGrid>
 				{searchResults.map(item => (
