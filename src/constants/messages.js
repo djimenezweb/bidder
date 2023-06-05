@@ -5,7 +5,7 @@ export const STATUS = {
 	firstBidder: 'No hay ningún pujador, ¡tú puedes ser el primero!',
 	outBid: 'Te han sobrepujado',
 	highestBidder: 'Eres el mayor postor. Tu precio máximo es ',
-	end: 'Lo sentimos, no has conseguido este artículo',
+	end: 'No has conseguido este artículo',
 	winner: '¡Enhorabuena, has ganado esta subasta!',
 	seller: 'No puedes pujar por tus propios artículos',
 	sellerEnded: 'No puedes modificar los datos de una subasta finalizada',

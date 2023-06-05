@@ -10,6 +10,10 @@ const AuctionStatus = ({ highestBid, highestBidder, endDate, seller }) => {
 	const today = new Date();
 	const timeSpan = end - today;
 
+	if (!loggedUser && timeSpan <= 0) {
+		return <></>;
+	}
+
 	if (!loggedUser) {
 		return <StyledGridItem2Cols>{STATUS.disabled}</StyledGridItem2Cols>;
 	}
