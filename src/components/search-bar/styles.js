@@ -13,12 +13,12 @@ const StyledSearchContainer = styled.div`
 	display: flex;
 	border-radius: 2rem;
 	border: ${({ focus }) =>
-		focus ? `1px solid ${COLORS.accent300}` : `1px solid ${COLORS.gray300}`};
+		focus ? `1px solid ${COLORS.accent100}` : `1px solid ${COLORS.gray300}`};
 	overflow: hidden;
 	box-shadow: ${BOX_SHADOWS.small};
 
 	&:hover {
-		border: 1px solid ${COLORS.accent300};
+		border: 1px solid ${COLORS.accent100};
 	}
 `;
 
@@ -35,6 +35,8 @@ const StyledInput = styled.input`
 	font-family: ${FONTS.cursive};
 	font-size: 2rem;
 	font-weight: 200;
+	color: ${COLORS.accentSecondary};
+	caret-color: ${COLORS.accentSecondary};
 
 	&:focus {
 		outline: transparent;

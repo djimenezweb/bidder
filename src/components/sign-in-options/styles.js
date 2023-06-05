@@ -1,6 +1,6 @@
 import styled from 'styled-components';
-import { StyledButton } from '../button/styles';
 import { COLORS } from '../../constants/colors';
+import { FONTS } from '../../constants/fonts';
 
 const StyledSeparator = styled.p`
 	position: relative;
@@ -29,57 +29,60 @@ const StyledButtonsContainer = styled.div`
 	gap: 1rem;
 `;
 
-const StyledGoogleSignInButton = styled(StyledButton)`
+const StyledButton = styled.button`
 	position: relative;
 	display: block;
-	margin: 0;
-	background-color: ${COLORS.googleBlue};
-	color: ${COLORS.white};
 	width: 100%;
+	margin: 0;
+	padding: 0.5em 1em;
+	color: ${COLORS.white};
+	font-size: 1rem;
+	font-family: ${FONTS.sans};
+	font-weight: 400;
+	border: none;
+	border-radius: 0.5rem;
 	overflow: hidden;
 	z-index: 10;
+
+	&::after {
+		content: '';
+		position: absolute;
+		background-size: contain;
+		transform: rotate(20deg);
+		transform-origin: center right;
+		z-index: -1;
+	}
 
 	&:hover {
 		opacity: 0.9;
 	}
 
+	&:focus {
+		outline: 1px solid black;
+	}
+`;
+
+const StyledGoogleSignInButton = styled(StyledButton)`
+	background-color: ${COLORS.googleBlue};
+
 	&::after {
-		content: '';
-		position: absolute;
 		width: 6rem;
 		height: 6rem;
 		background-image: url('/assets/images/google-logo.svg');
-		background-size: contain;
 		bottom: -2rem;
 		right: -1.5rem;
-		transform: rotate(20deg);
-		transform-origin: center right;
-		z-index: -1;
 	}
 `;
 
 const StyledGithubSignInButton = styled(StyledButton)`
-	position: relative;
-	display: block;
-	margin: 0;
 	background-color: ${COLORS.gitHubBlack};
-	color: ${COLORS.white};
-	width: 100%;
-	overflow: hidden;
-	z-index: 10;
 
 	&::after {
-		content: '';
-		position: absolute;
 		width: 5rem;
 		height: 5rem;
 		background-image: url('/assets/images/github-logo-white.svg');
-		background-size: contain;
 		bottom: -1.5rem;
 		right: -1rem;
-		transform: rotate(20deg);
-		transform-origin: center right;
-		z-index: -1;
 	}
 `;
 

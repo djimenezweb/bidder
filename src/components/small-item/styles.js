@@ -66,7 +66,7 @@ const StyledTimeLeft = styled.p`
 	margin: 0;
 	font-size: 0.9rem;
 	color: ${({ color }) =>
-		color <= 3600000 ? COLORS.warningForeground : COLORS.accent300};
+		color <= 3600000 ? COLORS.accentSecondary : COLORS.accent300};
 `;
 
 export {

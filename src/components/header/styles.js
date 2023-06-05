@@ -25,6 +25,10 @@ const StyledList = styled.ul`
 	align-items: center;
 	gap: 1rem;
 
+	& > *:hover {
+		opacity: 0.7;
+	}
+
 	@media screen and (max-width: 575.99px) {
 		position: fixed;
 		top: 3rem;

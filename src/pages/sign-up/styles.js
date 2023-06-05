@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { FONTS } from '../../constants/fonts';
 import { BOX_SHADOWS, COLORS } from '../../constants/colors';
-import { StyledButton } from '../../components/button/styles';
 
 const StyledContainer = styled.div`
 	width: min(100%, 448px);
@@ -54,13 +53,33 @@ const StyledInput = styled.input`
 	}
 `;
 
-const StyledSignUpButton = styled(StyledButton)`
+const StyledSignUpButton = styled.button`
 	display: block;
 	width: 100%;
 	margin: 1rem auto 1rem;
+	padding: 0.5em 1em;
+	background-color: ${COLORS.accent100};
+	color: ${COLORS.white};
+	font-size: 1rem;
+	font-family: ${FONTS.sans};
+	font-weight: 400;
+	border: none;
+	border-radius: 0.5rem;
+
+	&:hover {
+		background-color: ${COLORS.accent200};
+	}
+
+	&:focus {
+		outline: 1px solid black;
+	}
+
+	&:active {
+		background-color: ${COLORS.accentSecondary};
+	}
 `;
 
-const StyledGoogleSignInButton = styled(StyledButton)`
+const StyledGoogleSignInButton = styled.button`
 	display: block;
 	width: 100%;
 	margin: 0;

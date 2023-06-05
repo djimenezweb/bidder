@@ -4,76 +4,25 @@ export const BOX_SHADOWS = {
 	small: '0 0 0.5rem rgba(0,0,0,.05)'
 };
 
-export const COLORS1 = {
-	white: '#fff',
-
-	// gray200: 'hsl(220 20% 97%)',
-	gray200: 'hsl(160 10% 94%)',
-
-	// lightgray
-	gray300: 'hsl(0 0% 83%)',
-
-	// gray
-	gray400: 'hsl(0 0% 50%)',
-
-	black: '#000',
-
-	accent400: '#4059ad',
-	accent300: '#6b9ac4',
-	accent200: '#97d8c4',
-
-	cta: '#f4b942',
-
-	googleBlue: '#4285f4',
-	gitHubBlack: '#111',
-
-	errorPrimary: 'rgba(255 0 0 / 1)',
-	errorSecondary: 'rgba(255 0 0 / 0.2)',
-
-	warningPrimary: 'rgba(255 0 0 / 1)',
-	warningSecondary: 'rgba(255 0 0 / 0.5)',
-
-	successPrimary: 'rgba(0 255 0 / 1)',
-	successSecondary: 'rgba(0 255 0 / 0.5)'
-};
-
 export const COLORS = {
 	white: '#fff',
 
-	// Background morado muy clarito
-	// light100: '#fafaff',
 	light100: '#f4f5ff',
-
-	// Background recuadros texto
 	light200: '#ebe4ff',
 	light300: '#d5dfff',
 
-	// Background gris hover muy clarito
 	gray100: '#f6f7f8',
-
-	// Borde formulario
 	gray200: '#dadce0',
-
-	// Texto gris claro
 	gray300: '#c3c2ca',
-
-	// Texto gris oscuro
 	gray400: '#727586',
 
-	// Accent principal
 	accent100: '#673de6',
 	accent101: '#6747c7',
-
-	// Accent:hover
 	accent200: '#5025d1',
-
-	// Texto morado muy oscuro negro
 	accent300: '#2f1c6a',
-
-	// Background morado oscuro
 	accent400: '#36344d',
+	accentSecondary: '#fc5185',
 
-	// Texto casi casi negro
 	dark: '#1d1e20',
 	black: '#000',
 
@@ -119,12 +68,7 @@ HOSTINGER
 #ffe8ef		Rojo background warning
 
 
-Opacidad hover: 0.7
-
-
-
-
-PALETAS DE COLORES
+OTRAS PALETAS DE COLORES
 
 1	4059ad	6b9ac4	97d8c4	eff2f1	f4b942
 2	002642	840032	e59500	e5dada	02040f
@@ -138,12 +82,5 @@ PALETAS DE COLORES
 10	264653	2a9d8f	e9c46a	f4a261	e76f51
 11	b8b8d1	5b5f97	ffc145	fffffb	ff6b6c
 12	fbfef9	191923	0e8+b2	bf1363	f39237
-
-
-
-
-
-
-
 
 */

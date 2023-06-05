@@ -55,8 +55,9 @@ const validateBid = (value, setBid, setStatus, STATUS) => {
 	if (isNaN(value)) {
 		setStatus({
 			text: STATUS.invalidPrice,
-			primaryColor: COLORS.warningPrimary,
-			secondaryColor: COLORS.warningSecondary
+			backgroundColor: COLORS.warningBackground,
+			foregroundColor: COLORS.warningForeground,
+			borderColor: COLORS.warningBorder
 		});
 	} else {
 		setStatus('');
