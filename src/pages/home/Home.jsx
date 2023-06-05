@@ -60,8 +60,6 @@ const Home = () => {
 
 			{searchResults.length === 0 && <p>{MESSAGES.noResults}</p>}
 
-			<Loader />
-
 			<StyledGrid>
 				{searchResults.map(item => (
 					<SmallItem key={item.id} item={item} today={today} />
