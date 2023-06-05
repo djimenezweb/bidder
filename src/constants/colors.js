@@ -77,12 +77,12 @@ export const COLORS = {
 	dark: '#1d1e20',
 	black: '#000',
 
-	successForeground: '#00b090',
+	successForeground: '#fff',
 	successBackground: '#00b090',
 	successBorder: '#00b090',
 
 	warningForeground: '#fc5185',
-	warningBackground: '#ffe8ef',
+	warningBackground: '#ffeae5',
 	warningBorder: '#fc5185',
 
 	googleBlue: '#4285f4',

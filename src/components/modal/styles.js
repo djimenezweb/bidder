@@ -4,16 +4,15 @@ import { COLORS } from '../../constants/colors';
 const StyledBackground = styled.div`
 	position: fixed;
 	inset: 0;
-	background-color: rgba(0 0 0 / 0.25);
+	background-color: rgba(0 0 0 / 0.4);
+	display: flex;
+	justify-content: center;
+	align-items: center;
 `;
 
 const StyledModal = styled.div`
-	position: absolute;
-	width: min(90%, 600px);
-	height: 200px;
-	inset: 0;
-	margin: auto;
-	padding: 1rem 2rem;
+	max-width: 90%;
+	padding: 2rem 2rem 3rem;
 	background-color: ${COLORS.white};
 	border-radius: 0.5rem;
 `;
@@ -27,31 +26,31 @@ const StyledButtonContainer = styled.div`
 
 const StyledButton = styled.button`
 	width: 40%;
-	background-color: ${COLORS.accent300};
-	color: ${COLORS.white};
 	font-size: 1rem;
 	font-weight: 400;
 	padding: 0.5em 1em;
-	border: 1px solid ${COLORS.black};
+	border-radius: 0.5rem;
 `;
 
 const StyledCancelButton = styled(StyledButton)`
 	background-color: transparent;
-	color: ${COLORS.black};
-	border: 1px solid ${COLORS.black};
+	color: ${COLORS.accent300};
+	border: 1px solid ${COLORS.accent300};
 
 	&:hover {
-		background-color: ${COLORS.gray300};
+		color: ${COLORS.accent100};
+		border: 1px solid ${COLORS.accent100};
 	}
 `;
 
 const StyledDeleteButton = styled(StyledButton)`
-	background-color: ${COLORS.warningSecondary};
-	color: ${COLORS.white};
-	border: 1px solid ${COLORS.warningPrimary};
+	background-color: ${COLORS.warningBackground};
+	color: ${COLORS.warningForeground};
+	border: 1px solid ${COLORS.warningBorder};
 
 	&:hover {
-		background-color: ${COLORS.warningPrimary};
+		background-color: ${COLORS.warningForeground};
+		color: ${COLORS.white};
 	}
 `;
 

@@ -4,6 +4,7 @@ import { itemsDB, storage } from '../../config/firebase.config';
 import { arrayUnion, doc, updateDoc } from 'firebase/firestore';
 import Error from '../error/Error';
 import {
+	StyledButtonContainer,
 	StyledContainer,
 	StyledErrorContainer,
 	StyledFlexContainer,
@@ -126,10 +127,10 @@ const EditItem = () => {
 				/>
 			</StyledContainer>
 
-			<StyledContainer>
-				<button type='button' onClick={() => navigate(`/itm/${itemId}`)}>
+			<StyledButtonContainer>
+				<StyledResetButton type='button' onClick={() => navigate(-1)}>
 					Volver
-				</button>
+				</StyledResetButton>
 				<StyledResetButton
 					type='button'
 					onClick={() => setFormData(INITIAL_ITEM)}
@@ -137,7 +138,7 @@ const EditItem = () => {
 					Descartar cambios
 				</StyledResetButton>
 				<StyledSubmitButton type='submit'>Publicar cambios</StyledSubmitButton>
-			</StyledContainer>
+			</StyledButtonContainer>
 		</form>
 	);
 };

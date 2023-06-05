@@ -10,6 +10,7 @@ import { v4 } from 'uuid';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { useNavigate } from 'react-router-dom';
 import {
+	StyledButtonContainer,
 	StyledContainer,
 	StyledDate,
 	StyledErrorContainer,
@@ -146,7 +147,10 @@ const AddItem = () => {
 				/>
 			</StyledContainer>
 
-			<StyledContainer>
+			<StyledButtonContainer>
+				<StyledResetButton type='button' onClick={() => navigate(-1)}>
+					Volver
+				</StyledResetButton>
 				<StyledResetButton
 					type='button'
 					onClick={() =>
@@ -156,7 +160,7 @@ const AddItem = () => {
 					Borrar
 				</StyledResetButton>
 				<StyledSubmitButton>Publicar anuncio</StyledSubmitButton>
-			</StyledContainer>
+			</StyledButtonContainer>
 		</form>
 	);
 };

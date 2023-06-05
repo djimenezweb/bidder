@@ -20,7 +20,7 @@ body {
   margin: 0;
   // background-color: ${COLORS.gray200};
   background-color: ${COLORS.light100};
-  color: ${COLORS.black};
+  color: ${COLORS.accent300};
   font-family: ${FONTS.sans};
   font-weight: 400;
 }

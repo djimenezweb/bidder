@@ -28,7 +28,7 @@ const StyledInput = styled.input`
 
 	&:focus,
 	&:hover {
-		border: 1px solid ${COLORS.black};
+		border: 1px solid ${COLORS.accent100};
 		outline: none;
 	}
 
@@ -48,7 +48,8 @@ const StyledSubmitButton = styled.button`
 	justify-content: center;
 	align-items: center;
 	gap: 0.5rem;
-	border: 1px solid ${COLORS.gray300};
+	// border: 1px solid ${COLORS.gray300};
+	border: transparent;
 	border-radius: 0.5rem;
 	cursor: pointer;
 
@@ -58,6 +59,10 @@ const StyledSubmitButton = styled.button`
 
 	&:hover {
 		background-color: ${COLORS.accent200};
+	}
+
+	&:active {
+		background-color: ${COLORS.warningForeground};
 	}
 `;
 

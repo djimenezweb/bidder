@@ -18,12 +18,14 @@ import {
 	StyledGrid,
 	StyledGridItem,
 	StyledGridItem2Cols,
+	StyledName,
 	StyledStatusContainer,
 	StyledTitle
 } from './styles';
 import { ClockCountdown, PencilSimple, XCircle } from '@phosphor-icons/react';
 import Modal from '../../components/modal/Modal';
 import { MESSAGES } from '../../constants/messages';
+import { COLORS } from '../../constants/colors';
 
 const Item = () => {
 	const { itemId } = useParams();
@@ -88,9 +90,9 @@ const Item = () => {
 					<p>
 						Vendido por{' '}
 						<Link to={`/usr/${item.sellerEmail}`}>
-							<strong>
+							<StyledName>
 								{item.sellerEmail.substring(0, item.sellerEmail.indexOf('@'))}
-							</strong>
+							</StyledName>
 						</Link>
 					</p>
 					<p>{item.description}</p>
@@ -101,7 +103,7 @@ const Item = () => {
 
 					<StyledDetailsGrid>
 						<StyledGridItem2Cols>
-							<ClockCountdown size={24} color='currentColor' />
+							<ClockCountdown size={24} color={COLORS.accent100} />
 							<Countdown endDate={item.endDate} setActive={setActive} />
 						</StyledGridItem2Cols>
 						<StyledGridItem>
@@ -152,7 +154,7 @@ const Item = () => {
 									onClick={() => navigate('edit', { state: item })}
 									disabled={!active}
 								>
-									<PencilSimple size={24} color='currentColor' />
+									<PencilSimple size={20} color='currentColor' />
 									Editar anuncio
 								</StyledEditButton>
 							</>
@@ -160,9 +162,9 @@ const Item = () => {
 
 						{status ? (
 							<StyledStatusContainer
-								backgroundColor={status.primaryColor}
-								foregroundColor={status.secondaryColor}
-								borderColor={status.secondaryColor}
+								backgroundColor={status.backgroundColor}
+								foregroundColor={status.foregroundColor}
+								borderColor={status.borderColor}
 							>
 								{status.text}
 							</StyledStatusContainer>

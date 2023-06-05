@@ -2,6 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import {
 	StyledArticle,
 	StyledBids,
+	StyledCurrency,
 	StyledImageContainer,
 	StyledImg,
 	StyledPrice,
@@ -29,7 +30,7 @@ const SmallItem = ({ item, today }) => {
 					minimumFractionDigits: 2,
 					maximumFractionDigits: 2
 				})}{' '}
-				€
+				<StyledCurrency>€</StyledCurrency>
 			</StyledPrice>
 
 			<StyledBids>

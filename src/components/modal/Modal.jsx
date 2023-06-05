@@ -5,8 +5,8 @@ const Modal = ({ setModalContent, children }) => {
 	if (!children) return;
 
 	return createPortal(
-		<StyledBackground>
-			<StyledModal>{children}</StyledModal>
+		<StyledBackground onClick={() => setModalContent(null)}>
+			<StyledModal onClick={e => e.stopPropagation()}>{children}</StyledModal>
 		</StyledBackground>,
 		document.getElementById('modal')
 	);

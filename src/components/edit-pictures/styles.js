@@ -52,9 +52,9 @@ const StyledPreview = styled.img`
 const StyledErrorContainer = styled.div`
 	margin: 0;
 	padding: 0 1rem;
-	color: ${COLORS.errorPrimary};
-	background-color: ${COLORS.errorSecondary};
-	border: 1px solid ${COLORS.errorPrimary};
+	color: ${COLORS.warningForeground};
+	background-color: ${COLORS.warningBackground};
+	border: 1px solid ${COLORS.warningBorder};
 	border-radius: 8px;
 `;
 

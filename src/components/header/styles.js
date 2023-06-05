@@ -4,6 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 const StyledHeader = styled.header`
 	background-color: ${COLORS.light100};
+	color: ${COLORS.black};
 	padding: 0.5rem 0;
 
 	@media screen and (min-width: 576px) {

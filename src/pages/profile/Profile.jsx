@@ -17,6 +17,7 @@ import {
 } from './styles';
 import { SignOut } from '@phosphor-icons/react';
 import { MESSAGES } from '../../constants/messages';
+import { COLORS } from '../../constants/colors';
 
 const Profile = () => {
 	const { loggedUser } = useContext(AuthContext);
@@ -42,7 +43,7 @@ const Profile = () => {
 
 				<StyledFlexContainer pointer>
 					<StyledPictureRow onClick={() => logout(navigate)}>
-						<SignOut size={48} />
+						<SignOut size={48} color={COLORS.black} />
 					</StyledPictureRow>
 					<StyledTextRow>
 						<span onClick={() => logout(navigate)}>Cerrar sesión</span>

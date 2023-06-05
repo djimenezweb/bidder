@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { BOX_SHADOWS, COLORS } from '../../constants/colors';
 import { FONTS } from '../../constants/fonts';
-import { StyledButton } from '../../components/button/styles';
 
 const StyledContainer = styled.div`
 	max-width: 1200px;
@@ -26,18 +25,22 @@ const StyledInput = styled.input`
 	width: 100%;
 	margin: 0;
 	padding: 0.5rem 1rem;
-	background-color: none;
+	background-color: ${COLORS.white};
 	border: ${({ invalid }) =>
 		invalid
-			? `1px solid ${COLORS.errorPrimary}`
-			: `1px solid ${COLORS.gray400}`};
+			? `1px solid ${COLORS.warningBorder}`
+			: `1px solid ${COLORS.gray300}`};
 	border-radius: 8px;
 	font-family: ${FONTS.sans};
 	font-size: 1rem;
 
 	&:focus {
-		border: 1px solid ${COLORS.black};
+		border: 1px solid ${COLORS.accent100};
 		outline: none;
+	}
+
+	&:hover {
+		border: 1px solid ${COLORS.accent100};
 	}
 
 	&:autofill {
@@ -66,6 +69,7 @@ const StyledInputNumber = styled(StyledInput)`
 	background-color: ${COLORS.gray300};
 	width: 8rem;
 	margin: 0 1rem 0 0;
+	pointer-events: none;
 `;
 
 const StyledSelect = styled.select`
@@ -73,18 +77,11 @@ const StyledSelect = styled.select`
 	margin: 0;
 	padding: 0.5rem 1rem;
 	background-color: ${COLORS.gray300};
-	border: ${({ invalid }) =>
-		invalid
-			? `1px solid ${COLORS.errorPrimary}`
-			: `1px solid ${COLORS.gray400}`};
-	border-radius: 8px;
+	border: 1px solid ${COLORS.gray300};
+	border-radius: 0.5rem;
 	font-family: ${FONTS.sans};
 	font-size: 1rem;
-
-	&:focus {
-		border: 1px solid ${COLORS.black};
-		outline: none;
-	}
+	pointer-events: none;
 `;
 
 const StyledDate = styled.p`
@@ -102,30 +99,66 @@ const StyledTextarea = styled.textarea`
 	background-color: ${COLORS.white};
 	border: ${({ invalid }) =>
 		invalid
-			? `1px solid ${COLORS.errorPrimary}`
-			: `1px solid ${COLORS.gray400}`};
+			? `1px solid ${COLORS.warningBorder}`
+			: `1px solid ${COLORS.gray300}`};
 	border-radius: 8px;
 	font-family: ${FONTS.sans};
 	font-size: 1rem;
 
 	&:focus {
-		border: 1px solid ${COLORS.black};
+		border: 1px solid ${COLORS.accent100};
 		outline: none;
+	}
+
+	&:hover {
+		border: 1px solid ${COLORS.accent100};
 	}
 `;
 
 const StyledErrorContainer = styled.div`
 	margin: 0;
 	padding: 0 1rem;
-	color: ${COLORS.errorPrimary};
-	background-color: ${COLORS.errorSecondary};
-	border: 1px solid ${COLORS.errorPrimary};
+	color: ${COLORS.warningForeground};
+	background-color: ${COLORS.warningBackground};
+	border: 1px solid ${COLORS.warningBorder};
 	border-radius: 8px;
 `;
 
-const StyledResetButton = styled(StyledButton)``;
+// Botones
 
-const StyledSubmitButton = styled(StyledButton)``;
+const StyledButtonContainer = styled(StyledContainer)`
+	display: flex;
+	gap: 1rem;
+	justify-content: flex-end;
+`;
+
+const StyledButton = styled.button`
+	font-size: 1rem;
+	font-weight: 400;
+	padding: 0.5em 1em;
+	border-radius: 0.5rem;
+`;
+
+const StyledResetButton = styled(StyledButton)`
+	background-color: transparent;
+	color: ${COLORS.accent300};
+	border: 1px solid ${COLORS.accent300};
+
+	&:hover {
+		color: ${COLORS.accent100};
+		border: 1px solid ${COLORS.accent100};
+	}
+`;
+
+const StyledSubmitButton = styled(StyledButton)`
+	background-color: ${COLORS.accent100};
+	color: ${COLORS.white};
+	border: 1px solid ${COLORS.accent100};
+
+	&:hover {
+		background-color: ${COLORS.accent200};
+	}
+`;
 
 export {
 	StyledContainer,
@@ -138,6 +171,7 @@ export {
 	StyledTextarea,
 	StyledDate,
 	StyledErrorContainer,
+	StyledButtonContainer,
 	StyledResetButton,
 	StyledSubmitButton
 };

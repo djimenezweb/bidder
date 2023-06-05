@@ -29,8 +29,9 @@ const AuctionStatus = ({ highestBid, highestBidder, endDate, seller }) => {
 	if (timeSpan <= 0 && highestBidder === loggedUser?.email) {
 		return (
 			<StyledGridItem2Cols
-				primaryColor={COLORS.successForeground}
-				secondaryColor={COLORS.successBackground}
+				foregroundColor={COLORS.successForeground}
+				backgroundColor={COLORS.successBackground}
+				borderColor={COLORS.successBackground}
 			>
 				{STATUS.winner}
 			</StyledGridItem2Cols>
@@ -40,8 +41,9 @@ const AuctionStatus = ({ highestBid, highestBidder, endDate, seller }) => {
 	if (highestBidder === loggedUser?.email) {
 		return (
 			<StyledGridItem2Cols
-				primaryColor={COLORS.successForeground}
-				secondaryColor={COLORS.successBackground}
+				foregroundColor={COLORS.successForeground}
+				backgroundColor={COLORS.successBackground}
+				borderColor={COLORS.successBackground}
 			>
 				{STATUS.highestBidder} {highestBid} EUR.
 			</StyledGridItem2Cols>

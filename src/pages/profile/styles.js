@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { COLORS } from '../../constants/colors';
 
 const StyledGrid = styled.div`
 	margin-top: 2rem;
@@ -39,6 +40,7 @@ const StyledTextRow = styled.div`
 `;
 
 const StyledStrongSpan = styled.span`
+	color: ${COLORS.accent100};
 	font-weight: 800;
 `;
 

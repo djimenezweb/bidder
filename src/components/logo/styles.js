@@ -11,7 +11,7 @@ const StyledLogo = styled.h1`
 	letter-spacing: auto;
 
 	&::first-letter {
-		color: ${COLORS.accent100};
+		color: ${COLORS.warningForeground};
 	}
 
 	@media screen and (min-width: 576px) {

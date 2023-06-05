@@ -12,6 +12,10 @@ const StyledRow = styled.div`
 	padding: 1rem;
 	cursor: pointer;
 
+	&:hover {
+		background-color: ${COLORS.gray100};
+	}
+
 	&:first-child {
 		border-top-left-radius: 0.5rem;
 		border-top-right-radius: 0.5rem;
@@ -61,6 +65,10 @@ const StyledTitle = styled.p`
 	overflow: hidden;
 	text-overflow: ellipsis;
 
+	${StyledRow}:hover & {
+		color: ${COLORS.accent100};
+	}
+
 	@media screen and (min-width: 960px) {
 		justify-self: start;
 	}
@@ -72,7 +80,8 @@ const StyledPrice = styled.p`
 `;
 
 const StyledCurrency = styled.span`
-	opacity: 0.5;
+	color: ${COLORS.gray400};
+	font-weight: 200;
 `;
 
 const StyledBids = styled.p`

@@ -18,6 +18,10 @@ const StyledButton = styled.button`
 		opacity: 0.9;
 		// background-color: ${COLORS.accent200};
 	}
+
+	&:focus {
+		outline: 1px solid black;
+	}
 `;
 
 export { StyledButton };

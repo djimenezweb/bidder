@@ -13,12 +13,12 @@ const StyledSearchContainer = styled.div`
 	display: flex;
 	border-radius: 2rem;
 	border: ${({ focus }) =>
-		focus ? `1px solid ${COLORS.black}` : `1px solid ${COLORS.gray300}`};
+		focus ? `1px solid ${COLORS.accent300}` : `1px solid ${COLORS.gray300}`};
 	overflow: hidden;
 	box-shadow: ${BOX_SHADOWS.small};
 
 	&:hover {
-		border: 1px solid ${COLORS.black};
+		border: 1px solid ${COLORS.accent300};
 	}
 `;
 

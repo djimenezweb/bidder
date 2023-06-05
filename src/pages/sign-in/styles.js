@@ -3,17 +3,12 @@ import { FONTS } from '../../constants/fonts';
 import { BOX_SHADOWS, COLORS } from '../../constants/colors';
 import { StyledButton } from '../../components/button/styles';
 
-/* const StyledBackground = styled.div`
-	background-color: ${COLORS.gray200};
-	min-height: 100vh;
-	padding: calc(1rem + 10vh) 0 1rem;
-`; */
-
 const StyledContainer = styled.div`
 	width: min(100%, 448px);
 	margin: 2rem auto 1rem;
 	padding: 2rem;
 	background-color: ${COLORS.white};
+	color: ${COLORS.accent300};
 	border-radius: 0.5rem;
 	box-shadow: ${BOX_SHADOWS.default};
 `;
@@ -42,7 +37,7 @@ const StyledInput = styled.input`
 		invalid
 			? `1px solid ${COLORS.warningBorder}`
 			: `1px solid ${COLORS.gray200}`};
-	border-radius: 2rem;
+	border-radius: 0.5rem;
 	font-family: ${FONTS.sans};
 	font-size: 1rem;
 

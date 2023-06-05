@@ -63,7 +63,12 @@ const Header = () => {
 						</>
 					) : (
 						<li>
-							<NavLink to='/signin'>Acceder</NavLink>
+							<NavLink
+								to='/signin'
+								onClick={() => openMenu && setOpenMenu(false)}
+							>
+								Acceder
+							</NavLink>
 						</li>
 					)}
 				</StyledList>

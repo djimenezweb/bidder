@@ -47,19 +47,26 @@ const StyledPrice = styled.p`
 	margin: 0;
 	font-size: 1.5rem;
 	font-weight: 600;
+	color: ${COLORS.accent100};
+`;
+
+const StyledCurrency = styled.span`
+	font-size: 1.5rem;
+	font-weight: 300;
 `;
 
 const StyledBids = styled.p`
 	margin: 0;
-	font-size: 1rem;
-	opacity: 0.5;
+	font-size: 0.9rem;
+	font-weight: 600;
+	color: ${COLORS.accent300};
 `;
 
 const StyledTimeLeft = styled.p`
 	margin: 0;
 	font-size: 0.9rem;
 	color: ${({ color }) =>
-		color <= 3600000 ? COLORS.errorPrimary : COLORS.accent400};
+		color <= 3600000 ? COLORS.warningForeground : COLORS.accent300};
 `;
 
 export {
@@ -70,6 +77,7 @@ export {
 	StyledTitle,
 	StyledInfo,
 	StyledPrice,
+	StyledCurrency,
 	StyledBids,
 	StyledTimeLeft
 };

@@ -8,12 +8,13 @@ const StyledGridItem2Cols = styled.div`
 	justify-content: center;
 	align-items: center;
 	gap: 0.5rem;
-	font-size: 1.25rem;
+	font-size: 1rem;
 	border: 1px solid ${COLORS.gray300};
 	border-radius: 0.5rem;
 	color: ${({ foregroundColor }) => foregroundColor || 'inherit'};
-	background-color: ${({ primaryColor }) => primaryColor || 'transparent'};
-	border: 1px solid ${({ secondaryColor }) => secondaryColor || COLORS.gray300};
+	background-color: ${({ backgroundColor }) =>
+		backgroundColor || COLORS.light200};
+	border: 1px solid ${({ borderColor }) => borderColor || COLORS.gray300};
 
 	@media screen and (min-width: 960px) {
 		font-size: 1.25rem;

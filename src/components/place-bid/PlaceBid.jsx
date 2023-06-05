@@ -70,10 +70,11 @@ const updateAuction = async (
 	newHighestBid,
 	newHighestBidder,
 	setBid,
-	newBids
+	newBids,
+	email
 ) => {
 	const itemToUpdate = doc(db, 'items', id);
-	const userToUpdate = doc(db, 'users', newHighestBidder);
+	const userToUpdate = doc(db, 'users', email);
 	try {
 		await updateDoc(itemToUpdate, {
 			currentPrice: newPrice,
@@ -113,8 +114,9 @@ const handleSubmit = async (
 		console.log('Bid must be higher than current price');
 		setStatus({
 			text: STATUS.lowPrice,
-			primaryColor: COLORS.warningPrimary,
-			secondaryColor: COLORS.warningSecondary
+			backgroundColor: COLORS.warningBackground,
+			foregroundColor: COLORS.warningForeground,
+			borderColor: COLORS.warningBorder
 		});
 		return;
 	}
@@ -122,24 +124,31 @@ const handleSubmit = async (
 	// Invalid: Bid is lower than your own previous bid
 	if (highestBidder === email && bid < highestBid) {
 		console.log('Bid must be higher than your max price');
-		// setStatus(`${STATUS.lowerThanMaxPrice} (${highestBid} EUR)`);
 		setStatus({
 			text: `${STATUS.lowerThanMaxPrice} (${highestBid} EUR)`,
-			primaryColor: COLORS.warningPrimary,
-			secondaryColor: COLORS.warningSecondary
+			backgroundColor: COLORS.warningBackground,
+			foregroundColor: COLORS.warningForeground,
+			borderColor: COLORS.warningBorder
 		});
 		return;
 	}
 
 	// First bidder
 	if (highestBid === 0) {
-		// console.log('First bidder');
-		// newHighestBid = bid;
-		// newPrice = currentPrice;
-		// newHighestBidder = email;
-		await updateAuction(id, currentPrice, bid, email, setBid, newBids);
+		console.log('First bidder');
+		newHighestBid = bid;
+		newPrice = currentPrice;
+		newHighestBidder = email;
+		await updateAuction(
+			id,
+			newPrice,
+			newHighestBid,
+			newHighestBidder,
+			setBid,
+			newBids,
+			email
+		);
 		setStatus(null);
-		// updateAuction(id, newPrice, newHighestBid, newHighestBidder, setBid);
 		return;
 	}
 
@@ -161,7 +170,8 @@ const handleSubmit = async (
 			newHighestBid,
 			newHighestBidder,
 			setBid,
-			newBids
+			newBids,
+			email
 		);
 		setStatus(null);
 		return;
@@ -185,13 +195,15 @@ const handleSubmit = async (
 			newHighestBid,
 			newHighestBidder,
 			setBid,
-			newBids
+			newBids,
+			email
 		);
 		// setStatus(STATUS.outBid);
 		setStatus({
 			text: STATUS.outBid,
-			primaryColor: COLORS.warningPrimary,
-			secondaryColor: COLORS.warningSecondary
+			backgroundColor: COLORS.warningBackground,
+			foregroundColor: COLORS.warningForeground,
+			borderColor: COLORS.warningBorder
 		});
 
 		return;
@@ -202,8 +214,9 @@ const handleSubmit = async (
 	// setStatus(STATUS.invalid);
 	setStatus({
 		text: STATUS.invalid,
-		primaryColor: COLORS.warningPrimary,
-		secondaryColor: COLORS.warningSecondary
+		backgroundColor: COLORS.warningBackground,
+		foregroundColor: COLORS.warningForeground,
+		borderColor: COLORS.warningBorder
 	});
 };
 

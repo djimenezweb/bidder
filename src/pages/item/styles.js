@@ -3,6 +3,11 @@ import { BOX_SHADOWS, COLORS } from '../../constants/colors';
 
 const StyledGrid = styled.div`
 	padding: 2rem 0;
+
+	& > :first-child {
+		margin-bottom: 2rem;
+	}
+
 	@media screen and (min-width: 768px) {
 		display: grid;
 		gap: 2rem;
@@ -19,21 +24,33 @@ const StyledGrid = styled.div`
 const StyledTitle = styled.h2`
 	margin: 0 0 2rem;
 	font-size: 2.5rem;
-	line-height: 1;
+	line-height: 1.3;
 	font-weight: 500;
 	color: ${COLORS.accent300};
+`;
+
+const StyledName = styled.span`
+	color: ${COLORS.accent100};
+	font-weight: 800;
+
+	&:hover {
+		color: ${COLORS.accent200};
+		text-decoration: underline;
+	}
 `;
 
 const StyledDetailsGrid = styled.div`
 	width: min(100%, 46rem);
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	grid-auto-rows: 3rem;
+	grid-template-rows: repeat(4, 3rem);
+	// grid-auto-rows: 3rem;
 	place-items: stretch stretch;
 	gap: 1rem;
 
 	@media screen and (min-width: 960px) {
-		grid-auto-rows: 4rem;
+		grid-template-rows: repeat(4, 4rem);
+		// grid-auto-rows: 4rem;
 	}
 `;
 
@@ -53,7 +70,8 @@ const StyledGridItem = styled.div`
 `;
 
 const StyledCurrency = styled.span`
-	opacity: 0.5;
+	color: ${COLORS.gray400};
+	// opacity: 0.5;
 `;
 
 const StyledGridItem2Cols = styled(StyledGridItem)`
@@ -95,7 +113,7 @@ const StyledEditButton = styled(StyledSpecialButton)`
 	background-color: ${COLORS.accent100};
 	border: 1px solid ${COLORS.gray300};
 	&:hover {
-		background-color: ${COLORS.accent100};
+		background-color: ${COLORS.accent200};
 	}
 	&:disabled {
 		background-color: ${COLORS.gray300};
@@ -107,8 +125,10 @@ const StyledEditButton = styled(StyledSpecialButton)`
 const StyledDeleteButton = styled(StyledSpecialButton)`
 	background-color: ${COLORS.warningBackground};
 	border: 1px solid ${COLORS.warningBorder};
+	color: ${COLORS.warningForeground};
 	&:hover {
 		background-color: ${COLORS.warningForeground};
+		color: ${COLORS.white};
 	}
 `;
 
@@ -144,17 +164,18 @@ const StyledDotContainer = styled.div`
 
 const StyledDot = styled.div`
 	background-color: ${({ active }) =>
-		active ? `${COLORS.gray400}` : 'transparent'};
+		active ? `${COLORS.accent100}` : 'transparent'};
 	width: 8px;
 	aspect-ratio: 1;
 	border-radius: 50%;
-	border: 1px solid ${COLORS.gray400};
+	border: 1px solid ${COLORS.accent100};
 	cursor: pointer;
 `;
 
 export {
 	StyledGrid,
 	StyledTitle,
+	StyledName,
 	StyledDetailsGrid,
 	StyledGridItem,
 	StyledGridItem2Cols,

@@ -11,9 +11,9 @@ const StyledGrid = styled.div`
 const StyledAddPictureButton = styled.div`
 	width: 100px;
 	height: 100px;
-	opacity: 0.5;
 	background-color: transparent;
-	border: 2px dashed ${COLORS.black};
+	border: 2px dashed ${COLORS.gray400};
+	color: ${COLORS.gray400};
 	border-radius: 0.5rem;
 	display: flex;
 	justify-content: center;
@@ -22,7 +22,8 @@ const StyledAddPictureButton = styled.div`
 	cursor: pointer;
 
 	&:hover {
-		opacity: 1;
+		border: 2px dashed ${COLORS.accent100};
+		color: ${COLORS.accent100};
 	}
 `;
 
@@ -37,7 +38,9 @@ const StyledPreviewContainer = styled.div`
 		background-repeat: no-repeat;
 		position: absolute;
 		inset: 0;
-		background-color: rgba(255 255 255 / 0.5);
+		background-color: rgba(255 255 255 / 0.7);
+		border: 2px dashed ${COLORS.warningBorder};
+		border-radius: 0.5rem;
 		z-index: 10;
 	}
 `;
@@ -52,9 +55,9 @@ const StyledPreview = styled.img`
 const StyledErrorContainer = styled.div`
 	margin: 0;
 	padding: 0 1rem;
-	color: ${COLORS.errorPrimary};
-	background-color: ${COLORS.errorSecondary};
-	border: 1px solid ${COLORS.errorPrimary};
+	color: ${COLORS.warningForeground};
+	background-color: ${COLORS.warningBackground};
+	border: 1px solid ${COLORS.warningBorder};
 	border-radius: 8px;
 `;
 

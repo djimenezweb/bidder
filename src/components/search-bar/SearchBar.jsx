@@ -5,6 +5,7 @@ import {
 	StyledSearchButton,
 	StyledSearchContainer
 } from './styles';
+import { COLORS } from '../../constants/colors';
 import { useState } from 'react';
 
 const SearchBar = ({ allItems, setSearchResults }) => {
@@ -13,7 +14,7 @@ const SearchBar = ({ allItems, setSearchResults }) => {
 		<StyledForm onSubmit={e => handleSubmit(e)}>
 			<StyledSearchContainer focus={focus}>
 				<StyledSearchButton>
-					<MagnifyingGlass size={32} />
+					<MagnifyingGlass size={32} color={COLORS.accent100} />
 				</StyledSearchButton>
 				<StyledInput
 					type='search'
