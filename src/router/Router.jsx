@@ -67,7 +67,10 @@ const Router = () => {
 					}
 				/>
 				<Route path='/login' element={<Navigate to='/signin' />} />
-				<Route path='*' element={<Error>{MESSAGES.notFound}</Error>} />
+				<Route
+					path='*'
+					element={<Error backButton>{MESSAGES.notFound}</Error>}
+				/>
 			</Route>
 		</Routes>
 	);

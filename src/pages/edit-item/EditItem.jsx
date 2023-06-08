@@ -27,7 +27,7 @@ const EditItem = () => {
 	const navigate = useNavigate();
 	const { state } = useLocation();
 	const { loggedUser } = useContext(AuthContext);
-	if (!state) return <Error>{MESSAGES.cannotEdit}</Error>;
+	if (!state) return <Error backButton>{MESSAGES.cannotEdit}</Error>;
 
 	const INITIAL_ITEM = {
 		title: state.title,

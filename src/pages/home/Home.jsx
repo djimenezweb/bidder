@@ -59,9 +59,7 @@ const Home = () => {
 		<>
 			<SearchBar allItems={allItems} setSearchResults={setSearchResults} />
 
-			{searchResults.length === 0 && (
-				<Error type={'small'}>{MESSAGES.noResults}</Error>
-			)}
+			{searchResults.length === 0 && <Error>{MESSAGES.noResults}</Error>}
 
 			<StyledGrid>
 				{searchResults.map(item => (
