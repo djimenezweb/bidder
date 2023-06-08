@@ -41,7 +41,7 @@ const Profile = () => {
 					</StyledTextRow>
 				</StyledFlexContainer>
 
-				<StyledFlexContainer pointer>
+				<StyledFlexContainer clickable>
 					<StyledPictureRow onClick={() => logout(navigate)}>
 						<SignOut size={48} color={COLORS.black} />
 					</StyledPictureRow>

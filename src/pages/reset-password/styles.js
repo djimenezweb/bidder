@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 import { FONTS } from '../../constants/fonts';
 import { BOX_SHADOWS, COLORS } from '../../constants/colors';
-import { Link } from 'react-router-dom';
 
 const StyledContainer = styled.div`
 	width: min(100%, 448px);
@@ -90,14 +89,10 @@ const StyledErrorContainer = styled.div`
 	background-color: ${COLORS.warningBackground};
 `;
 
-const StyledLink = styled(Link)`
-	display: block;
-	font-size: 0.9rem;
-	text-align: center;
-
-	&:hover {
-		opacity: 0.7;
-	}
+const StyledSuccessContainer = styled(StyledErrorContainer)`
+	color: ${COLORS.successForeground};
+	border: 1px solid ${COLORS.successBorder};
+	background-color: ${COLORS.successBackground};
 `;
 
 export {
@@ -107,6 +102,6 @@ export {
 	StyledFormField,
 	StyledInput,
 	StyledErrorContainer,
-	StyledSignInButton,
-	StyledLink
+	StyledSuccessContainer,
+	StyledSignInButton
 };

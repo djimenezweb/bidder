@@ -19,7 +19,7 @@ export const MESSAGES = {
 		'¿Seguro que deseas borrar este anuncio y las imágenes vinculadas?',
 	irreversible: 'Esta acción no se puede deshacer.',
 	loading: 'Cargando...',
-	noResults: 'No hay resultados.',
+	noResults: 'No hay resultados',
 	myAuctions: 'Mis subastas',
 	myItems: 'Mis anuncios',
 	nullAuctions: 'Todavía no has pujado en ninguna subasta',
@@ -31,4 +31,23 @@ export const MESSAGES = {
 	requiredPicture: 'Es necesario subir al menos 1 foto',
 	invalidStartingPrice:
 		'Introduce un número válido. El precio debe ser igual o mayor que 1 EUR.'
+};
+
+export const AUTH_MESSAGES = {
+	back: 'Volver',
+	signIn: 'Inicia sesión',
+	signInButton: 'Iniciar sesión',
+	signInQuestion: '¿Ya tienes una cuenta? Inicia sesión',
+	signInOptions: 'más opciones',
+	resetPassword: 'Recordar contraseña',
+	register: 'Crea una cuenta',
+	registerButton: 'Crear cuenta',
+	registerQuestion: '¿No tienes cuenta? ¡Regístrate!',
+	emailPHolder: 'email',
+	passwordPHolder: 'contraseña',
+	repeatPasswordPHolder: 'repite tu contraseña',
+	userNamePHolder: 'nombre de usuario',
+	wGoogle: 'con Google',
+	wGitHub: 'con GitHub',
+	checkEmail: 'Comprueba tu correo electrónico'
 };

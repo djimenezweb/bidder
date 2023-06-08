@@ -109,10 +109,18 @@ const AddItem = () => {
 							})}
 						</StyledSelect>
 					</div>
-					<StyledDate>
-						La subasta terminará el {printDate(formData.duration)} a las{' '}
-						{printTime()}
-					</StyledDate>
+
+					{formData.duration === '0' ? (
+						<StyledDate>
+							La subasta terminará dentro de 5 minutos.{' '}
+							<strong>Esta opción sólo está para hacer pruebas.</strong>
+						</StyledDate>
+					) : (
+						<StyledDate>
+							La subasta terminará el {printDate(formData.duration)} a las{' '}
+							{printTime()}
+						</StyledDate>
+					)}
 				</StyledFlexContainer>
 
 				<StyledFormField>

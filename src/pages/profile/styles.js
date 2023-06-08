@@ -18,7 +18,11 @@ const StyledFlexContainer = styled.div`
 	display: flex;
 	align-items: center;
 	gap: 1rem;
-	cursor: ${({ pointer }) => (pointer ? 'pointer' : 'arrow')};
+	cursor: ${({ clickable }) => (clickable ? 'pointer' : 'arrow')};
+
+	&:hover {
+		opacity: ${({ clickable }) => (clickable ? 0.7 : 1)};
+	}
 `;
 
 const StyledPictureRow = styled.div`

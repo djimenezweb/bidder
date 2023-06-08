@@ -28,6 +28,7 @@ import {
 } from './styles';
 import SignInOptions from '../../components/sign-in-options/SignInOptions';
 import { useState } from 'react';
+import { AUTH_MESSAGES } from '../../constants/messages';
 
 const SignUp = () => {
 	const navigate = useNavigate();
@@ -42,7 +43,7 @@ const SignUp = () => {
 	return (
 		<>
 			<StyledContainer>
-				<StyledTitle>Crea una cuenta</StyledTitle>
+				<StyledTitle>{AUTH_MESSAGES.register}</StyledTitle>
 				<form
 					onSubmit={handleSubmit((data, e) =>
 						onSubmit(data, e, navigate, setAuthErrors)
@@ -55,7 +56,7 @@ const SignUp = () => {
 							name='newDisplayName'
 							id='newDisplayName'
 							autoComplete='off'
-							placeholder='nombre de usuario'
+							placeholder={AUTH_MESSAGES.userNamePHolder}
 							{...register('newDisplayName', FORM_VALIDATION.name)}
 							invalid={errors?.newDisplayName?.message}
 						/>
@@ -66,7 +67,7 @@ const SignUp = () => {
 							name='newEmail'
 							id='newEmail'
 							autoComplete='off'
-							placeholder='email'
+							placeholder={AUTH_MESSAGES.emailPHolder}
 							{...register('newEmail', FORM_VALIDATION.email)}
 							invalid={errors?.newEmail?.message}
 						/>
@@ -77,7 +78,7 @@ const SignUp = () => {
 							name='newPassword'
 							id='newPassword'
 							autoComplete='new-password'
-							placeholder='contraseña'
+							placeholder={AUTH_MESSAGES.passwordPHolder}
 							{...register('newPassword', FORM_VALIDATION.password)}
 							invalid={errors?.newPassword?.message}
 						/>
@@ -88,7 +89,7 @@ const SignUp = () => {
 							name='repeatPassword'
 							id='repeatPassword'
 							autoComplete='new-password'
-							placeholder='repite tu contraseña'
+							placeholder={AUTH_MESSAGES.repeatPasswordPHolder}
 							{...register('repeatPassword', {
 								required: 'Es obligatorio comprobar la contraseña',
 								validate: value => validatePasswords(value, getValues)
@@ -107,13 +108,15 @@ const SignUp = () => {
 						</StyledErrorContainer>
 					)}
 
-					<StyledSignUpButton>Crear cuenta</StyledSignUpButton>
+					<StyledSignUpButton>
+						{AUTH_MESSAGES.registerButton}
+					</StyledSignUpButton>
 				</form>
 				<SignInOptions />
 			</StyledContainer>
 
 			<StyledSmallContainer onClick={() => navigate('/signin')}>
-				¿Ya tienes una cuenta? Inicia sesión
+				{AUTH_MESSAGES.signInQuestion}
 			</StyledSmallContainer>
 		</>
 	);

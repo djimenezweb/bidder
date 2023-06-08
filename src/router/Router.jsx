@@ -16,6 +16,7 @@ import Error from '../pages/error/Error';
 import SellerItems from '../pages/seller-items/SellerItems';
 import RedirectLoggedUser from './RedirectLoggedUser';
 import { MESSAGES } from '../constants/messages';
+import ResetPassword from '../pages/reset-password/ResetPassword';
 
 const Router = () => {
 	return (
@@ -49,7 +50,6 @@ const Router = () => {
 						</RedirectLoggedUser>
 					}
 				/>
-				<Route path='/login' element={<Navigate to='/signin' />} />
 				<Route
 					path='/signup'
 					element={
@@ -58,6 +58,15 @@ const Router = () => {
 						</RedirectLoggedUser>
 					}
 				/>
+				<Route
+					path='/reset'
+					element={
+						<RedirectLoggedUser>
+							<ResetPassword />
+						</RedirectLoggedUser>
+					}
+				/>
+				<Route path='/login' element={<Navigate to='/signin' />} />
 				<Route path='*' element={<Error>{MESSAGES.notFound}</Error>} />
 			</Route>
 		</Routes>

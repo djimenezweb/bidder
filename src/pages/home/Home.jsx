@@ -6,6 +6,7 @@ import SmallItem from '../../components/small-item/SmallItem';
 import { StyledGrid } from './styles';
 import { MESSAGES } from '../../constants/messages';
 import Loader from '../../components/loader/Loader';
+import Error from '../error/Error';
 
 const Home = () => {
 	const today = new Date();
@@ -58,7 +59,9 @@ const Home = () => {
 		<>
 			<SearchBar allItems={allItems} setSearchResults={setSearchResults} />
 
-			{searchResults.length === 0 && <p>{MESSAGES.noResults}</p>}
+			{searchResults.length === 0 && (
+				<Error type={'small'}>{MESSAGES.noResults}</Error>
+			)}
 
 			<StyledGrid>
 				{searchResults.map(item => (

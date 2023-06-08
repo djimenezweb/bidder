@@ -9,23 +9,25 @@ import {
 	handleGithubLogin,
 	handleGoogleLogin
 } from '../../utils/sign-in-providers';
+import { AUTH_MESSAGES } from '../../constants/messages';
 
 const SignInOptions = () => {
 	const navigate = useNavigate();
 	return (
 		<>
 			<StyledSeparator>
-				<span>más opciones</span>
+				<span>{AUTH_MESSAGES.signInOptions}</span>
 			</StyledSeparator>
 			<StyledButtonsContainer>
 				<StyledGoogleSignInButton onClick={() => handleGoogleLogin(navigate)}>
-					Iniciar sesión
+					{AUTH_MESSAGES.signInButton}
 					<br />
-					con Google
+					{AUTH_MESSAGES.wGoogle}
 				</StyledGoogleSignInButton>
 				<StyledGithubSignInButton onClick={() => handleGithubLogin(navigate)}>
-					Iniciar sesión <br />
-					con GitHub
+					{AUTH_MESSAGES.signInButton}
+					<br />
+					{AUTH_MESSAGES.wGitHub}
 				</StyledGithubSignInButton>
 			</StyledButtonsContainer>
 		</>
