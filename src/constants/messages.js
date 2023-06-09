@@ -15,15 +15,23 @@ export const STATUS = {
 };
 
 export const MESSAGES = {
+	bid: 'puja',
+	bids: 'pujas',
+	currency: 'EUR',
+	currencySymbol: '€',
 	deleteWarning:
 		'¿Seguro que deseas borrar este anuncio y las imágenes vinculadas?',
 	irreversible: 'Esta acción no se puede deshacer.',
+	deleteItem: 'Eliminar anuncio',
+	editItem: 'Editar anuncio',
 	loading: 'Cargando...',
 	noResults: 'No hay resultados',
 	myAuctions: 'Mis subastas',
 	myItems: 'Mis anuncios',
+	myFavs: 'Mis favoritos',
 	nullAuctions: 'Todavía no has pujado en ninguna subasta',
 	nullItems: 'Todavía no has publicado ningún anuncio',
+	nullFavs: 'Todavía no tienes ningún anuncio favorito',
 	notFound: 'Página no encontrada',
 	cannotEdit: 'No tienes permiso para editar este anuncio',
 	requiredTitle: 'Título necesario',

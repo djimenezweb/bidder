@@ -16,10 +16,10 @@ export const printTimeLeft = timeSpan => {
 	}
 	// 1 día
 	if (timeSpan <= 86400000) {
-		return `${hoursLeft}h`;
+		return `${hoursLeft} horas`;
 	}
 	if (daysLeft === 1) {
 		return `${daysLeft} día`;
 	}
-	return `${daysLeft} días y ${hoursLeft} horas`;
+	return `${daysLeft} d ${hoursLeft} h`;
 };

@@ -34,9 +34,10 @@ main {
   // min-height: calc(100% - 68px);
   width: min(75rem, 100% - 2rem);
   margin: 0 auto;
+  padding: 0 0 1rem;
 }
 
-img, video {
+img, svg, video {
   max-width: 100%;
   display: block;
 }

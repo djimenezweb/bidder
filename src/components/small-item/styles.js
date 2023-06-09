@@ -18,8 +18,7 @@ const StyledImageContainer = styled.div`
 const StyledFlexContainer = styled.div`
 	display: flex;
 	justify-content: space-between;
-	align-items: flex-start;
-	gap: 0.5rem;
+	align-items: center;
 `;
 
 const StyledInfo = styled.div`
@@ -55,6 +54,12 @@ const StyledCurrency = styled.span`
 	font-weight: 300;
 `;
 
+const StyledFavContainer = styled.div`
+	cursor: pointer;
+	position: relative;
+	z-index: 10;
+`;
+
 const StyledBids = styled.p`
 	margin: 0;
 	font-size: 0.9rem;
@@ -62,11 +67,17 @@ const StyledBids = styled.p`
 	color: ${COLORS.accent300};
 `;
 
-const StyledTimeLeft = styled.p`
-	margin: 0;
-	font-size: 0.9rem;
+const StyledTimeLeft = styled.span`
+	font-weight: 400;
 	color: ${({ color }) =>
 		color <= 3600000 ? COLORS.accentSecondary : COLORS.accent300};
+
+	&::before {
+		content: '·';
+		position: relative;
+		margin: 0 0.5rem 0;
+		font-weight: 600;
+	}
 `;
 
 export {
@@ -78,6 +89,7 @@ export {
 	StyledInfo,
 	StyledPrice,
 	StyledCurrency,
+	StyledFavContainer,
 	StyledBids,
 	StyledTimeLeft
 };

@@ -251,6 +251,7 @@ const handleSubmit = async (
 			highestBid: 0,
 			highestBidder: '',
 			bids: 0,
+			favs: 0,
 			creationDate: today.toISOString(),
 			endDate: endDate.toISOString(),
 			pictures: allUrls

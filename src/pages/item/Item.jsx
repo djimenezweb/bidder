@@ -15,24 +15,31 @@ import {
 	StyledDot,
 	StyledDotContainer,
 	StyledEditButton,
+	StyledFavContainer,
+	StyledFavCounter,
 	StyledGrid,
 	StyledGridItem,
 	StyledGridItem2Cols,
 	StyledName,
 	StyledStatusContainer,
-	StyledTitle
+	StyledTitle,
+	StyledTitleContainer
 } from './styles';
 import { ClockCountdown, PencilSimple, XCircle } from '@phosphor-icons/react';
 import Modal from '../../components/modal/Modal';
 import { COLORS } from '../../constants/colors';
 import Loader from '../../components/loader/Loader';
+import { MESSAGES } from '../../constants/messages';
+import Fav from '../../components/fav/Fav';
+import { handleFav } from '../../utils/toggle-fav';
 
 const Item = () => {
 	const { itemId } = useParams();
 	const [item, setItem] = useState(null);
 	const [modalContent, setModalContent] = useState(null);
 	const [activePicture, setActivePicture] = useState(0);
-	const { loggedUser } = useContext(AuthContext);
+	const { loggedUser, setLoggedUser } = useContext(AuthContext);
+	const isFav = loggedUser?.myFavs.includes(itemId);
 	const navigate = useNavigate();
 
 	useEffect(() => {
@@ -44,7 +51,6 @@ const Item = () => {
 				return 0;
 			});
 			setItem(response);
-			console.log(response);
 		});
 
 		return () => unsub();
@@ -86,7 +92,25 @@ const Item = () => {
 					</div>
 				)}
 				<div>
-					<StyledTitle>{item.title}</StyledTitle>
+					<StyledTitleContainer>
+						<StyledTitle>{item.title}</StyledTitle>
+						<StyledFavContainer
+							onClickCapture={e =>
+								handleFav(
+									e,
+									navigate,
+									loggedUser,
+									setLoggedUser,
+									itemId,
+									isFav,
+									item.favs
+								)
+							}
+						>
+							<Fav size={64} isFav={isFav} />
+							<StyledFavCounter isFav={isFav}>{item.favs}</StyledFavCounter>
+						</StyledFavContainer>
+					</StyledTitleContainer>
 					<p>
 						Vendido por{' '}
 						<Link to={`/usr/${item.sellerEmail}`}>
@@ -112,13 +136,13 @@ const Item = () => {
 								maximumFractionDigits: 2
 							})}
 							&nbsp;
-							<StyledCurrency>EUR</StyledCurrency>
+							<StyledCurrency>{MESSAGES.currency}</StyledCurrency>
 						</StyledGridItem>
 						<StyledGridItem>
 							{item.bids} {Number(item.bids) === 1 ? 'puja' : 'pujas'}
 						</StyledGridItem>
 
-						{/* Si el anuncio está activo, Si HAY loggedUser y NO ES el vendedor, puede PUJAR */}
+						{/* Si el anuncio está activo Y si HAY loggedUser Y NO ES el vendedor, puede PUJAR */}
 						{active &&
 							loggedUser?.email &&
 							loggedUser?.email !== item.sellerEmail && (
@@ -148,14 +172,14 @@ const Item = () => {
 									}
 								>
 									<XCircle size={24} color='currentColor' />
-									Borrar anuncio
+									{MESSAGES.deleteItem}
 								</StyledDeleteButton>
 								<StyledEditButton
 									onClick={() => navigate('edit', { state: item })}
 									disabled={!active}
 								>
 									<PencilSimple size={20} color='currentColor' />
-									Editar anuncio
+									{MESSAGES.editItem}
 								</StyledEditButton>
 							</>
 						)}

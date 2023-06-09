@@ -18,6 +18,7 @@ import {
 import { SignOut } from '@phosphor-icons/react';
 import { MESSAGES } from '../../constants/messages';
 import { COLORS } from '../../constants/colors';
+import MyFavs from '../my-favs/MyFavs';
 
 const Profile = () => {
 	const { loggedUser } = useContext(AuthContext);
@@ -53,6 +54,7 @@ const Profile = () => {
 			<div>
 				<MyItems user={loggedUser.email} title={MESSAGES.myItems} />
 				<MyAuctions />
+				<MyFavs />
 			</div>
 		</StyledGrid>
 	);

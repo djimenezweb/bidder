@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { BOX_SHADOWS, COLORS } from '../../constants/colors';
+import { FONTS } from '../../constants/fonts';
 
 const StyledGrid = styled.div`
 	padding: 2rem 0;
@@ -21,12 +22,39 @@ const StyledGrid = styled.div`
 	}
 `;
 
+const StyledTitleContainer = styled.div`
+	display: flex;
+	justify-content: space-between;
+	align-items: start;
+	gap: 1rem;
+
+	& > :nth-child(2) {
+		margin-top: 4px;
+	}
+`;
+
 const StyledTitle = styled.h2`
 	margin: 0 0 2rem;
 	font-size: 2.5rem;
 	line-height: 1.3;
 	font-weight: 500;
 	color: ${COLORS.accent300};
+`;
+
+const StyledFavContainer = styled.div`
+	cursor: pointer;
+	position: relative;
+	z-index: 10;
+`;
+
+const StyledFavCounter = styled.span`
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -40%);
+	font-family: ${FONTS.cursive};
+	font-size: 1.25rem;
+	color: ${({ isFav }) => (isFav ? COLORS.accent200 : COLORS.gray400)};
 `;
 
 const StyledName = styled.span`
@@ -96,6 +124,7 @@ const StyledSpecialButton = styled.button`
 	font-size: 1rem;
 	font-family: inherit;
 	font-weight: 400;
+	line-height: 1.1;
 	padding: 0.5em 1em;
 	display: flex;
 	justify-content: center;
@@ -174,7 +203,10 @@ const StyledDot = styled.div`
 
 export {
 	StyledGrid,
+	StyledTitleContainer,
 	StyledTitle,
+	StyledFavContainer,
+	StyledFavCounter,
 	StyledName,
 	StyledDetailsGrid,
 	StyledGridItem,
