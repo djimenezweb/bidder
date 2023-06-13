@@ -17,7 +17,7 @@ import {
 	StyledSubmitButton,
 	StyledTextarea
 } from './styles';
-import { MESSAGES } from '../../constants/messages';
+import { LABELS, MESSAGES, TITLES } from '../../constants/messages';
 import EditPictures from '../../components/edit-pictures/EditPictures';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { AuthContext } from '../../contexts/Auth.context';
@@ -55,9 +55,9 @@ const EditItem = () => {
 			}
 		>
 			<StyledContainer>
-				<h2>Editar anuncio</h2>
+				<h2>{TITLES.editItem}</h2>
 				<StyledFormField>
-					<StyledLabel htmlFor='title'>Título</StyledLabel>
+					<StyledLabel htmlFor='title'>{LABELS.title}</StyledLabel>
 					<StyledInput
 						type='text'
 						name='title'
@@ -72,7 +72,7 @@ const EditItem = () => {
 
 				<StyledFlexContainer>
 					<div>
-						<StyledLabel htmlFor='price'>Precio</StyledLabel>
+						<StyledLabel htmlFor='price'>{LABELS.price}</StyledLabel>
 						<StyledInputNumber
 							type='number'
 							name='price'
@@ -80,23 +80,23 @@ const EditItem = () => {
 							value={formData.price}
 							disabled
 						/>
-						<span>EUR</span>
+						<span>{MESSAGES.currency}</span>
 					</div>
 
 					<div>
-						<StyledLabel htmlFor='duration'>Duración</StyledLabel>
+						<StyledLabel htmlFor='duration'>{LABELS.duration}</StyledLabel>
 						<StyledSelect
 							name='duration'
 							id='duration'
 							value={formData.duration}
 							disabled
 						>
-							<option value={''}>No se puede modificar</option>
+							<option value={''}>{LABELS.forbidden}</option>
 						</StyledSelect>
 					</div>
 				</StyledFlexContainer>
 				<StyledFormField>
-					<StyledLabel htmlFor='description'>Descripción</StyledLabel>
+					<StyledLabel htmlFor='description'>{LABELS.description}</StyledLabel>
 					<StyledTextarea
 						name='description'
 						id='description'
@@ -129,15 +129,17 @@ const EditItem = () => {
 
 			<StyledButtonContainer>
 				<StyledResetButton type='button' onClick={() => navigate(-1)}>
-					Volver
+					{MESSAGES.back}
 				</StyledResetButton>
 				<StyledResetButton
 					type='button'
 					onClick={() => setFormData(INITIAL_ITEM)}
 				>
-					Descartar cambios
+					{MESSAGES.revert}
 				</StyledResetButton>
-				<StyledSubmitButton type='submit'>Publicar cambios</StyledSubmitButton>
+				<StyledSubmitButton type='submit'>
+					{MESSAGES.submitChanges}
+				</StyledSubmitButton>
 			</StyledButtonContainer>
 		</form>
 	);

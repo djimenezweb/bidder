@@ -22,7 +22,7 @@ import {
 	StyledSubmitButton,
 	StyledTextarea
 } from './styles';
-import { MESSAGES } from '../../constants/messages';
+import { LABELS, MESSAGES, TITLES } from '../../constants/messages';
 
 const AddItem = () => {
 	const navigate = useNavigate();
@@ -56,9 +56,9 @@ const AddItem = () => {
 			}
 		>
 			<StyledContainer>
-				<h2>Crear anuncio</h2>
+				<h2>{TITLES.addItem}</h2>
 				<StyledFormField>
-					<StyledLabel htmlFor='title'>Título</StyledLabel>
+					<StyledLabel htmlFor='title'>{LABELS.title}</StyledLabel>
 					<StyledInput
 						type='text'
 						name='title'
@@ -72,7 +72,9 @@ const AddItem = () => {
 				</StyledFormField>
 				<StyledFlexContainer>
 					<div>
-						<StyledLabel htmlFor='startingPrice'>Precio de salida</StyledLabel>
+						<StyledLabel htmlFor='startingPrice'>
+							{LABELS.startingPrice}
+						</StyledLabel>
 						<StyledInputNumber
 							type='number'
 							name='startingPrice'
@@ -88,10 +90,10 @@ const AddItem = () => {
 							}
 							invalid={errors?.startingPrice}
 						/>
-						<span>EUR</span>
+						<span>{MESSAGES.currency}</span>
 					</div>
 					<div>
-						<StyledLabel htmlFor='duration'>Duración</StyledLabel>
+						<StyledLabel htmlFor='duration'>{LABELS.duration}</StyledLabel>
 						<StyledSelect
 							name='duration'
 							id='duration'
@@ -117,14 +119,16 @@ const AddItem = () => {
 						</StyledDate>
 					) : (
 						<StyledDate>
-							La subasta terminará el {printDate(formData.duration)} a las{' '}
+							{MESSAGES.printDatePre}
+							{printDate(formData.duration)}
+							{MESSAGES.printDateAt}
 							{printTime()}
 						</StyledDate>
 					)}
 				</StyledFlexContainer>
 
 				<StyledFormField>
-					<StyledLabel htmlFor='description'>Descripción</StyledLabel>
+					<StyledLabel htmlFor='description'>{LABELS.description}</StyledLabel>
 					<StyledTextarea
 						name='description'
 						id='description'
@@ -155,7 +159,7 @@ const AddItem = () => {
 
 			<StyledButtonContainer>
 				<StyledResetButton type='button' onClick={() => navigate(-1)}>
-					Volver
+					{MESSAGES.back}
 				</StyledResetButton>
 				<StyledResetButton
 					type='button'
@@ -163,9 +167,9 @@ const AddItem = () => {
 						resetForm(setFormData, INITIAL_STATE, setPictures, setErrors)
 					}
 				>
-					Borrar
+					{MESSAGES.reset}
 				</StyledResetButton>
-				<StyledSubmitButton>Publicar anuncio</StyledSubmitButton>
+				<StyledSubmitButton>{MESSAGES.submitItem}</StyledSubmitButton>
 			</StyledButtonContainer>
 		</form>
 	);

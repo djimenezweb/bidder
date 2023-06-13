@@ -27,14 +27,10 @@ const StyledTitleContainer = styled.div`
 	justify-content: space-between;
 	align-items: start;
 	gap: 1rem;
-
-	& > :nth-child(2) {
-		margin-top: 4px;
-	}
 `;
 
 const StyledTitle = styled.h2`
-	margin: 0 0 2rem;
+	margin: 0 0 1rem;
 	font-size: 2.5rem;
 	line-height: 1.3;
 	font-weight: 500;
@@ -71,14 +67,12 @@ const StyledDetailsGrid = styled.div`
 	width: min(100%, 46rem);
 	display: grid;
 	grid-template-columns: 1fr 1fr;
-	grid-template-rows: repeat(4, 3rem);
-	// grid-auto-rows: 3rem;
+	grid-template-rows: repeat(3, 3rem) minmax(3rem, auto);
 	place-items: stretch stretch;
 	gap: 1rem;
 
 	@media screen and (min-width: 960px) {
-		grid-template-rows: repeat(4, 4rem);
-		// grid-auto-rows: 4rem;
+		grid-template-rows: repeat(3, 4rem) minmax(4rem, auto);
 	}
 `;
 

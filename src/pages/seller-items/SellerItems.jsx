@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { StyledContainer } from './styles';
 import MyItems from '../my-items/MyItems';
+import { TITLES } from '../../constants/messages';
 
 const SellerItems = () => {
 	const { userEmail } = useParams();
@@ -9,10 +10,9 @@ const SellerItems = () => {
 		<StyledContainer>
 			<MyItems
 				user={userEmail}
-				title={`Los anuncios de ${userEmail.substring(
-					0,
-					userEmail.indexOf('@')
-				)}`}
+				title={
+					TITLES.sellerItems + userEmail.substring(0, userEmail.indexOf('@'))
+				}
 			/>
 		</StyledContainer>
 	);

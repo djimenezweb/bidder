@@ -17,12 +17,12 @@ const DeleteItem = ({ itemId, picturesArray, setModalContent }) => {
 			<p>{MESSAGES.irreversible}</p>
 			<StyledButtonContainer>
 				<StyledCancelButton onClick={() => setModalContent(null)}>
-					Cancelar
+					{MESSAGES.cancel}
 				</StyledCancelButton>
 				<StyledDeleteButton
 					onClick={() => handleDelete(itemId, picturesArray, navigate)}
 				>
-					Borrar anuncio
+					{MESSAGES.removeItem}
 				</StyledDeleteButton>
 			</StyledButtonContainer>
 		</>

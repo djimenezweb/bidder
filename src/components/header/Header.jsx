@@ -10,6 +10,7 @@ import {
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../contexts/Auth.context';
 import Logo from '../logo/Logo';
+import { MESSAGES } from '../../constants/messages';
 
 const Header = () => {
 	const { loggedUser } = useContext(AuthContext);
@@ -19,7 +20,7 @@ const Header = () => {
 		<StyledHeader>
 			<StyledNav>
 				<Link to='/'>
-					<Logo>bidder</Logo>
+					<Logo />
 				</Link>
 				<StyledMenuButton onClick={() => setOpenMenu(!openMenu)}>
 					<img
@@ -37,7 +38,7 @@ const Header = () => {
 								to='/additem'
 								onClick={() => openMenu && setOpenMenu(false)}
 							>
-								Crear anuncio
+								{MESSAGES.addItem}
 							</NavLink>
 						</li>
 					)}

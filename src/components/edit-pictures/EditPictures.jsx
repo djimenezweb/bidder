@@ -11,6 +11,7 @@ import { PICTURE_LIMIT } from '../../constants/add-item';
 import { deleteObject, ref } from 'firebase/storage';
 import { itemsDB, storage } from '../../config/firebase.config';
 import { arrayRemove, doc, updateDoc } from 'firebase/firestore';
+import { MESSAGES, TITLES } from '../../constants/messages';
 
 const EditPictures = ({
 	uploadedPictures,
@@ -24,8 +25,10 @@ const EditPictures = ({
 
 	return (
 		<>
-			<h3>Fotos</h3>
-			<p>Puedes subir hasta {PICTURE_LIMIT} fotos</p>
+			<h3>{TITLES.pictures}</h3>
+			<p>
+				{MESSAGES.pictureLimit} {PICTURE_LIMIT} {MESSAGES.picures}
+			</p>
 			<StyledGrid>
 				{uploadedPictures.length !== 0 &&
 					uploadedPictures.map(url => (

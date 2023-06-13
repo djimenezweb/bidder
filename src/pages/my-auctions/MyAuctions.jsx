@@ -4,7 +4,7 @@ import { doc, getDoc } from 'firebase/firestore';
 import { itemsDB } from '../../config/firebase.config';
 import MiniItem from '../../components/mini-item/MiniItem';
 import { StyledContainer } from './styles';
-import { MESSAGES } from '../../constants/messages';
+import { MESSAGES, TITLES } from '../../constants/messages';
 import Loader from '../../components/loader/Loader';
 
 const MyAuctions = () => {
@@ -22,7 +22,7 @@ const MyAuctions = () => {
 
 	return (
 		<>
-			<h2>{MESSAGES.myAuctions}</h2>
+			<h2>{TITLES.myAuctions}</h2>
 
 			<div>
 				{items.length === 0 && <p>{MESSAGES.nullAuctions}</p>}

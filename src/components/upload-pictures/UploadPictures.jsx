@@ -8,14 +8,17 @@ import {
 	StyledPreviewContainer
 } from './styles';
 import { PICTURE_LIMIT } from '../../constants/add-item';
+import { MESSAGES, TITLES } from '../../constants/messages';
 
 const UploadPictures = ({ pictures, setPictures, errors }) => {
 	const inputPictureRef = useRef(null);
 
 	return (
 		<>
-			<h3>Fotos</h3>
-			<p>Puedes subir hasta {PICTURE_LIMIT} fotos</p>
+			<h3>{TITLES.pictures}</h3>
+			<p>
+				{MESSAGES.pictureLimit} {PICTURE_LIMIT} {MESSAGES.picures}
+			</p>
 			<StyledGrid>
 				{pictures.length !== 0 &&
 					pictures.map((picture, index) => (

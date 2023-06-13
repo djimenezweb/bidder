@@ -5,10 +5,14 @@ import { FONTS } from '../../constants/fonts';
 const StyledContainer = styled.div`
 	max-width: 1200px;
 	margin: 1rem auto 2rem;
-	padding: 2rem;
+	padding: 1rem;
 	background-color: ${COLORS.white};
 	border-radius: 8px;
 	box-shadow: ${BOX_SHADOWS.default};
+
+	@media screen and (min-width: 36rem) {
+		padding: 2rem;
+	}
 `;
 
 const StyledFormField = styled.div`

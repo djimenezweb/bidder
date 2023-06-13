@@ -16,7 +16,7 @@ import {
 	StyledTextRow
 } from './styles';
 import { SignOut } from '@phosphor-icons/react';
-import { MESSAGES } from '../../constants/messages';
+import { AUTH_MESSAGES, TITLES } from '../../constants/messages';
 import { COLORS } from '../../constants/colors';
 import MyFavs from '../my-favs/MyFavs';
 
@@ -27,7 +27,7 @@ const Profile = () => {
 	return (
 		<StyledGrid>
 			<div>
-				<h2>Mi cuenta</h2>
+				<h2>{TITLES.myAccount}</h2>
 				<StyledFlexContainer>
 					<StyledPictureRow>
 						<StyledProfilePicture
@@ -47,12 +47,14 @@ const Profile = () => {
 						<SignOut size={48} color={COLORS.black} />
 					</StyledPictureRow>
 					<StyledTextRow>
-						<span onClick={() => logout(navigate)}>Cerrar sesión</span>
+						<span onClick={() => logout(navigate)}>
+							{AUTH_MESSAGES.signOut}
+						</span>
 					</StyledTextRow>
 				</StyledFlexContainer>
 			</div>
 			<div>
-				<MyItems user={loggedUser.email} title={MESSAGES.myItems} />
+				<MyItems user={loggedUser.email} title={TITLES.myItems} />
 				<MyAuctions />
 				<MyFavs />
 			</div>

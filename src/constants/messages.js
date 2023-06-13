@@ -1,3 +1,23 @@
+export const TITLES = {
+	myAuctions: 'Mis subastas',
+	myItems: 'Mis anuncios',
+	sellerItems: 'Los anuncios de ',
+	myFavs: 'Mis favoritos',
+	myAccount: 'Mi cuenta',
+	pictures: 'Fotos',
+	addItem: 'Crear anuncio',
+	editItem: 'Editar anuncio'
+};
+
+export const LABELS = {
+	title: 'Título',
+	startingPrice: 'Precio de salida',
+	price: 'Precio',
+	duration: 'Duración',
+	description: 'Descripción',
+	forbidden: 'No se puede modificar'
+};
+
 export const STATUS = {
 	default: 'Haz una puja si quieres conseguir este artículo',
 	disabled: 'Inicia sesión para pujar',
@@ -22,13 +42,14 @@ export const MESSAGES = {
 	deleteWarning:
 		'¿Seguro que deseas borrar este anuncio y las imágenes vinculadas?',
 	irreversible: 'Esta acción no se puede deshacer.',
+	addItem: 'Crear anuncio',
+	submitItem: 'Publicar anuncio',
+	submitChanges: 'Publicar cambios',
 	deleteItem: 'Eliminar anuncio',
+	removeItem: 'Borrar anuncio',
 	editItem: 'Editar anuncio',
 	loading: 'Cargando...',
 	noResults: 'No hay resultados',
-	myAuctions: 'Mis subastas',
-	myItems: 'Mis anuncios',
-	myFavs: 'Mis favoritos',
 	nullAuctions: 'Todavía no has pujado en ninguna subasta',
 	nullItems: 'Todavía no has publicado ningún anuncio',
 	nullFavs: 'Todavía no tienes ningún anuncio favorito',
@@ -38,7 +59,16 @@ export const MESSAGES = {
 	requiredDescription: 'Descripción necesaria',
 	requiredPicture: 'Es necesario subir al menos 1 foto',
 	invalidStartingPrice:
-		'Introduce un número válido. El precio debe ser igual o mayor que 1 EUR.'
+		'Introduce un número válido. El precio debe ser igual o mayor que 1 EUR.',
+	cancel: 'Cancelar',
+	pictureLimit: 'Puedes subir hasta',
+	picures: 'fotos',
+	picture: 'foto',
+	back: 'Volver',
+	reset: 'Borrar',
+	revert: 'Descartar cambios',
+	printDatePre: 'La subasta terminará el ',
+	printDateAt: ' a las '
 };
 
 export const AUTH_MESSAGES = {
@@ -57,5 +87,6 @@ export const AUTH_MESSAGES = {
 	userNamePHolder: 'nombre de usuario',
 	wGoogle: 'con Google',
 	wGitHub: 'con GitHub',
-	checkEmail: 'Comprueba tu correo electrónico'
+	checkEmail: 'Comprueba tu correo electrónico',
+	signOut: 'Cerrar sesión'
 };

@@ -159,7 +159,6 @@ const Item = () => {
 						{/* Si HAY loggedUser y ES el vendedor, puede EDITAR y BORRAR */}
 						{loggedUser?.email && loggedUser?.email === item.sellerEmail && (
 							<>
-								{/* <DeleteItem itemId={itemId} picturesArray={item.pictures} /> */}
 								<StyledDeleteButton
 									onClick={() =>
 										setModalContent(

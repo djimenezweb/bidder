@@ -5,17 +5,25 @@ import { BOX_SHADOWS, COLORS } from '../../constants/colors';
 const StyledContainer = styled.div`
 	width: min(100%, 448px);
 	margin: 2rem auto 1rem;
-	padding: 2rem;
+	padding: 1rem;
 	background-color: ${COLORS.white};
 	color: ${COLORS.accent300};
 	border-radius: 0.5rem;
 	box-shadow: ${BOX_SHADOWS.default};
+
+	@media screen and (min-width: 36rem) {
+		padding: 2rem;
+	}
 `;
 
 const StyledSmallContainer = styled(StyledContainer)`
 	text-align: center;
-	padding: 1rem 2rem;
+	padding: 1rem;
 	cursor: pointer;
+
+	@media screen and (min-width: 36rem) {
+		padding: 1rem 2rem;
+	}
 `;
 
 const StyledTitle = styled.h2`

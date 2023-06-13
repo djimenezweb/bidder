@@ -36,7 +36,7 @@ const StyledRow = styled.div`
 
 	@media screen and (min-width: 960px) {
 		padding: 0.5rem 1rem;
-		grid-template-columns: 2rem 20rem 1fr 1fr 1fr;
+		grid-template-columns: 2rem 16rem 1fr 1fr 1fr;
 		grid-template-areas: 'img tit pri bid tim';
 		grid-gap: 0 1rem;
 		align-items: center;
