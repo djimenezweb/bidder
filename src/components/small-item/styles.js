@@ -44,14 +44,22 @@ const StyledTitle = styled.h3`
 
 const StyledPrice = styled.p`
 	margin: 0;
-	font-size: 1.5rem;
+	font-size: 1.25rem;
 	font-weight: 600;
 	color: ${COLORS.accent100};
+
+	@media screen and (min-width: 36rem) {
+		font-size: 1.5rem;
+	}
 `;
 
 const StyledCurrency = styled.span`
-	font-size: 1.5rem;
+	font-size: 1.25rem;
 	font-weight: 300;
+
+	@media screen and (min-width: 36rem) {
+		font-size: 1.5rem;
+	}
 `;
 
 const StyledFavContainer = styled.div`

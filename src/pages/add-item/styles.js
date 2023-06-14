@@ -106,7 +106,7 @@ const StyledDate = styled.p`
 const StyledTextarea = styled.textarea`
 	resize: none;
 	width: 100%;
-	min-height: 6.5rem;
+	min-height: 9rem;
 	margin: 0;
 	padding: 1rem;
 	background-color: ${COLORS.white};

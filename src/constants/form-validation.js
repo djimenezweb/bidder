@@ -10,7 +10,7 @@ const messages = {
 };
 
 const patterns = {
-	name: /^[A-Za-záéíóúüñç]*$/,
+	name: /^[A-Za-z0-9áéíóúüñç_-]*$/,
 	email: /^[a-zA-Z0-9.!#$%&’*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
 };
 

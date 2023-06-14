@@ -24,7 +24,7 @@ const SmallItem = ({ item, today }) => {
 	const timeSpan = end - today;
 	const timeLeft = printTimeLeft(timeSpan);
 	const { loggedUser, setLoggedUser } = useContext(AuthContext);
-	const isFav = loggedUser?.myFavs.includes(item.id);
+	const isFav = loggedUser?.myFavs?.includes(item.id);
 
 	return (
 		<StyledArticle key={item.id} onClick={() => navigate(`/itm/${item.id}`)}>
