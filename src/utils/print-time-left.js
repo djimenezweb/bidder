@@ -18,8 +18,8 @@ export const printTimeLeft = timeSpan => {
 	if (timeSpan <= 86400000) {
 		return `${hoursLeft} horas`;
 	}
-	if (daysLeft === 1) {
-		return `${daysLeft} día`;
-	}
-	return `${daysLeft} d ${hoursLeft} h`;
+	// if (daysLeft === 1) {
+	// 	return `${daysLeft} día`;
+	// }
+	return `${daysLeft}d ${hoursLeft}h`;
 };
