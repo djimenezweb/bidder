@@ -58,3 +58,18 @@ Cuando estaba a punto de dar por terminado el proyecto decidí habilitar la opci
 Los estilos CSS están resueltos con Styled Components, que permite una inmensa flexibilidad para combinar CSS y JavaScript.
 
 Las tipografías usadas son [Manrope](https://fonts.google.com/specimen/Manrope) y [Comfortaa](https://fonts.google.com/specimen/Comfortaa). Los iconos son de [Phosphor Icons](https://phosphoricons.com/).
+
+## Dependencias
+
+- [eslint 8.36.0](https://www.npmjs.com/package/eslint)
+- [firebase 9.21.0](https://www.npmjs.com/package/firebase)
+- [framer-motion 10.12.16](https://www.npmjs.com/package/framer-motion)
+- [prettier 2.8.5](https://www.npmjs.com/package/prettier)
+- [react 18.2.0](https://www.npmjs.com/package/react)
+- [react-dom 18.2.0](https://www.npmjs.com/package/react-dom)
+- [react-hook-form 7.43.9](https://www.npmjs.com/package/react-hook-form)
+- [react-router-dom 6.11.1](https://www.npmjs.com/package/react-router-dom)
+- [styled-components 5.3.9](https://www.npmjs.com/package/styled-components)
+- [uuid 9.0.0](https://www.npmjs.com/package/uuid)
+- [vite 4.3.9](https://www.npmjs.com/package/vite)
+- [@phosphor-icons/react 2.0.9](https://www.npmjs.com/package/@phosphor-icons/react)
