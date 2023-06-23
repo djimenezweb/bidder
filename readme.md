@@ -51,9 +51,11 @@ El primer desafío fue programar una serie de funciones para modificar el precio
 
 El módulo de autenticación de Firebase es seguro y fácil de usar, pero requiere adaptar todo el código y las rutas a condiciones que comprueben si hay un usuario conectado. Además, en cada anuncio se comprueba si el usuario en línea es el propio vendedor para impedirle que puje por sus propios productos.
 
-La capacidad de subir fotos me presentó varias dificultades que resolví después de programar varias versiones distintas. Se trataba de crear un sistema para enviar varias fotos con un botón personalizado, visualizarlas previamente, cancelar cada una de ellas y vincular los archivos en lugares distintos de la base de datos, de tal manera que las fotos se eliminaran automáticamente al borrar el anuncio.
+Cuando un usuario se registra por primera vez se crea un perfil básico en la base de datos. ¿Pero qué hacer si el usuario inicia sesión a través de su cuenta de Google o Github? En este caso registrarse e inciar sesión es exactamente la misma función. ¿Cómo distinguir, entonces, entre usuarios nuevos y ya existentes? Después de varias búsquedas e intentos, descubrí la propiedad isNewUser dentro de las credenciales que devuelve el proveedor de autenticación.
 
-Cuando estaba a punto de dar por terminado el proyecto decidí habilitar la opción de artículos favoritos. Esto requirió modificar algunos de los planteamientos iniciales. Sin la opción de favoritos la base de datos simplemente lee la lista de items. Pero al habilitar los favoritos se requiere hacer una serie de comprobaciones previas sobre cada uno de los items.
+La capacidad de subir fotos me presentó varias dificultades que resolví después de programar varias versiones distintas. El objetivo era un sistema que permitiera enviar varias fotos con un botón personalizado, visualizarlas previamente, cancelar cada una de ellas y vincular los archivos en lugares distintos de la base de datos, de tal manera que las fotos se eliminaran automáticamente al borrar el anuncio. En este proceso aprendí que los bucles forEach no se pueden usar en funciones asíncronas.
+
+Cuando estaba a punto de dar por terminado el proyecto decidí habilitar la opción de artículos favoritos. Esto requirió modificar algunos de los planteamientos iniciales. Sin la opción de favoritos la base de datos simplemente lee la lista de anuncios. Pero al habilitar los favoritos se requiere comprobar previamente si cada anuncio ha sido marcado como favorito por el usuario en línea.
 
 Los estilos CSS están resueltos con Styled Components, que permite una inmensa flexibilidad para combinar CSS y JavaScript.
 
